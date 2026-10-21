@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bloom · Pregnancy Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700;6..72,800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..700,0..1,-25..0">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   BLOOM — Pastel Lavender/Peach Design System (rhythme twin)
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --paper:#f7f2fa; --paper-deep:#f0e8f5; --card:rgba(255,255,255,.82); --card-solid:#fff;
+  --sunken:#f0eaf5; --line:rgba(107,82,142,.15); --line-soft:rgba(107,82,142,.08);
+  --ink:#3d2f52; --taupe:#7a6896; --faded:#9a8ab0;
+  --mauve:#7a5c96; --terracotta:#d49a8a; --coral:#e8a898; --gold:#e5c98a;
+  --lavender:#c4b5e0; --periwinkle:#a8b8d8; --sage:#a8c0a0; --sky:#b8cde0; --blush:#f5c6b8;
+  --ok:#6ba88a; --warn:#d4a85a; --low:#c47a6a;
+  --serif:'Newsreader',Georgia,serif; --sans:'Manrope',system-ui,sans-serif;
+  --r:22px; --r-sm:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans); font-size:16px; color:var(--ink); background:var(--paper);
+  min-height:100dvh; display:flex; justify-content:center; align-items:flex-start;
+  -webkit-font-smoothing:antialiased; position:relative;
+  background:linear-gradient(135deg,#e8dff5 0%,#f5c4a8 50%,#e8dff5 100%);
+}
+body::before{
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(42% 30% at 82% 6%, rgba(196,181,224,.45), transparent 70%),
+    radial-gradient(38% 26% at 8% 16%, rgba(245,198,184,.4), transparent 70%),
+    radial-gradient(46% 30% at 90% 52%, rgba(214,200,235,.3), transparent 70%),
+    radial-gradient(40% 26% at 4% 66%, rgba(200,215,240,.28), transparent 70%),
+    radial-gradient(44% 30% at 70% 96%, rgba(248,210,200,.32), transparent 72%);
+}
+.app{
+  position:relative; z-index:1; width:100%; max-width:430px; min-height:100dvh;
+  display:flex; flex-direction:column; min-width:0;
+  padding-top:calc(69px + env(safe-area-inset-top,0px) + 8px);
+  padding-bottom:calc(82px + env(safe-area-inset-bottom,0px) + 16px);
+}
+/* top bar */
+.top{
+  position:fixed; top:0; left:50%; transform:translateX(-50%);
+  width:100%; max-width:430px; z-index:50;
+  display:flex; align-items:center; gap:10px;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 16px 10px;
+  background:rgba(247,242,250,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(196,181,224,.2);
+}
+.top .t-title{font-family:var(--serif); font-size:22px; font-weight:800; color:var(--ink); letter-spacing:-.01em; flex:1}
+.top .t-icon{
+  width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  background:var(--card); border:2px solid var(--ink); color:var(--ink); text-decoration:none; font-size:18px;
+}
+.brandline{display:flex; align-items:center; gap:9px; flex:1; min-width:0}
+.brandline .bdot{width:30px; height:30px; border-radius:50%; background:url('https://aka.doubaocdn.com/s/Plr6ogKbKb') center/cover; box-shadow:0 2px 8px rgba(122,92,150,.25)}
+.brandline b{font-family:var(--serif); font-weight:800; font-size:21px; color:var(--ink); letter-spacing:-.01em}
+/* scroll */
+.scroll{padding:14px 18px 24px; display:flex; flex-direction:column; gap:16px}
+h2.sec{font-family:var(--serif); font-weight:800; font-size:19px; color:var(--ink); margin:6px 2px 0; letter-spacing:-.01em}
+.sub{font-size:13.5px; color:var(--taupe); line-height:1.5}
+/* cards */
+.card{
+  background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r);
+  padding:18px; box-shadow:0 8px 24px -12px rgba(107,82,142,.18); backdrop-filter:blur(8px);
+}
+.card.tint-lavender{background:rgba(196,181,224,.18); border-color:rgba(196,181,224,.4)}
+.card.tint-sage{background:rgba(168,192,160,.16); border-color:rgba(168,192,160,.35)}
+.card.tint-blush{background:#FCF6F5; border-color:var(--blush)}
+.card.tint-gold{background:#FDFAF3; border-color:var(--gold)}
+.row{display:flex; align-items:center; gap:12px}
+.grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+/* metric tiles */
+.metric{text-align:center; padding:12px 6px; border-radius:var(--r-sm); background:var(--sunken); border:1.5px solid var(--line-soft)}
+.metric .m-v{font-family:var(--serif); font-size:18px; font-weight:800; color:var(--ink)}
+.metric .m-l{font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--taupe); font-weight:700; margin-top:3px}
+/* badges */
+.badge{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:800; padding:4px 11px; border-radius:99px; letter-spacing:.04em}
+.badge.ok{background:rgba(107,168,138,.14); color:var(--ok)}
+.badge.warn{background:rgba(212,168,90,.16); color:var(--warn)}
+.badge.info{background:rgba(168,184,216,.22); color:#4B5C97}
+.badge.mauve{background:rgba(122,92,150,.14); color:var(--mauve)}
+/* buttons */
+.btn{
+  display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:15px;
+  border:none; cursor:pointer; border-radius:99px; font:800 15px var(--sans); letter-spacing:-.01em;
+  background:var(--ink); color:#fff; box-shadow:0 4px 14px rgba(29,27,24,.18); text-decoration:none; transition:.18s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent; border:2px solid var(--ink); color:var(--ink); box-shadow:none}
+.btn.mauve{background:var(--mauve); color:#fff; box-shadow:0 4px 14px rgba(139,108,130,.3)}
+.btn.sm{padding:10px 14px; font-size:13px; width:auto}
+/* chips */
+.chiprow{display:flex; gap:9px; flex-wrap:wrap}
+.chip{
+  display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 10px; min-width:64px; flex:1;
+  background:var(--card); border:2px solid var(--line-soft); border-radius:var(--r-sm);
+  font-size:11.5px; color:var(--taupe); cursor:pointer; transition:.15s; font-weight:600;
+}
+.chip .c-ic{font-size:21px}
+.chip.on{border-color:var(--ink); background:var(--sunken); color:var(--ink); font-weight:800}
+/* list rows */
+.lrow{display:flex; align-items:center; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line-soft); text-decoration:none; color:var(--ink)}
+.lrow:last-child{border-bottom:none}
+.lrow .l-ic{width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0}
+.lrow .l-t{flex:1; min-width:0}
+.lrow .l-t b{display:block; font-size:14.5px; font-weight:800; color:var(--ink)}
+.lrow .l-t span{font-size:12px; color:var(--taupe); line-height:1.4; display:block; margin-top:2px}
+.lrow .l-arr{color:var(--faded); font-size:18px}
+/* insight */
+.insight{display:flex; gap:12px; padding:15px 16px; border-radius:var(--r-sm); background:var(--sunken); border:1.5px solid var(--line-soft)}
+.insight .i-ic{font-size:20px}
+.insight p{font-size:13px; line-height:1.55; color:var(--ink)}
+.insight b{color:var(--mauve)}
+/* inputs */
+input,select,textarea{
+  font:inherit; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line);
+  background:#fff; color:var(--ink); width:100%;
+}
+input:focus,select:focus{outline:none; border-color:var(--mauve); box-shadow:0 0 0 3px rgba(196,168,224,.15)}
+label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); margin:0 0 6px 2px; text-transform:uppercase; letter-spacing:.04em}
+/* bottom nav */
+.bottom-nav{
+  position:fixed; bottom:0; left:50%; transform:translateX(-50%);
+  width:100%; max-width:430px; z-index:50;
+  display:flex; justify-content:space-around; align-items:center;
+  padding:8px 8px calc(10px + env(safe-area-inset-bottom,0px));
+  background:rgba(247,242,250,.94); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-top:1px solid rgba(196,181,224,.3);
+}
+.bottom-nav a{
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  font-size:10.5px; font-weight:800; color:var(--faded); text-decoration:none;
+  min-width:44px; min-height:44px; flex:1; padding:4px 2px; border-radius:12px; transition:.15s;
+}
+.bottom-nav a .n-ic{font-family:'Material Symbols Outlined'; font-size:23px; font-variation-settings:'FILL' 0}
+.bottom-nav a.on{color:var(--mauve)}
+.bottom-nav a.on .n-ic{font-variation-settings:'FILL' 1; color:var(--mauve)}
+/* hero countdown */
+.hero{
+  position:relative; overflow:hidden;
+  background:linear-gradient(160deg,#c4b5e0 0%,#e8a898 100%);
+  color:#fff; border-radius:var(--r); padding:22px;
+  box-shadow:0 12px 30px -10px rgba(122,92,150,.4);
+}
+.hero .h-kicker{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; opacity:.9}
+.hero .h-weeks{font-family:var(--serif); font-size:56px; font-weight:800; line-height:1; margin:6px 0 2px; letter-spacing:-.02em}
+.hero .h-weeks small{font-size:20px; font-weight:600; opacity:.9}
+.hero .h-sub{font-size:13.5px; opacity:.95; line-height:1.5}
+.hero .h-fruit{
+  position:absolute; right:16px; top:16px; width:72px; height:72px; border-radius:50%;
+  background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:42px;
+  backdrop-filter:blur(4px);
+}
+.hero .h-count{display:flex; gap:14px; margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.3)}
+.hero .h-count div{flex:1}
+.hero .h-count .n{font-family:var(--serif); font-size:22px; font-weight:800}
+.hero .h-count .l{font-size:10.5px; opacity:.9; text-transform:uppercase; letter-spacing:.05em; font-weight:700}
+/* week selector */
+.weekstrip{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 8px; scrollbar-width:none}
+.weekstrip::-webkit-scrollbar{display:none}
+.weekstrip button{
+  flex-shrink:0; width:44px; height:44px; border-radius:12px; border:2px solid var(--line-soft);
+  background:var(--card); font:800 13px var(--sans); color:var(--taupe); cursor:pointer;
+}
+.weekstrip button.on{background:var(--mauve); color:#fff; border-color:var(--mauve)}
+/* checklist */
+.ck{display:flex; align-items:flex-start; gap:12px; padding:12px 4px; border-bottom:1px solid var(--line-soft); cursor:pointer}
+.ck:last-child{border-bottom:none}
+.ck .box{
+  width:24px; height:24px; border-radius:8px; border:2px solid var(--line); flex-shrink:0; margin-top:1px;
+  display:flex; align-items:center; justify-content:center; transition:.15s;
+}
+.ck.done .box{background:var(--ok); border-color:var(--ok); color:#fff}
+.ck .box .material-symbols-outlined{font-size:16px; opacity:0}
+.ck.done .box .material-symbols-outlined{opacity:1}
+.ck .txt{flex:1}
+.ck .txt b{font-size:14px; font-weight:700; color:var(--ink); display:block}
+.ck .txt span{font-size:12px; color:var(--taupe)}
+.ck.done .txt b{text-decoration:line-through; color:var(--faded)}
+/* pump timeline */
+.pump-step{display:flex; align-items:center; gap:12px; padding:12px; border-radius:14px; background:var(--sunken); margin-bottom:8px}
+.pump-step .ph{width:44px; height:44px; border-radius:50%; background:var(--card); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:var(--mauve); border:2px solid var(--mauve); flex-shrink:0}
+.pump-step.run{background:rgba(196,181,224,.25)}
+.pump-step.run .ph{background:var(--mauve); color:#fff}
+.pump-step .pt{flex:1}
+.pump-step .pt b{font-size:14px; display:block}
+.pump-step .pt span{font-size:12px; color:var(--taupe)}
+/* progress bar */
+.pbar{height:10px; border-radius:99px; background:var(--sunken); overflow:hidden; margin-top:8px}
+.pbar > i{display:block; height:100%; background:linear-gradient(90deg,var(--lavender),var(--coral)); border-radius:99px; transition:width .4s}
+/* food grid */
+.food{display:flex; gap:10px; padding:11px 4px; border-bottom:1px solid var(--line-soft); align-items:center}
+.food:last-child{border-bottom:none}
+.food .fi{font-size:22px; width:34px; text-align:center}
+.food .ft{flex:1}
+.food .ft b{font-size:13.5px; display:block}
+.food .ft span{font-size:11.5px; color:var(--taupe)}
+.food .fb{font-size:11px; font-weight:800; padding:3px 9px; border-radius:99px}
+.food .fb.go{background:rgba(107,168,138,.15); color:var(--ok)}
+.food .fb.no{background:rgba(196,122,106,.15); color:var(--low)}
+.food .fb.lim{background:rgba(212,168,90,.15); color:var(--warn)}
+/* toast */
+#toast{position:fixed; bottom:110px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:10px 18px; border-radius:99px; font-size:13px; font-weight:700; opacity:0; transition:.25s; z-index:100; pointer-events:none}
+#toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+/* page */
+.page{display:none; animation:fade .25s ease}
+.page.on{display:flex; flex-direction:column; gap:16px}
+@keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+/* phone frame on desktop */
+@media (min-width:500px){
+  body{padding:20px; align-items:center}
+  .app{
+    width:390px; max-width:390px; min-height:844px; max-height:92vh;
+    border-radius:44px; overflow:hidden; position:relative;
+    box-shadow:0 0 0 10px #1a1228, 0 0 0 12px #3a2a50, 0 50px 100px -20px rgba(0,0,0,.6);
+  }
+  .app::before{content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:24px; background:#1a1228; border-radius:0 0 18px 18px; z-index:1000}
+  .app > .top{padding-top:calc(14px + 30px) !important}
+}
+@media (max-width:499px){ body{padding:0; background:var(--paper)} .app{border-radius:0; box-shadow:none; max-height:none} }
+/* modal */
+.modal-bg{position:fixed; inset:0; background:rgba(60,40,90,.4); backdrop-filter:blur(4px); z-index:200; display:none; align-items:flex-end; justify-content:center}
+.modal-bg.on{display:flex}
+.modal{background:var(--paper); width:100%; max-width:430px; border-radius:24px 24px 0 0; padding:24px 20px calc(20px + env(safe-area-inset-bottom,0px)); max-height:85dvh; overflow-y:auto}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOP BAR -->
+  <header class="top">
+    <div class="brandline">
+      <div class="bdot">✿</div>
+      <b>Bloom</b>
+    </div>
+    <button class="t-icon" id="btn-settings" aria-label="Settings"><span class="material-symbols-outlined">settings</span></button>
+  </header>
+
+  <!-- ═══════════ HOME ═══════════ -->
+  <main class="page on" id="page-home">
+    <div class="scroll">
+      <div class="hero" id="hero">
+        <div class="h-kicker" id="hero-trimester">First Trimester</div>
+        <div class="h-weeks"><span id="h-weeks-num">0</span><small> weeks</small></div>
+        <div class="h-sub" id="h-week-sub">Tiny miracle is the size of a poppy seed</div>
+        <div class="h-fruit" id="h-fruit">🌱</div>
+        <div class="h-count">
+          <div><div class="n" id="h-days-left">—</div><div class="l">days to EDD</div></div>
+          <div><div class="n" id="h-edd">—</div><div class="l">estimated due</div></div>
+          <div><div class="n" id="h-trim-pct">—</div><div class="l">pregnancy</div></div>
+        </div>
+      </div>
+
+      <div id="onboard-empty" style="display:none">
+        <div style="text-align:center; margin-bottom:8px">
+          <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Bloom" style="width:100%; max-width:280px; border-radius:20px; box-shadow:0 12px 30px -10px rgba(122,92,150,.3)">
+        </div>
+        <div class="card tint-lavender">
+          <h2 class="sec" style="margin-top:0">Welcome, mama 🌸</h2>
+          <p class="sub" style="margin:8px 0 14px">Tell us your due date (or last period) and we'll personalise every screen.</p>
+          <label class="f">Estimated Due Date (EDD)</label>
+          <input type="date" id="edd-input" style="margin-bottom:12px">
+          <button class="btn mauve" id="btn-save-edd">Start my journey</button>
+          <p class="sub" style="margin-top:10px; text-align:center; font-size:11.5px">Don't know? Use today minus ~280 days from LMP, or ask your OB.</p>
+        </div>
+      </div>
+
+      <div id="home-content" style="display:none">
+        <div style="border-radius:var(--r); overflow:hidden; box-shadow:0 10px 28px -12px rgba(122,92,150,.3)">
+          <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Bloom" style="width:100%; display:block">
+        </div>
+        <h2 class="sec">This week</h2>
+        <div class="card">
+          <div class="row" style="justify-content:space-between; margin-bottom:6px">
+            <b style="font-family:var(--serif); font-size:17px" id="week-title">Week 0</b>
+            <span class="badge mauve" id="week-badge">Trimester 1</span>
+          </div>
+          <p class="sub" id="week-summary" style="margin-top:4px"></p>
+        </div>
+
+        <div class="grid3">
+          <div class="metric"><div class="m-v" id="m-len">—</div><div class="m-l">baby length</div></div>
+          <div class="metric"><div class="m-v" id="m-wei">—</div><div class="m-l">baby weight</div></div>
+          <div class="metric"><div class="m-v" id="m-size">—</div><div class="m-l">about the size of</div></div>
+        </div>
+
+        <div class="insight">
+          <div class="i-ic">💛</div>
+          <p id="week-tip"></p>
+        </div>
+
+        <h2 class="sec">Quick actions</h2>
+        <div class="card" style="padding:6px 14px">
+          <a class="lrow" href="#" data-go="grow"><div class="l-ic" style="background:rgba(196,181,224,.3)">🌱</div><div class="l-t"><b>Baby growth explorer</b><span>See all 40 weeks</span></div><div class="l-arr">›</div></a>
+          <a class="lrow" href="#" data-go="eat"><div class="l-ic" style="background:rgba(156,187,144,.25)">🥑</div><div class="l-t"><b>Eat well this trimester</b><span>Foods to enjoy & avoid</span></div><div class="l-arr">›</div></a>
+          <a class="lrow" href="#" data-go="checklist"><div class="l-ic" style="background:rgba(232,168,152,.25)">🎒</div><div class="l-t"><b>Pregnancy checklists</b><span>Hospital bag, baby, postpartum</span></div><div class="l-arr">›</div></a>
+          <a class="lrow" href="#" data-go="feed"><div class="l-ic" style="background:rgba(168,184,216,.25)">🤱</div><div class="l-t"><b>Breastfeeding & power pump</b><span>Schedule and log</span></div><div class="l-arr">›</div></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════ GROW ═══════════ -->
+  <main class="page" id="page-grow">
+    <div class="scroll">
+      <h2 class="sec">Baby growth</h2>
+      <p class="sub">Pick a week to see size, development and what's happening for you.</p>
+      <div class="weekstrip" id="weekstrip"></div>
+      <div class="hero" style="padding:18px">
+        <div class="h-kicker" id="g-trimester">Trimester 1</div>
+        <div class="h-weeks" style="font-size:42px"><span id="g-week">20</span><small> wk</small></div>
+        <div class="h-fruit" id="g-fruit" style="width:60px;height:60px;font-size:34px">🥑</div>
+        <div class="h-sub" id="g-compare">Avocado</div>
+      </div>
+      <div class="grid3">
+        <div class="metric"><div class="m-v" id="g-len">—</div><div class="m-l">length</div></div>
+        <div class="metric"><div class="m-v" id="g-wei">—</div><div class="m-l">weight</div></div>
+        <div class="metric"><div class="m-v" id="g-ln">—</div><div class="m-l">trimester</div></div>
+      </div>
+      <div class="card">
+        <b style="font-family:var(--serif); font-size:16px">Baby's development</b>
+        <p class="sub" id="g-dev" style="margin-top:6px; line-height:1.6"></p>
+      </div>
+      <div class="card tint-blush">
+        <b style="font-family:var(--serif); font-size:16px">For you</b>
+        <p class="sub" id="g-mom" style="margin-top:6px; line-height:1.6"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════ EAT ═══════════ -->
+  <main class="page" id="page-eat">
+    <div class="scroll">
+      <h2 class="sec">Nourish the bump</h2>
+      <p class="sub">Food wisdom by trimester. Always check with your OB for personal advice.</p>
+      <div class="chiprow" id="trim-chips">
+        <div class="chip on" data-trim="1"><span class="c-ic">🌱</span>1st</div>
+        <div class="chip" data-trim="2"><span class="c-ic">🌿</span>2nd</div>
+        <div class="chip" data-trim="3"><span class="c-ic">🌸</span>3rd</div>
+      </div>
+
+      <div class="card tint-sage">
+        <b style="font-family:var(--serif); font-size:16px">🥦 Foods to enjoy</b>
+        <div id="eat-go" style="margin-top:10px"></div>
+      </div>
+      <div class="card tint-blush">
+        <b style="font-family:var(--serif); font-size:16px">🚫 Foods to avoid</b>
+        <div id="eat-no" style="margin-top:10px"></div>
+      </div>
+      <div class="card tint-gold">
+        <b style="font-family:var(--serif); font-size:16px">✨ Top nutrients</b>
+        <div id="eat-nut" style="margin-top:10px"></div>
+      </div>
+      <div class="insight">
+        <div class="i-ic">💧</div>
+        <p>Drink <b>8–10 cups of water</b> daily. Add a prenatal with <b>folate + iodine + DHA</b> from week 4 onward.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════ CHECKLIST ═══════════ -->
+  <main class="page" id="page-checklist">
+    <div class="scroll">
+      <h2 class="sec">Checklists</h2>
+      <div class="chiprow" id="ck-chips">
+        <div class="chip on" data-ck="hospital"><span class="c-ic">🎒</span>Hospital bag</div>
+        <div class="chip" data-ck="baby"><span class="c-ic">👶</span>Baby</div>
+        <div class="chip" data-ck="postpartum"><span class="c-ic">🛁</span>Postpartum</div>
+      </div>
+      <div class="card">
+        <div class="row" style="justify-content:space-between; margin-bottom:6px">
+          <b id="ck-title">Hospital bag</b>
+          <span class="badge ok" id="ck-progress">0 / 0</span>
+        </div>
+        <div class="pbar"><i id="ck-bar" style="width:0%"></i></div>
+        <div id="ck-list" style="margin-top:10px"></div>
+      </div>
+      <button class="btn ghost sm" id="ck-reset" style="align-self:flex-start">Reset this list</button>
+    </div>
+  </main>
+
+  <!-- ═══════════ FEED ═══════════ -->
+  <main class="page" id="page-feed">
+    <div class="scroll">
+      <h2 class="sec">Breastfeeding journey</h2>
+      <p class="sub">Log feeds and run a power-pump session to boost supply.</p>
+
+      <div class="grid2">
+        <div class="metric"><div class="m-v" id="f-today">0</div><div class="m-l">feeds today</div></div>
+        <div class="metric"><div class="m-v" id="f-minutes">0</div><div class="m-l">minutes today</div></div>
+      </div>
+
+      <div class="card">
+        <b style="font-family:var(--serif); font-size:16px">Log a feed</b>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px">
+          <div>
+            <label class="f">Side</label>
+            <select id="f-side"><option value="left">Left</option><option value="right">Right</option><option value="both">Both</option></select>
+          </div>
+          <div>
+            <label class="f">Minutes</label>
+            <input type="number" id="f-min" value="15" min="1" max="60">
+          </div>
+        </div>
+        <button class="btn mauve" id="f-log" style="margin-top:12px">+ Add feed</button>
+      </div>
+
+      <h2 class="sec">Power pump session</h2>
+      <div class="card">
+        <p class="sub" style="margin-bottom:12px">
+          Power pumping mimics cluster-feeding to tell your body to make more milk.
+          <b>60 minutes total</b>: pump 10, rest 10, pump 10, rest 10, pump 10, then rest 10.
+          Do once a day for 2–3 days, ideally in the morning.
+        </p>
+        <div id="pump-steps"></div>
+        <button class="btn" id="pump-start">Start session</button>
+        <button class="btn ghost" id="pump-reset" style="margin-top:8px">Reset</button>
+      </div>
+
+      <div class="card tint-lavender">
+        <b style="font-family:var(--serif); font-size:16px">🤱 Breastfeeding tips</b>
+        <div class="lrow" style="padding:11px 0"><div class="l-ic">🍼</div><div class="l-t"><b>Feed on demand</b><span>Newborns eat 8–12 times in 24 hours</span></div></div>
+        <div class="lrow" style="padding:11px 0"><div class="l-ic">💧</div><div class="l-t"><b>Hydrate</b><span>Have a big water bottle beside you while nursing</span></div></div>
+        <div class="lrow" style="padding:11px 0"><div class="l-ic">🛌</div><div class="l-t"><b>Skin-to-skin</b><span>Boosts oxytocin and milk let-down</span></div></div>
+        <div class="lrow" style="padding:11px 0"><div class="l-ic">⚠️</div><div class="l-t"><b>Pain = pause</b><span>Clicking, deep pain or blistering means check latch with a lactation consultant</span></div></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <a href="#" class="on" data-tab="home"><span class="n-ic">home</span>Home</a>
+    <a href="#" data-tab="grow"><span class="n-ic">child_care</span>Grow</a>
+    <a href="#" data-tab="eat"><span class="n-ic">restaurant</span>Eat</a>
+    <a href="#" data-tab="checklist"><span class="n-ic">checklist</span>List</a>
+    <a href="#" data-tab="feed"><span class="n-ic">water_drop</span>Feed</a>
+  </nav>
+</div>
+
+<!-- Settings modal -->
+<div class="modal-bg" id="settings-modal">
+  <div class="modal">
+    <h2 class="sec" style="margin-top:0">Settings</h2>
+    <label class="f" style="margin-top:14px">Due date (EDD)</label>
+    <input type="date" id="edd-edit">
+    <button class="btn mauve" id="btn-save-edd2" style="margin-top:12px">Save</button>
+    <button class="btn ghost" id="btn-close-settings" style="margin-top:8px">Close</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ═══════════════ DATA ═══════════════ */
+const WEEKS = [
+  {w:4,  fruit:'🌱', name:'poppy seed',      len:'~0.1 mm', wei:'0 g',     trim:1, dev:'The ball of cells has implanted and is forming the placenta and amniotic sac.', mom:'You may not know yet. Mild cramping or spotting can happen around implantation.'},
+  {w:5,  fruit:'🐸', name:'sesame seed',     len:'~2 mm',   wei:'<1 g',     trim:1, dev:'The neural tube closes, and the heart begins to beat.', mom:'Missed period. Prenatal vitamin with folate now.'},
+  {w:6,  fruit:'💧', name:'lentil',          len:'~4 mm',   wei:'<1 g',     trim:1, dev:'Arm and limb buds appear; the heart is pumping.', mom:'Morning sickness may start. Small, frequent meals help.'},
+  {w:7,  fruit:'🫘', name:'blueberry',       len:'~10 mm',  wei:'<1 g',     trim:1, dev:'Brain is rapidly developing; webbed fingers and toes form.', mom:'Breasts tender, fatigue real. Rest when you can.'},
+  {w:8,  fruit:'🍓', name:'raspberry',       len:'~16 mm',  wei:'1 g',      trim:1, dev:'Tail disappears; all major organs are in place. Now a fetus.', mom:'Bloating and food aversions common. Stay hydrated.'},
+  {w:9,  fruit:'🍒', name:'cherry',          len:'~23 mm',  wei:'2 g',      trim:1, dev:'Toes separate, ears form, tiny nails grow.', mom:'Frequent urination starts as uterus expands.'},
+  {w:10, fruit:'🌰', name:'kumquat',         len:'~31 mm',  wei:'4 g',      trim:1, dev:'Vital organs begin to function. Nails and fingerprints form.', mom:'Mood swings peak. Skin may glow or break out.'},
+  {w:11, fruit:'🍑', name:'fig',             len:'~41 mm',  wei:'7 g',      trim:1, dev:'Bone begins to replace cartilage; external genitals forming.', mom:'Nausea may ease. Increased vaginal discharge is normal.'},
+  {w:12, fruit:'🥥', name:'lime',            len:'~5.4 cm', wei:'14 g',     trim:1, dev:'Reflexes develop. Fingernails, vocal cords and tooth buds present.', mom:'End of first trimester! First scan around now. Uterus is the size of a grapefruit.'},
+  {w:13, fruit:'🥑', name:'lemon',           len:'~7.4 cm', wei:'23 g',     trim:2, dev:'Voice box forms; fingerprints set; the placenta fully takes over.', mom:'Energy returns, nausea fades. Appetite grows.'},
+  {w:14, fruit:'🍋', name:'peach',           len:'~8.7 cm', wei:'43 g',     trim:2, dev:'Baby can squint, frown and make facial expressions.', mom:'May get a stuffy nose (pregnancy rhinitis). Use a humidifier.'},
+  {w:15, fruit:'🍐', name:'apple',           len:'~10 cm',  wei:'70 g',     trim:2, dev:'Skin is still thin; bones are hardening. Senses active.', mom:'Nasal congestion and bleeding gums are normal.'},
+  {w:16, fruit:'🥔', name:'avocado',         len:'~11.6 cm',wei:'100 g',    trim:2, dev:'Baby can make sucking motions. Gender visible on ultrasound.', mom:'Belly popping out. Stretch mark oil helps.'},
+  {w:17, fruit:'🫐', name:'onion',           len:'~13 cm',  wei:'140 g',    trim:2, dev:'Fat stores building; sweat glands forming. Baby practices breathing.', mom:'Round ligament pain — sharp twinges on standing. Move slowly.'},
+  {w:18, fruit:'🥭', name:'bell pepper',     len:'~14 cm',  wei:'190 g',    trim:2, dev:'Hearing develops. Baby can hear your voice and heartbeat.', mom:'Anatomy scan around now. Leg cramps at night — stretch before bed.'},
+  {w:19, fruit:'🍆', name:'mango',          len:'~15 cm',  wei:'240 g',    trim:2, dev:'Vernix caseosa covers skin to protect it. Meconium forming.', mom:'Linea nigra may appear. Back pain — pregnancy pillow helps.'},
+  {w:20, fruit:'🧅', name:'banana',          len:'~16.4 cm',wei:'300 g',    trim:2, dev:'Halfway! Baby can swallow and feels hiccups.', mom:'You are halfway. Fundal height at your belly button.'},
+  {w:21, fruit:'🥕', name:'carrot',          len:'~26.7 cm',wei:'360 g',    trim:2, dev:'Eyebrows and eyelids present. Movement gets stronger.', mom:'Fetal movement (quickening) should be noticeable.'},
+  {w:22, fruit:'🍠', name:'papaya',          len:'~27.8 cm',wei:'430 g',    trim:2, dev:'Taste buds developing. Hair and nails grow.', mom:'Braxton Hicks may start. Stay hydrated.'},
+  {w:23, fruit:'🌽', name:'large mango',     len:'~28.9 cm',wei:'500 g',    trim:2, dev:'Lungs begin producing surfactant. Baby looks like a skinny newborn.', mom:'Dizziness possible — rise slowly. Iron-rich food important.'},
+  {w:24, fruit:'🌶️', name:'ear of corn',     len:'~30 cm',  wei:'600 g',    trim:2, dev:'Footprints and fingerprints formed. Inner ear fully developed.', mom:'Glucose screening test around now. Shoe size may grow!'},
+  {w:25, fruit:'🥬', name:'cauliflower',     len:'~34.6 cm',wei:'660 g',   trim:3, dev:'Baby responds to familiar voices. Lungs practice breathing.', mom:'Round ligament pain, swollen feet. Elevate legs.'},
+  {w:26, fruit:'🥦', name:'lettuce',         len:'~35.6 cm',wei:'760 g',   trim:3, dev:'Eyes open! Baby can blink and sense light.', mom:'Braxton Hicks more noticeable. Shortness of breath normal.'},
+  {w:27, fruit:'🥒', name:'cabbage',         len:'~36.6 cm',wei:'875 g',   trim:3, dev:'Brain waves ramp up for sleeping and waking cycles.', mom:'Third trimester begins. Heartburn and constipation common.'},
+  {w:28, fruit:'🍈', name:'eggplant',        len:'~37.6 cm',wei:'1 kg',     trim:3, dev:'Eyes can open and close. Baby dreams.', mom:'Rh status check if needed. Take it easy.'},
+  {w:29, fruit:'🥝', name:'butternut squash',len:'~38.6 cm',wei:'1.15 kg',  trim:3, dev:'Bones fully develop but still soft. Muscles and lungs mature.', mom:'Harder to get comfortable. Pregnancy pillow helps.'},
+  {w:30, fruit:'🍋', name:'cucumber',        len:'~39.9 cm',wei:'1.3 kg',   trim:3, dev:'Baby practices breathing. Body begins storing iron.', mom:'Backache, frequent urination returns. Kegels daily.'},
+  {w:31, fruit:'🧃', name:'coconut',         len:'~41.1 cm',wei:'1.5 kg',   trim:3, dev:'Five senses working. Baby turns head toward light.', mom:'Braxton Hicks more regular. Notice real vs practice contractions.'},
+  {w:32, fruit:'🐬', name:'jicama',          len:'~42.4 cm',wei:'1.7 kg',   trim:3, dev:'Skin becomes opaque. Lanugo (fine hair) starts to shed.', mom:'Bump feels heavy. Pelvic pain when walking normal.'},
+  {w:33, fruit:'🍍', name:'pineapple',       len:'~43.7 cm',wei:'1.9 kg',   trim:3, dev:'Bones harden except skull (soft for birth). Pupils dilate.', mom:'Fetal movement counts start weekly. Note patterns.'},
+  {w:34, fruit:'🍉', name:'cantaloupe',       len:'~45 cm',  wei:'2.1 kg',    trim:3, dev:'Immune system strengthens. Baby gains about 200 g/week.', mom:'Maybe nesting instinct! Pack hospital bag now.'},
+  {w:35, fruit:'🍑', name:'honeydew',        len:'~46.2 cm',wei:'2.4 kg',   trim:3, dev:'Kidneys fully developed. Liver processing waste.', mom:'Shortness of breath eases as baby drops (lightening).'},
+  {w:36, fruit:'🍐', name:'papaya',          len:'~47.4 cm',wei:'2.6 kg',    trim:3, dev:'Baby usually drops into head-down position.', mom:'Pressure on bladder. Mucus plug may dislodge.'},
+  {w:37, fruit:'🍠', name:'winter melon',    len:'~48.6 cm',wei:'2.9 kg',    trim:3, dev:'Early term. Lungs likely mature. Baby gains weight fast.', mom:'Any week now. Know the signs of labour (show, waters, contractions).'},
+  {w:38, fruit:'🍊', name:'large leek',      len:'~49.8 cm',wei:'3.1 kg',    trim:3, dev:'Brain continues to grow. Lanugo mostly gone.', mom:'Membranes may rupture. Time contractions if they are regular.'},
+  {w:39, fruit:'🍇', name:'watermelon',      len:'~50.7 cm',wei:'3.3 kg',    trim:3, dev:'Full term. Placenta still delivers antibodies.', mom:'Contractions may intensify. Stay in touch with your OB.'},
+  {w:40, fruit:'🎈', name:'pumpkin',         len:'~51.2 cm',wei:'3.5 kg',    trim:3, dev:'Due date! Baby is ready. Only 5% arrive on their exact EDD.', mom:'You made it. Labour can start any day. Trust your body.'},
+];
+
+const NUTRITION = {
+  1: {
+    go: [
+      ['🥬','Leafy greens','Spinach, kale — folate + iron'],
+      ['🥑','Avocado','Folate, healthy fats, potassium'],
+      ['🥚','Eggs','Choline for baby\'s brain'],
+      ['🍊','Citrus','Vitamin C for absorption'],
+      ['🥣','Greek yoghurt','Calcium + probiotics'],
+      ['🍞','Fortified grains','Folate + B vitamins'],
+    ],
+    no: [
+      ['🍣','Raw fish / sushi','Risk of listeria'],
+      ['🥩','Deli meats / unpasteurised dairy','Listeria risk — heat until steaming'],
+      ['☕','More than 200 mg caffeine','~1–2 cups a day max'],
+      ['🍷','Alcohol','None in pregnancy'],
+      ['🐟','High-mercury fish','Shark, swordfish, king mackerel'],
+      ['☕','Unpasteurised juices',''],
+    ],
+    nut: [
+      ['Folate / folic acid','400–800 mcg daily — prevents neural tube defects'],
+      ['Iodine','For thyroid and brain development'],
+      ['Vitamin B6','Eases morning sickness'],
+    ],
+  },
+  2: {
+    go: [
+      ['🐟','Low-mercury fish','Salmon, sardines — DHA for brain'],
+      ['🍠','Sweet potato','Vitamin A + fibre'],
+      ['🥜','Nuts & seeds','Healthy fats + magnesium'],
+      ['🧀','Cheese (pasteurised)','Calcium for bones'],
+      ['🍌','Bananas','Potassium, eases leg cramps'],
+      ['🍫','Dark chocolate','In moderation — magnesium'],
+    ],
+    no: [
+      ['🍰','Raw flour / raw cake mix','E. coli risk'],
+      ['🍯','Unpasteurised honey','Avoid until baby is 1'],
+      ['🌭','Undercooked meat / eggs','Cook through fully'],
+      ['🧂','Excess added salt','Watch blood pressure'],
+    ],
+    nut: [
+      ['DHA / omega-3','200 mg daily — brain & eyes'],
+      ['Calcium','1,000 mg — bone growth'],
+      ['Vitamin D','For calcium absorption'],
+    ],
+  },
+  3: {
+    go: [
+      ['🥩','Lean red meat','Heme iron — stores for birth'],
+      ['🌱','Lentils & beans','Plant iron + protein'],
+      ['🥦','Broccoli','Vitamin K + fibre'],
+      ['🥛','Milk / tofu','Calcium for bones'],
+      ['🌰','Chia / flax seeds','Omega-3 + fibre'],
+      ['🍒','Cherries','May ease inflammation and sleep'],
+    ],
+    no: [
+      ['🍽️','Large heavy meals','Smaller, more frequent'],
+      ['🌶️','Spicy reflux triggers','If heartburn flares'],
+      ['☕','Late caffeine','Disrupts your sleep'],
+    ],
+    nut: [
+      ['Iron','27 mg — baby stores for birth'],
+      ['Protein','70–100 g daily — growth'],
+      ['Fibre','Prevent constipation'],
+    ],
+  },
+};
+
+const CHECKLISTS = {
+  hospital: {
+    title: 'Hospital bag',
+    items: [
+      ['Papers','ID, insurance, birth plan','papers'],
+      ['Birth plan','Printed copy, 2 copies','papers'],
+      ['Robe / nursing gown','Comfy, front-opening','clothes'],
+      ['Nursing bras','2–3, easy clip','clothes'],
+      ['Heavy pads','For after birth','toiletries'],
+      ['Slippers + socks','','clothes'],
+      ['Phone charger','Long cable','tech'],
+      ['Toiletries','Toothbrush, lip balm, hair tie','toiletries'],
+      ['Going-home outfit','Loose, maternity','clothes'],
+      ['Baby going-home outfit','Newborn size','baby'],
+      ['Car seat','Installed and ready','baby'],
+      ['Baby blanket','Swaddle','baby'],
+    ],
+  },
+  baby: {
+    title: 'Baby essentials',
+    items: [
+      ['Newborn onesies','5–7, easy snaps','clothes'],
+      ['Sleepsuits / swaddles','3–5','clothes'],
+      ['Hats, mittens, socks','','clothes'],
+      ['Nappies','1 pack newborn','gear'],
+      ['Wipes + nappy cream','','gear'],
+      ['Breast pads + nipple cream','','feeding'],
+      ['Bottles (if combo feeding)','2–4 slow flow','feeding'],
+      ['Muslin cloths','5–7','gear'],
+      ['Baby bath + wash','','gear'],
+      ['Thermometer','','health'],
+      ['Car seat + cot / bassinet','Safe sleep space','gear'],
+      ['Book the newborn photoshoot','','memories'],
+    ],
+  },
+  postpartum: {
+    title: 'Postpartum for you',
+    items: [
+      ['Nursing pads','Disposable or washable','feeding'],
+      ['Nipple cream','Lansinoh or similar','feeding'],
+      ['High-waist postpartum underwear','Disposable period style','recovery'],
+      ['Peri bottle + sitz bath','For perineum care','recovery'],
+      ['Pain relief','Paracetamol / ibuprofen (ask OB)','recovery'],
+      ['Healthy snacks','Nuts, fruit, bars by the couch','nutrition'],
+      ['Water bottle with straw','','hydration'],
+      ['Heating pad','For cramping','recovery'],
+      ['Book meals / help for first 2 weeks','','support'],
+      ['Postnatal vitamin','Continue 6–12 weeks','health'],
+      ['Therapy / GP follow-up booked','6-week check','health'],
+      ['Padsicles / cooling packs','','recovery'],
+    ],
+  },
+};
+
+const TRIM_NAMES = {1:'First Trimester',2:'Second Trimester',3:'Third Trimester'};
+
+/* ═══════════════ STATE ═══════════════ */
+const store = {
+  get edd(){ try{return localStorage.getItem('bloom_edd')}catch(e){return null} },
+  set edd(v){ localStorage.setItem('bloom_edd', v) },
+  getChecklist(key){ try{return JSON.parse(localStorage.getItem('bloom_ck_'+key)||'{}')}catch(e){return {}} },
+  setChecklist(key,obj){ localStorage.setItem('bloom_ck_'+key, JSON.stringify(obj)) },
+  getFeeds(){ try{return JSON.parse(localStorage.getItem('bloom_feeds')||'[]')}catch(e){return []} },
+  setFeeds(a){ localStorage.setItem('bloom_feeds', JSON.stringify(a)) },
+};
+
+function getWeeksPregnant(){
+  const edd = store.edd; if(!edd) return null;
+  // Pregnancy is 280 days = 40 weeks from LMP. So LMP = EDD - 280.
+  const eddDate = new Date(edd + 'T00:00:00');
+  const lmp = new Date(eddDate.getTime() - 280*86400000);
+  const now = new Date();
+  const days = Math.floor((now - lmp)/86400000);
+  return days; // days since LMP
+}
+
+function currentWeek(){
+  const d = getWeeksPregnant();
+  if(d === null) return null;
+  if(d < 0) return {week:0, day:d, daysTotal:d};
+  const week = Math.min(40, Math.floor(d/7)+ (d>=0?1:0));
+  return {week: Math.max(0, Math.min(40, Math.floor(d/7)+1)), day: d%7, daysTotal:d};
+}
+
+/* ═══════════════ HOME RENDER ═══════════════ */
+function renderHome(){
+  const edd = store.edd;
+  const onboard = document.getElementById('onboard-empty');
+  const content = document.getElementById('home-content');
+  if(!edd){ onboard.style.display='block'; content.style.display='none'; return; }
+  onboard.style.display='none'; content.style.display='block';
+
+  const info = currentWeek();
+  const wk = WEEKS[Math.max(0, Math.min(39, info.week-1))] || WEEKS[0];
+  const eddDate = new Date(edd+'T00:00:00');
+  const now = new Date();
+  const daysLeft = Math.max(0, Math.ceil((eddDate - now)/86400000));
+  const pct = Math.min(100, Math.max(0, Math.round(info.daysTotal/280*100)));
+
+  document.getElementById('h-weeks-num').textContent = Math.max(0, info.week);
+  document.getElementById('h-fruit').textContent = wk.fruit;
+  document.getElementById('h-week-sub').textContent = `Baby is the size of a ${wk.name}`;
+  document.getElementById('h-trimester').textContent = TRIM_NAMES[wk.trim];
+  document.getElementById('h-days-left').textContent = daysLeft;
+  document.getElementById('h-edd').textContent = new Date(edd).toLocaleDateString('en-SG',{month:'short', day:'numeric'});
+  document.getElementById('h-trim-pct').textContent = pct + '%';
+
+  document.getElementById('week-title').textContent = `Week ${info.week}`;
+  document.getElementById('week-badge').textContent = TRIM_NAMES[wk.trim];
+  document.getElementById('week-summary').textContent = wk.dev;
+  document.getElementById('m-len').textContent = wk.len;
+  document.getElementById('m-wei').textContent = wk.wei;
+  document.getElementById('m-size').textContent = wk.name;
+  document.getElementById('week-tip').innerHTML = `<b>For you:</b> ${wk.mom}`;
+}
+
+/* ═══════════════ GROW RENDER ═══════════════ */
+let gsel = 20;
+function renderGrowStrip(){
+  const strip = document.getElementById('weekstrip');
+  strip.innerHTML='';
+  for(let w=4; w<=40; w++){
+    const b = document.createElement('button');
+    b.textContent = w;
+    if(w===gsel) b.classList.add('on');
+    b.onclick = ()=>{ gsel=w; renderGrowStrip(); renderGrow(); };
+    strip.appendChild(b);
+  }
+}
+function renderGrow(){
+  const wk = WEEKS.find(x=>x.w===gsel) || WEEKS[0];
+  document.getElementById('g-week').textContent = gsel;
+  document.getElementById('g-fruit').textContent = wk.fruit;
+  document.getElementById('g-compare').textContent = `About the size of a ${wk.name}`;
+  document.getElementById('g-trimester').textContent = TRIM_NAMES[wk.trim];
+  document.getElementById('g-len').textContent = wk.len;
+  document.getElementById('g-wei').textContent = wk.wei;
+  document.getElementById('g-ln').textContent = 'T'+wk.trim;
+  document.getElementById('g-dev').textContent = wk.dev;
+  document.getElementById('g-mom').textContent = wk.mom;
+}
+
+/* ═══════════════ EAT RENDER ═══════════════ */
+let eatTrim = 1;
+function renderEat(){
+  const d = NUTRITION[eatTrim];
+  const go = document.getElementById('eat-go');
+  const no = document.getElementById('eat-no');
+  const nut = document.getElementById('eat-nut');
+  go.innerHTML = d.go.map(([ic,name,why])=>`<div class="food"><div class="fi">${ic}</div><div class="ft"><b>${name}</b><span>${why}</span></div><span class="fb go">enjoy</span></div>`).join('');
+  no.innerHTML  = d.no.map(([ic,name,why])=>`<div class="food"><div class="fi">${ic}</div><div class="ft"><b>${name}</b><span>${why}</span></div><span class="fb no">avoid</span></div>`).join('');
+  nut.innerHTML = d.nut.map(([n,why])=>`<div class="lrow" style="padding:10px 0"><div class="l-ic" style="background:rgba(229,201,138,.3)">✨</div><div class="l-t"><b>${n}</b><span>${why}</span></div></div>`).join('');
+}
+
+/* ═══════════════ CHECKLIST RENDER ═══════════════ */
+let ckKey = 'hospital';
+function renderChecklist(){
+  const data = CHECKLISTS[ckKey];
+  const state = store.getChecklist(ckKey);
+  document.getElementById('ck-title').textContent = data.title;
+  const list = document.getElementById('ck-list');
+  list.innerHTML = '';
+  data.items.forEach(([label, note, icon], i)=>{
+    const done = !!state[i];
+    const row = document.createElement('div');
+    row.className = 'ck' + (done?' done':'');
+    row.innerHTML = `<div class="box"><span class="material-symbols-outlined">check</span></div>
+      <div class="txt"><b>${label}</b>${note?`<span>${note}</span>`:''}</div>`;
+    row.onclick = ()=>{
+      state[i] = !state[i];
+      store.setChecklist(ckKey, state);
+      renderChecklist();
+    };
+    list.appendChild(row);
+  });
+  const doneCount = Object.values(state).filter(Boolean).length;
+  document.getElementById('ck-progress').textContent = `${doneCount} / ${data.items.length}`;
+  document.getElementById('ck-bar').style.width = (doneCount/data.items.length*100)+'%';
+}
+
+/* ═══════════════ FEED RENDER ═══════════════ */
+function todayKey(){ const d=new Date(); return d.toISOString().slice(0,10); }
+function renderFeed(){
+  const feeds = store.getFeeds();
+  const today = feeds.filter(f=>f.date===todayKey());
+  document.getElementById('f-today').textContent = today.length;
+  document.getElementById('f-minutes').textContent = today.reduce((s,f)=>s+f.min,0);
+}
+
+/* Power pump */
+const PUMP_PLAN = [
+  {label:'Pump',  min:10, type:'pump'},
+  {label:'Rest',  min:10, type:'rest'},
+  {label:'Pump',  min:10, type:'pump'},
+  {label:'Rest',  min:10, type:'rest'},
+  {label:'Pump',  min:10, type:'pump'},
+  {label:'Rest',  min:10, type:'rest'},
+];
+let pumpTimer = null, pumpIdx = 0, pumpRemain = 0;
+function renderPump(){
+  const wrap = document.getElementById('pump-steps');
+  wrap.innerHTML = '';
+  PUMP_PLAN.forEach((s,i)=>{
+    const el = document.createElement('div');
+    el.className = 'pump-step' + (i===pumpIdx?' run':'');
+    el.innerHTML = `<div class="ph">${s.type==='pump'?'P':'R'}</div>
+      <div class="pt"><b>${i<pumpIdx?'✓ ':''}${s.label} · ${s.min} min</b>
+      <span>${s.type==='pump'?'Express milk':'Relax, drink water, massage breasts'}</span></div>
+      ${i===pumpIdx?`<span class="badge mauve">${Math.ceil(pumpRemain/60)}s left</span>`:''}
+      </div>`;
+    wrap.appendChild(el);
+  });
+}
+function startPump(){
+  if(pumpTimer){ clearInterval(pumpTimer); pumpTimer=null; document.getElementById('pump-start').textContent='Start session'; return; }
+  if(pumpIdx>=PUMP_PLAN.length){ pumpIdx=0; }
+  pumpRemain = PUMP_PLAN[pumpIdx].min*60;
+  document.getElementById('pump-start').textContent='Pause session';
+  toast('Power pump started');
+  pumpTimer = setInterval(()=>{
+    pumpRemain--;
+    if(pumpRemain<=0){
+      pumpIdx++;
+      if(pumpIdx>=PUMP_PLAN.length){
+        clearInterval(pumpTimer); pumpTimer=null; pumpIdx=0; pumpRemain=0;
+        document.getElementById('pump-start').textContent='Start session';
+        toast('Power pump complete 🎉');
+      } else {
+        pumpRemain = PUMP_PLAN[pumpIdx].min*60;
+      }
+    }
+    renderPump();
+  },1000);
+  renderPump();
+}
+
+/* ═══════════════ NAV ═══════════════ */
+function switchTab(tab){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById('page-'+tab).classList.add('on');
+  document.querySelectorAll('.bottom-nav a').forEach(a=>a.classList.toggle('on', a.dataset.tab===tab));
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.bottom-nav a').forEach(a=>{
+  a.addEventListener('click', e=>{ e.preventDefault(); switchTab(a.dataset.tab); });
+});
+document.querySelectorAll('[data-go]').forEach(a=>{
+  a.addEventListener('click', e=>{ e.preventDefault(); switchTab(a.dataset.go); });
+});
+
+/* ═══════════════ EVENTS ═══════════════ */
+document.getElementById('btn-save-edd').onclick = ()=>{
+  const val = document.getElementById('edd-input').value;
+  if(!val){ toast('Pick a due date first'); return; }
+  store.edd = val;
+  toast('Welcome to Bloom 🌸');
+  renderHome();
+};
+document.getElementById('btn-settings').onclick = ()=>{
+  document.getElementById('edd-edit').value = store.edd || '';
+  document.getElementById('settings-modal').classList.add('on');
+};
+document.getElementById('btn-close-settings').onclick = ()=> document.getElementById('settings-modal').classList.remove('on');
+document.getElementById('btn-save-edd2').onclick = ()=>{
+  const val = document.getElementById('edd-edit').value;
+  if(!val){ toast('Pick a due date'); return; }
+  store.edd = val;
+  document.getElementById('settings-modal').classList.remove('on');
+  renderHome(); toast('Due date updated');
+};
+
+document.querySelectorAll('#trim-chips .chip').forEach(c=>{
+  c.onclick = ()=>{
+    document.querySelectorAll('#trim-chips .chip').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+    eatTrim = parseInt(c.dataset.trim);
+    renderEat();
+  };
+});
+document.querySelectorAll('#ck-chips .chip').forEach(c=>{
+  c.onclick = ()=>{
+    document.querySelectorAll('#ck-chips .chip').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+    ckKey = c.dataset.ck;
+    renderChecklist();
+  };
+});
+document.getElementById('ck-reset').onclick = ()=>{
+  store.setChecklist(ckKey, {});
+  renderChecklist();
+  toast('List reset');
+};
+document.getElementById('f-log').onclick = ()=>{
+  const side = document.getElementById('f-side').value;
+  const min = parseInt(document.getElementById('f-min').value)||15;
+  const feeds = store.getFeeds();
+  feeds.push({date:todayKey(), side, min, ts:Date.now()});
+  store.setFeeds(feeds);
+  renderFeed();
+  toast(`Logged ${min} min on ${side}`);
+};
+document.getElementById('pump-start').onclick = startPump;
+document.getElementById('pump-reset').onclick = ()=>{
+  if(pumpTimer){ clearInterval(pumpTimer); pumpTimer=null; }
+  pumpIdx=0; pumpRemain=0;
+  document.getElementById('pump-start').textContent='Start session';
+  renderPump();
+};
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+/* ═══════════════ INIT ═══════════════ */
+renderHome();
+renderGrowStrip();
+renderGrow();
+renderEat();
+renderChecklist();
+renderFeed();
+renderPump();
+
+/* Pre-fill EDD input with a sensible default (38 weeks ahead) so onboarding is one tap */
+if(!store.edd){
+  const d = new Date(); d.setDate(d.getDate()+266); // ~38 weeks = typical "now"
+  document.getElementById('edd-input').value = d.toISOString().slice(0,10);
+}
+</script>
+</body>
+</html>
