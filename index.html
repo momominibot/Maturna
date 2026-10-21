@@ -21,15 +21,20 @@
   --ok:#6ba88a; --warn:#d4a85a; --low:#c47a6a;
   --serif:'Newsreader',Georgia,serif; --sans:'Manrope',system-ui,sans-serif;
   --r:22px; --r-sm:16px;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{
   font-family:var(--sans); font-size:16px; color:var(--ink); background:var(--paper);
   min-height:100dvh; display:flex; justify-content:center; align-items:flex-start;
-  -webkit-font-smoothing:antialiased; position:relative;
+  -webkit-font-smoothing:antialiased; position:relative; overflow-x:hidden;
   background:linear-gradient(135deg,#e8dff5 0%,#f5c4a8 50%,#e8dff5 100%);
+  background-size:200% 200%;
+  animation:bgShift 18s ease-in-out infinite;
 }
+@keyframes bgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body::before{
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
@@ -38,7 +43,9 @@ body::before{
     radial-gradient(46% 30% at 90% 52%, rgba(214,200,235,.3), transparent 70%),
     radial-gradient(40% 26% at 4% 66%, rgba(200,215,240,.28), transparent 70%),
     radial-gradient(44% 30% at 70% 96%, rgba(248,210,200,.32), transparent 72%);
+  animation:washFloat 12s ease-in-out infinite alternate;
 }
+@keyframes washFloat{from{transform:translateY(0) scale(1)}to{transform:translateY(-12px) scale(1.03)}}
 .app{
   position:relative; z-index:1; width:100%; max-width:430px; min-height:100dvh;
   display:flex; flex-direction:column; min-width:0;
@@ -53,14 +60,23 @@ body::before{
   padding:calc(14px + env(safe-area-inset-top,0px)) 16px 10px;
   background:rgba(247,242,250,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(196,181,224,.2);
+  transition:background .3s var(--ease);
 }
 .top .t-title{font-family:var(--serif); font-size:22px; font-weight:800; color:var(--ink); letter-spacing:-.01em; flex:1}
 .top .t-icon{
   width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
   background:var(--card); border:2px solid var(--ink); color:var(--ink); text-decoration:none; font-size:18px;
+  cursor:pointer; transition:transform .2s var(--ease-spring), box-shadow .2s;
 }
+.top .t-icon:active{transform:scale(.92)}
 .brandline{display:flex; align-items:center; gap:9px; flex:1; min-width:0}
-.brandline .bdot{width:30px; height:30px; border-radius:50%; background:url('https://aka.doubaocdn.com/s/Plr6ogKbKb') center/cover; box-shadow:0 2px 8px rgba(122,92,150,.25)}
+.brandline .bdot{
+  width:30px; height:30px; border-radius:50%;
+  background:url('https://aka.doubaocdn.com/s/Plr6ogKbKb') center/cover;
+  box-shadow:0 2px 8px rgba(122,92,150,.25);
+  animation:logoSpin 8s ease-in-out infinite;
+}
+@keyframes logoSpin{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(8deg) scale(1.05)}}
 .brandline b{font-family:var(--serif); font-weight:800; font-size:21px; color:var(--ink); letter-spacing:-.01em}
 /* scroll */
 .scroll{padding:14px 18px 24px; display:flex; flex-direction:column; gap:16px}
@@ -70,7 +86,9 @@ h2.sec{font-family:var(--serif); font-weight:800; font-size:19px; color:var(--in
 .card{
   background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r);
   padding:18px; box-shadow:0 8px 24px -12px rgba(107,82,142,.18); backdrop-filter:blur(8px);
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease);
 }
+.card:hover{transform:translateY(-2px); box-shadow:0 14px 32px -12px rgba(107,82,142,.25)}
 .card.tint-lavender{background:rgba(196,181,224,.18); border-color:rgba(196,181,224,.4)}
 .card.tint-sage{background:rgba(168,192,160,.16); border-color:rgba(168,192,160,.35)}
 .card.tint-blush{background:#FCF6F5; border-color:var(--blush)}
@@ -79,23 +97,33 @@ h2.sec{font-family:var(--serif); font-weight:800; font-size:19px; color:var(--in
 .grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
 .grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
 /* metric tiles */
-.metric{text-align:center; padding:12px 6px; border-radius:var(--r-sm); background:var(--sunken); border:1.5px solid var(--line-soft)}
+.metric{
+  text-align:center; padding:12px 6px; border-radius:var(--r-sm); background:var(--sunken);
+  border:1.5px solid var(--line-soft); transition:transform .2s var(--ease-spring);
+}
+.metric:active{transform:scale(.95)}
 .metric .m-v{font-family:var(--serif); font-size:18px; font-weight:800; color:var(--ink)}
 .metric .m-l{font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--taupe); font-weight:700; margin-top:3px}
 /* badges */
-.badge{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:800; padding:4px 11px; border-radius:99px; letter-spacing:.04em}
+.badge{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:800; padding:4px 11px; border-radius:99px; letter-spacing:.04em; transition:transform .2s var(--ease-spring)}
 .badge.ok{background:rgba(107,168,138,.14); color:var(--ok)}
 .badge.warn{background:rgba(212,168,90,.16); color:var(--warn)}
 .badge.info{background:rgba(168,184,216,.22); color:#4B5C97}
 .badge.mauve{background:rgba(122,92,150,.14); color:var(--mauve)}
-/* buttons */
+/* buttons with ripple */
 .btn{
+  position:relative; overflow:hidden;
   display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:15px;
   border:none; cursor:pointer; border-radius:99px; font:800 15px var(--sans); letter-spacing:-.01em;
-  background:var(--ink); color:#fff; box-shadow:0 4px 14px rgba(29,27,24,.18); text-decoration:none; transition:.18s;
+  background:var(--ink); color:#fff; box-shadow:0 4px 14px rgba(29,27,24,.18); text-decoration:none;
+  transition:transform .18s var(--ease-spring), box-shadow .25s var(--ease);
 }
-.btn:hover{transform:translateY(-1px)}
+.btn:hover{transform:translateY(-1px); box-shadow:0 8px 22px rgba(29,27,24,.25)}
+.btn:active{transform:scale(.97)}
+.btn .ripple{position:absolute; border-radius:50%; background:rgba(255,255,255,.4); transform:scale(0); animation:ripple .6s var(--ease); pointer-events:none}
+@keyframes ripple{to{transform:scale(4); opacity:0}}
 .btn.ghost{background:transparent; border:2px solid var(--ink); color:var(--ink); box-shadow:none}
+.btn.ghost .ripple{background:rgba(61,47,82,.15)}
 .btn.mauve{background:var(--mauve); color:#fff; box-shadow:0 4px 14px rgba(139,108,130,.3)}
 .btn.sm{padding:10px 14px; font-size:13px; width:auto}
 /* chips */
@@ -103,31 +131,47 @@ h2.sec{font-family:var(--serif); font-weight:800; font-size:19px; color:var(--in
 .chip{
   display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 10px; min-width:64px; flex:1;
   background:var(--card); border:2px solid var(--line-soft); border-radius:var(--r-sm);
-  font-size:11.5px; color:var(--taupe); cursor:pointer; transition:.15s; font-weight:600;
+  font-size:11.5px; color:var(--taupe); cursor:pointer; transition:.2s var(--ease-spring); font-weight:600;
 }
-.chip .c-ic{font-size:21px}
-.chip.on{border-color:var(--ink); background:var(--sunken); color:var(--ink); font-weight:800}
+.chip .c-ic{font-size:21px; transition:transform .3s var(--ease-spring)}
+.chip:hover .c-ic{transform:scale(1.15)}
+.chip:active{transform:scale(.94)}
+.chip.on{border-color:var(--mauve); background:var(--sunken); color:var(--ink); font-weight:800; box-shadow:0 4px 14px -4px rgba(122,92,150,.3)}
+.chip.on .c-ic{transform:scale(1.1)}
 /* list rows */
-.lrow{display:flex; align-items:center; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line-soft); text-decoration:none; color:var(--ink)}
+.lrow{
+  display:flex; align-items:center; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line-soft);
+  text-decoration:none; color:var(--ink); cursor:pointer; transition:background .2s, padding-left .2s var(--ease);
+  border-radius:8px;
+}
+.lrow:hover{padding-left:8px; background:rgba(196,181,224,.06)}
 .lrow:last-child{border-bottom:none}
-.lrow .l-ic{width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0}
+.lrow .l-ic{width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0; transition:transform .25s var(--ease-spring)}
+.lrow:hover .l-ic{transform:scale(1.1) rotate(-4deg)}
 .lrow .l-t{flex:1; min-width:0}
 .lrow .l-t b{display:block; font-size:14.5px; font-weight:800; color:var(--ink)}
 .lrow .l-t span{font-size:12px; color:var(--taupe); line-height:1.4; display:block; margin-top:2px}
-.lrow .l-arr{color:var(--faded); font-size:18px}
+.lrow .l-arr{color:var(--faded); font-size:18px; transition:transform .2s var(--ease)}
+.lrow:hover .l-arr{transform:translateX(4px)}
 /* insight */
-.insight{display:flex; gap:12px; padding:15px 16px; border-radius:var(--r-sm); background:var(--sunken); border:1.5px solid var(--line-soft)}
-.insight .i-ic{font-size:20px}
+.insight{
+  display:flex; gap:12px; padding:15px 16px; border-radius:var(--r-sm); background:var(--sunken);
+  border:1.5px solid var(--line-soft); transition:transform .25s var(--ease);
+}
+.insight:hover{transform:translateX(3px)}
+.insight .i-ic{font-size:20px; animation:iconBob 3s ease-in-out infinite}
+@keyframes iconBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 .insight p{font-size:13px; line-height:1.55; color:var(--ink)}
 .insight b{color:var(--mauve)}
 /* inputs */
 input,select,textarea{
   font:inherit; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line);
-  background:#fff; color:var(--ink); width:100%;
+  background:#fff; color:var(--ink); width:100%; transition:border-color .2s, box-shadow .2s, transform .15s;
 }
 input:focus,select:focus{outline:none; border-color:var(--mauve); box-shadow:0 0 0 3px rgba(196,168,224,.15)}
+input:active,select:active{transform:scale(.99)}
 label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); margin:0 0 6px 2px; text-transform:uppercase; letter-spacing:.04em}
-/* bottom nav */
+/* bottom nav with sliding indicator */
 .bottom-nav{
   position:fixed; bottom:0; left:50%; transform:translateX(-50%);
   width:100%; max-width:430px; z-index:50;
@@ -137,20 +181,25 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
   border-top:1px solid rgba(196,181,224,.3);
 }
 .bottom-nav a{
+  position:relative; z-index:1;
   display:flex; flex-direction:column; align-items:center; gap:2px;
   font-size:10.5px; font-weight:800; color:var(--faded); text-decoration:none;
-  min-width:44px; min-height:44px; flex:1; padding:4px 2px; border-radius:12px; transition:.15s;
+  min-width:44px; min-height:44px; flex:1; padding:4px 2px; border-radius:12px; transition:color .25s var(--ease);
 }
-.bottom-nav a .n-ic{font-family:'Material Symbols Outlined'; font-size:23px; font-variation-settings:'FILL' 0}
+.bottom-nav a .n-ic{font-family:'Material Symbols Outlined'; font-size:23px; font-variation-settings:'FILL' 0; transition:transform .25s var(--ease-spring), font-variation-settings .2s}
 .bottom-nav a.on{color:var(--mauve)}
-.bottom-nav a.on .n-ic{font-variation-settings:'FILL' 1; color:var(--mauve)}
+.bottom-nav a.on .n-ic{font-variation-settings:'FILL' 1; transform:translateY(-2px) scale(1.1)}
+.bottom-nav a:active .n-ic{transform:scale(.9)}
 /* hero countdown */
 .hero{
   position:relative; overflow:hidden;
   background:linear-gradient(160deg,#c4b5e0 0%,#e8a898 100%);
+  background-size:200% 200%;
   color:#fff; border-radius:var(--r); padding:22px;
   box-shadow:0 12px 30px -10px rgba(122,92,150,.4);
+  animation:heroGradient 8s ease-in-out infinite;
 }
+@keyframes heroGradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .hero .h-kicker{font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; opacity:.9}
 .hero .h-weeks{font-family:var(--serif); font-size:56px; font-weight:800; line-height:1; margin:6px 0 2px; letter-spacing:-.02em}
 .hero .h-weeks small{font-size:20px; font-weight:600; opacity:.9}
@@ -158,63 +207,125 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .hero .h-fruit{
   position:absolute; right:16px; top:16px; width:72px; height:72px; border-radius:50%;
   background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:42px;
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(4px); animation:fruitFloat 4s ease-in-out infinite;
 }
+@keyframes fruitFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
 .hero .h-count{display:flex; gap:14px; margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.3)}
 .hero .h-count div{flex:1}
 .hero .h-count .n{font-family:var(--serif); font-size:22px; font-weight:800}
 .hero .h-count .l{font-size:10.5px; opacity:.9; text-transform:uppercase; letter-spacing:.05em; font-weight:700}
 /* week selector */
-.weekstrip{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 8px; scrollbar-width:none}
+.weekstrip{display:flex; gap:8px; overflow-x:auto; padding:4px 2px 8px; scrollbar-width:none; scroll-behavior:smooth}
 .weekstrip::-webkit-scrollbar{display:none}
 .weekstrip button{
   flex-shrink:0; width:44px; height:44px; border-radius:12px; border:2px solid var(--line-soft);
   background:var(--card); font:800 13px var(--sans); color:var(--taupe); cursor:pointer;
+  transition:all .25s var(--ease-spring);
 }
-.weekstrip button.on{background:var(--mauve); color:#fff; border-color:var(--mauve)}
+.weekstrip button:hover{transform:translateY(-2px)}
+.weekstrip button.on{background:var(--mauve); color:#fff; border-color:var(--mauve); transform:scale(1.1); box-shadow:0 4px 12px rgba(122,92,150,.35)}
 /* checklist */
-.ck{display:flex; align-items:flex-start; gap:12px; padding:12px 4px; border-bottom:1px solid var(--line-soft); cursor:pointer}
+.ck{
+  display:flex; align-items:flex-start; gap:12px; padding:12px 4px; border-bottom:1px solid var(--line-soft);
+  cursor:pointer; transition:background .2s, padding-left .2s var(--ease); border-radius:8px;
+}
+.ck:hover{padding-left:6px; background:rgba(196,181,224,.05)}
 .ck:last-child{border-bottom:none}
 .ck .box{
   width:24px; height:24px; border-radius:8px; border:2px solid var(--line); flex-shrink:0; margin-top:1px;
-  display:flex; align-items:center; justify-content:center; transition:.15s;
+  display:flex; align-items:center; justify-content:center; transition:all .3s var(--ease-spring);
+  background:#fff;
 }
-.ck.done .box{background:var(--ok); border-color:var(--ok); color:#fff}
-.ck .box .material-symbols-outlined{font-size:16px; opacity:0}
-.ck.done .box .material-symbols-outlined{opacity:1}
-.ck .txt{flex:1}
-.ck .txt b{font-size:14px; font-weight:700; color:var(--ink); display:block}
+.ck.done .box{background:var(--ok); border-color:var(--ok); color:#fff; transform:scale(1.05)}
+.ck .box .material-symbols-outlined{
+  font-size:16px; opacity:0; transform:scale(0) rotate(-45deg);
+  transition:all .3s var(--ease-spring);
+}
+.ck.done .box .material-symbols-outlined{opacity:1; transform:scale(1) rotate(0)}
+.ck .txt{flex:1; transition:opacity .3s}
+.ck .txt b{font-size:14px; font-weight:700; color:var(--ink); display:block; transition:color .3s}
 .ck .txt span{font-size:12px; color:var(--taupe)}
 .ck.done .txt b{text-decoration:line-through; color:var(--faded)}
-/* pump timeline */
-.pump-step{display:flex; align-items:center; gap:12px; padding:12px; border-radius:14px; background:var(--sunken); margin-bottom:8px}
-.pump-step .ph{width:44px; height:44px; border-radius:50%; background:var(--card); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:var(--mauve); border:2px solid var(--mauve); flex-shrink:0}
-.pump-step.run{background:rgba(196,181,224,.25)}
-.pump-step.run .ph{background:var(--mauve); color:#fff}
+/* pump timeline with circular progress */
+.pump-step{
+  display:flex; align-items:center; gap:12px; padding:12px; border-radius:14px; background:var(--sunken);
+  margin-bottom:8px; transition:all .35s var(--ease);
+}
+.pump-step .ph{
+  position:relative; width:44px; height:44px; border-radius:50%; background:var(--card);
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+  color:var(--mauve); border:2px solid var(--mauve); flex-shrink:0; transition:all .3s var(--ease-spring);
+}
+.pump-step.run{background:rgba(196,181,224,.25); transform:scale(1.02); box-shadow:0 4px 16px -4px rgba(122,92,150,.3)}
+.pump-step.run .ph{background:var(--mauve); color:#fff; animation:pumpPulse 1.5s ease-in-out infinite}
+@keyframes pumpPulse{0%,100%{box-shadow:0 0 0 0 rgba(122,92,150,.4)}50%{box-shadow:0 0 0 10px rgba(122,92,150,0)}}
+.pump-step.done{opacity:.6}
+.pump-step.done .ph{background:var(--ok); border-color:var(--ok); color:#fff}
 .pump-step .pt{flex:1}
 .pump-step .pt b{font-size:14px; display:block}
 .pump-step .pt span{font-size:12px; color:var(--taupe)}
+/* pump circular ring */
+.pump-ring-wrap{display:flex; justify-content:center; margin:8px 0 16px}
+.pump-ring{position:relative; width:120px; height:120px}
+.pump-ring svg{transform:rotate(-90deg)}
+.pump-ring .ring-bg{fill:none; stroke:var(--sunken); stroke-width:8}
+.pump-ring .ring-fg{fill:none; stroke:url(#pumpGrad); stroke-width:8; stroke-linecap:round; transition:stroke-dashoffset .5s var(--ease)}
+.pump-ring .ring-text{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center}
+.pump-ring .ring-text .rt-n{font-family:var(--serif); font-size:28px; font-weight:800; color:var(--ink)}
+.pump-ring .ring-text .rt-l{font-size:10px; color:var(--taupe); text-transform:uppercase; letter-spacing:.05em; font-weight:700}
 /* progress bar */
 .pbar{height:10px; border-radius:99px; background:var(--sunken); overflow:hidden; margin-top:8px}
-.pbar > i{display:block; height:100%; background:linear-gradient(90deg,var(--lavender),var(--coral)); border-radius:99px; transition:width .4s}
+.pbar > i{display:block; height:100%; background:linear-gradient(90deg,var(--lavender),var(--coral)); border-radius:99px; transition:width .6s var(--ease); position:relative}
+.pbar > i::after{content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent); animation:shimmer 1.8s infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 /* food grid */
-.food{display:flex; gap:10px; padding:11px 4px; border-bottom:1px solid var(--line-soft); align-items:center}
+.food{
+  display:flex; gap:10px; padding:11px 4px; border-bottom:1px solid var(--line-soft); align-items:center;
+  transition:transform .2s var(--ease), opacity .3s;
+}
 .food:last-child{border-bottom:none}
-.food .fi{font-size:22px; width:34px; text-align:center}
+.food:hover{transform:translateX(4px)}
+.food .fi{font-size:22px; width:34px; text-align:center; transition:transform .3s var(--ease-spring)}
+.food:hover .fi{transform:scale(1.2) rotate(-5deg)}
 .food .ft{flex:1}
 .food .ft b{font-size:13.5px; display:block}
 .food .ft span{font-size:11.5px; color:var(--taupe)}
-.food .fb{font-size:11px; font-weight:800; padding:3px 9px; border-radius:99px}
+.food .fb{font-size:11px; font-weight:800; padding:3px 9px; border-radius:99px; transition:transform .2s var(--ease-spring)}
+.food:hover .fb{transform:scale(1.08)}
 .food .fb.go{background:rgba(107,168,138,.15); color:var(--ok)}
 .food .fb.no{background:rgba(196,122,106,.15); color:var(--low)}
 .food .fb.lim{background:rgba(212,168,90,.15); color:var(--warn)}
 /* toast */
-#toast{position:fixed; bottom:110px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:10px 18px; border-radius:99px; font-size:13px; font-weight:700; opacity:0; transition:.25s; z-index:100; pointer-events:none}
-#toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
-/* page */
-.page{display:none; animation:fade .25s ease}
-.page.on{display:flex; flex-direction:column; gap:16px}
-@keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+#toast{
+  position:fixed; bottom:110px; left:50%; transform:translateX(-50%) translateY(20px) scale(.9);
+  background:var(--ink); color:#fff; padding:10px 18px; border-radius:99px; font-size:13px; font-weight:700;
+  opacity:0; transition:all .35s var(--ease-spring); z-index:100; pointer-events:none;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+}
+#toast.show{opacity:1; transform:translateX(-50%) translateY(0) scale(1)}
+/* page transitions */
+.page{display:none; opacity:0; transform:translateY(12px)}
+.page.on{display:flex; flex-direction:column; gap:16px; animation:pageIn .45s var(--ease) forwards}
+.page.leaving{animation:pageOut .3s var(--ease) forwards}
+@keyframes pageIn{from{opacity:0; transform:translateY(14px)}to{opacity:1; transform:translateY(0)}}
+@keyframes pageOut{from{opacity:1; transform:translateY(0)}to{opacity:0; transform:translateY(-10px)}}
+/* stagger entrance for children */
+.page.on .scroll > *{opacity:0; animation:staggerIn .5s var(--ease) forwards}
+.page.on .scroll > *:nth-child(1){animation-delay:.05s}
+.page.on .scroll > *:nth-child(2){animation-delay:.12s}
+.page.on .scroll > *:nth-child(3){animation-delay:.19s}
+.page.on .scroll > *:nth-child(4){animation-delay:.26s}
+.page.on .scroll > *:nth-child(5){animation-delay:.33s}
+.page.on .scroll > *:nth-child(6){animation-delay:.40s}
+.page.on .scroll > *:nth-child(7){animation-delay:.47s}
+.page.on .scroll > *:nth-child(8){animation-delay:.54s}
+.page.on .scroll > *:nth-child(9){animation-delay:.61s}
+@keyframes staggerIn{from{opacity:0; transform:translateY(16px)}to{opacity:1; transform:translateY(0)}}
+/* hero image */
+.hero-img{border-radius:var(--r); overflow:hidden; box-shadow:0 10px 28px -12px rgba(122,92,150,.3); transition:transform .4s var(--ease), box-shadow .4s}
+.hero-img:hover{transform:scale(1.01); box-shadow:0 16px 36px -12px rgba(122,92,150,.4)}
+.hero-img img{width:100%; display:block; transition:transform .6s var(--ease)}
+.hero-img:hover img{transform:scale(1.03)}
 /* phone frame on desktop */
 @media (min-width:500px){
   body{padding:20px; align-items:center}
@@ -228,9 +339,22 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 }
 @media (max-width:499px){ body{padding:0; background:var(--paper)} .app{border-radius:0; box-shadow:none; max-height:none} }
 /* modal */
-.modal-bg{position:fixed; inset:0; background:rgba(60,40,90,.4); backdrop-filter:blur(4px); z-index:200; display:none; align-items:flex-end; justify-content:center}
-.modal-bg.on{display:flex}
-.modal{background:var(--paper); width:100%; max-width:430px; border-radius:24px 24px 0 0; padding:24px 20px calc(20px + env(safe-area-inset-bottom,0px)); max-height:85dvh; overflow-y:auto}
+.modal-bg{
+  position:fixed; inset:0; background:rgba(60,40,90,.4); backdrop-filter:blur(4px); z-index:200;
+  display:none; align-items:flex-end; justify-content:center; opacity:0; transition:opacity .3s;
+}
+.modal-bg.on{display:flex; opacity:1}
+.modal{
+  background:var(--paper); width:100%; max-width:430px; border-radius:24px 24px 0 0;
+  padding:24px 20px calc(20px + env(safe-area-inset-bottom,0px)); max-height:85dvh; overflow-y:auto;
+  transform:translateY(100%); transition:transform .4s var(--ease-spring);
+}
+.modal-bg.on .modal{transform:translateY(0)}
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
+  .page.on .scroll > *{animation:none; opacity:1}
+}
 </style>
 </head>
 <body>
@@ -239,7 +363,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
   <!-- TOP BAR -->
   <header class="top">
     <div class="brandline">
-      <div class="bdot">✿</div>
+      <div class="bdot"></div>
       <b>Maturna</b>
     </div>
     <button class="t-icon" id="btn-settings" aria-label="Settings"><span class="material-symbols-outlined">settings</span></button>
@@ -261,8 +385,8 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
       </div>
 
       <div id="onboard-empty" style="display:none">
-        <div style="text-align:center; margin-bottom:8px">
-          <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Bloom" style="width:100%; max-width:280px; border-radius:20px; box-shadow:0 12px 30px -10px rgba(122,92,150,.3)">
+        <div class="hero-img" style="text-align:center; margin-bottom:8px">
+          <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Maturna">
         </div>
         <div class="card tint-lavender">
           <h2 class="sec" style="margin-top:0">Welcome to Maturna 🌸</h2>
@@ -275,8 +399,8 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
       </div>
 
       <div id="home-content" style="display:none">
-        <div style="border-radius:var(--r); overflow:hidden; box-shadow:0 10px 28px -12px rgba(122,92,150,.3)">
-          <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Bloom" style="width:100%; display:block">
+        <div class="hero-img">
+          <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Maturna">
         </div>
         <h2 class="sec">This week</h2>
         <div class="card">
@@ -421,6 +545,24 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
           <b>60 minutes total</b>: pump 10, rest 10, pump 10, rest 10, pump 10, then rest 10.
           Do once a day for 2–3 days, ideally in the morning.
         </p>
+        <div class="pump-ring-wrap">
+          <div class="pump-ring">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="pumpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c4b5e0"/>
+                  <stop offset="100%" stop-color="#e8a898"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring-bg" cx="60" cy="60" r="52"/>
+              <circle class="ring-fg" id="pump-ring-fg" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+            </svg>
+            <div class="ring-text">
+              <div class="rt-n" id="pump-ring-time">60:00</div>
+              <div class="rt-l" id="pump-ring-label">ready</div>
+            </div>
+          </div>
+        </div>
         <div id="pump-steps"></div>
         <button class="btn" id="pump-start">Start session</button>
         <button class="btn ghost" id="pump-reset" style="margin-top:8px">Reset</button>
@@ -623,37 +765,50 @@ const CHECKLISTS = {
 };
 
 const TRIM_NAMES = {1:'First Trimester',2:'Second Trimester',3:'Third Trimester'};
+const TAB_ORDER = ['home','grow','eat','checklist','feed'];
 
 /* ═══════════════ STATE ═══════════════ */
 const store = {
-  get edd(){ try{return localStorage.getItem('bloom_edd')}catch(e){return null} },
-  set edd(v){ localStorage.setItem('bloom_edd', v) },
-  getChecklist(key){ try{return JSON.parse(localStorage.getItem('bloom_ck_'+key)||'{}')}catch(e){return {}} },
-  setChecklist(key,obj){ localStorage.setItem('bloom_ck_'+key, JSON.stringify(obj)) },
-  getFeeds(){ try{return JSON.parse(localStorage.getItem('bloom_feeds')||'[]')}catch(e){return []} },
-  setFeeds(a){ localStorage.setItem('bloom_feeds', JSON.stringify(a)) },
+  get edd(){ try{return localStorage.getItem('maturna_edd')}catch(e){return null} },
+  set edd(v){ localStorage.setItem('maturna_edd', v) },
+  getChecklist(key){ try{return JSON.parse(localStorage.getItem('maturna_ck_'+key)||'{}')}catch(e){return {}} },
+  setChecklist(key,obj){ localStorage.setItem('maturna_ck_'+key, JSON.stringify(obj)) },
+  getFeeds(){ try{return JSON.parse(localStorage.getItem('maturna_feeds')||'[]')}catch(e){return []} },
+  setFeeds(a){ localStorage.setItem('maturna_feeds', JSON.stringify(a)) },
 };
 
+function haptic(ms=10){ if(navigator.vibrate) navigator.vibrate(ms); }
+
+/* ═══════════════ COUNT-UP ANIMATION ═══════════════ */
+function countUp(el, target, duration=800, suffix=''){
+  const start = performance.now();
+  const from = 0;
+  function tick(now){
+    const p = Math.min(1, (now-start)/duration);
+    const eased = 1 - Math.pow(1-p, 3);
+    const val = Math.round(from + (target-from)*eased);
+    el.textContent = val + suffix;
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ═══════════════ PREGNANCY MATH ═══════════════ */
 function getWeeksPregnant(){
   const edd = store.edd; if(!edd) return null;
-  // Pregnancy is 280 days = 40 weeks from LMP. So LMP = EDD - 280.
   const eddDate = new Date(edd + 'T00:00:00');
   const lmp = new Date(eddDate.getTime() - 280*86400000);
   const now = new Date();
-  const days = Math.floor((now - lmp)/86400000);
-  return days; // days since LMP
+  return Math.floor((now - lmp)/86400000);
 }
-
 function currentWeek(){
   const d = getWeeksPregnant();
   if(d === null) return null;
-  if(d < 0) return {week:0, day:d, daysTotal:d};
-  const week = Math.min(40, Math.floor(d/7)+ (d>=0?1:0));
   return {week: Math.max(0, Math.min(40, Math.floor(d/7)+1)), day: d%7, daysTotal:d};
 }
 
 /* ═══════════════ HOME RENDER ═══════════════ */
-function renderHome(){
+function renderHome(animate=true){
   const edd = store.edd;
   const onboard = document.getElementById('onboard-empty');
   const content = document.getElementById('home-content');
@@ -667,13 +822,14 @@ function renderHome(){
   const daysLeft = Math.max(0, Math.ceil((eddDate - now)/86400000));
   const pct = Math.min(100, Math.max(0, Math.round(info.daysTotal/280*100)));
 
-  document.getElementById('h-weeks-num').textContent = Math.max(0, info.week);
+  const weeksEl = document.getElementById('h-weeks-num');
+  if(animate) countUp(weeksEl, Math.max(0, info.week), 900); else weeksEl.textContent = Math.max(0, info.week);
   document.getElementById('h-fruit').textContent = wk.fruit;
   document.getElementById('h-week-sub').textContent = `Baby is the size of a ${wk.name}`;
   document.getElementById('h-trimester').textContent = TRIM_NAMES[wk.trim];
-  document.getElementById('h-days-left').textContent = daysLeft;
+  if(animate) countUp(document.getElementById('h-days-left'), daysLeft, 700); else document.getElementById('h-days-left').textContent = daysLeft;
   document.getElementById('h-edd').textContent = new Date(edd).toLocaleDateString('en-SG',{month:'short', day:'numeric'});
-  document.getElementById('h-trim-pct').textContent = pct + '%';
+  if(animate) countUp(document.getElementById('h-trim-pct'), pct, 800, '%'); else document.getElementById('h-trim-pct').textContent = pct + '%';
 
   document.getElementById('week-title').textContent = `Week ${info.week}`;
   document.getElementById('week-badge').textContent = TRIM_NAMES[wk.trim];
@@ -693,8 +849,17 @@ function renderGrowStrip(){
     const b = document.createElement('button');
     b.textContent = w;
     if(w===gsel) b.classList.add('on');
-    b.onclick = ()=>{ gsel=w; renderGrowStrip(); renderGrow(); };
+    b.onclick = ()=>{ haptic(); gsel=w; renderGrowStrip(); renderGrow(); scrollToWeek(w); };
     strip.appendChild(b);
+  }
+}
+function scrollToWeek(w){
+  const strip = document.getElementById('weekstrip');
+  const btns = strip.querySelectorAll('button');
+  const idx = w-4;
+  if(btns[idx]){
+    const target = btns[idx].offsetLeft - strip.offsetWidth/2 + btns[idx].offsetWidth/2;
+    strip.scrollTo({left:target, behavior:'smooth'});
   }
 }
 function renderGrow(){
@@ -737,9 +902,11 @@ function renderChecklist(){
     row.innerHTML = `<div class="box"><span class="material-symbols-outlined">check</span></div>
       <div class="txt"><b>${label}</b>${note?`<span>${note}</span>`:''}</div>`;
     row.onclick = ()=>{
+      haptic(15);
       state[i] = !state[i];
       store.setChecklist(ckKey, state);
       renderChecklist();
+      if(state[i]) toast('Checked off ✓');
     };
     list.appendChild(row);
   });
@@ -750,14 +917,21 @@ function renderChecklist(){
 
 /* ═══════════════ FEED RENDER ═══════════════ */
 function todayKey(){ const d=new Date(); return d.toISOString().slice(0,10); }
-function renderFeed(){
+function renderFeed(animate=true){
   const feeds = store.getFeeds();
   const today = feeds.filter(f=>f.date===todayKey());
-  document.getElementById('f-today').textContent = today.length;
-  document.getElementById('f-minutes').textContent = today.reduce((s,f)=>s+f.min,0);
+  const count = today.length;
+  const mins = today.reduce((s,f)=>s+f.min,0);
+  if(animate){
+    countUp(document.getElementById('f-today'), count, 500);
+    countUp(document.getElementById('f-minutes'), mins, 600);
+  } else {
+    document.getElementById('f-today').textContent = count;
+    document.getElementById('f-minutes').textContent = mins;
+  }
 }
 
-/* Power pump */
+/* ═══════════════ POWER PUMP ═══════════════ */
 const PUMP_PLAN = [
   {label:'Pump',  min:10, type:'pump'},
   {label:'Rest',  min:10, type:'rest'},
@@ -766,37 +940,68 @@ const PUMP_PLAN = [
   {label:'Pump',  min:10, type:'pump'},
   {label:'Rest',  min:10, type:'rest'},
 ];
-let pumpTimer = null, pumpIdx = 0, pumpRemain = 0;
+const TOTAL_SEC = PUMP_PLAN.reduce((s,p)=>s+p.min*60,0);
+let pumpTimer = null, pumpIdx = 0, pumpRemain = 0, pumpElapsed = 0;
+
+function updatePumpRing(){
+  const ring = document.getElementById('pump-ring-fg');
+  const circumference = 2 * Math.PI * 52; // ~326.7
+  const progress = pumpElapsed / TOTAL_SEC;
+  ring.style.strokeDashoffset = circumference * (1 - progress);
+  const remaining = TOTAL_SEC - pumpElapsed;
+  const mm = String(Math.floor(remaining/60)).padStart(2,'0');
+  const ss = String(remaining%60).padStart(2,'0');
+  document.getElementById('pump-ring-time').textContent = `${mm}:${ss}`;
+  document.getElementById('pump-ring-label').textContent =
+    pumpTimer ? (PUMP_PLAN[pumpIdx]?.type==='pump' ? 'pumping' : 'resting') : 'ready';
+}
+
 function renderPump(){
   const wrap = document.getElementById('pump-steps');
   wrap.innerHTML = '';
   PUMP_PLAN.forEach((s,i)=>{
     const el = document.createElement('div');
-    el.className = 'pump-step' + (i===pumpIdx?' run':'');
-    el.innerHTML = `<div class="ph">${s.type==='pump'?'P':'R'}</div>
-      <div class="pt"><b>${i<pumpIdx?'✓ ':''}${s.label} · ${s.min} min</b>
+    let cls = 'pump-step';
+    if(i < pumpIdx) cls += ' done';
+    if(i === pumpIdx && pumpTimer) cls += ' run';
+    el.className = cls;
+    el.innerHTML = `<div class="ph">${i<pumpIdx?'✓':(s.type==='pump'?'P':'R')}</div>
+      <div class="pt"><b>${s.label} · ${s.min} min</b>
       <span>${s.type==='pump'?'Express milk':'Relax, drink water, massage breasts'}</span></div>
-      ${i===pumpIdx?`<span class="badge mauve">${Math.ceil(pumpRemain/60)}s left</span>`:''}
+      ${i===pumpIdx && pumpTimer?`<span class="badge mauve">${Math.ceil(pumpRemain/60)}s</span>`:''}
       </div>`;
     wrap.appendChild(el);
   });
+  updatePumpRing();
 }
+
 function startPump(){
-  if(pumpTimer){ clearInterval(pumpTimer); pumpTimer=null; document.getElementById('pump-start').textContent='Start session'; return; }
-  if(pumpIdx>=PUMP_PLAN.length){ pumpIdx=0; }
+  haptic(20);
+  if(pumpTimer){
+    clearInterval(pumpTimer); pumpTimer=null;
+    document.getElementById('pump-start').textContent='Resume session';
+    toast('Paused');
+    renderPump();
+    return;
+  }
+  if(pumpIdx>=PUMP_PLAN.length){ pumpIdx=0; pumpElapsed=0; }
   pumpRemain = PUMP_PLAN[pumpIdx].min*60;
   document.getElementById('pump-start').textContent='Pause session';
-  toast('Power pump started');
+  toast(pumpIdx===0 ? 'Power pump started 🤱' : 'Resumed');
   pumpTimer = setInterval(()=>{
     pumpRemain--;
+    pumpElapsed++;
     if(pumpRemain<=0){
       pumpIdx++;
+      haptic(30);
       if(pumpIdx>=PUMP_PLAN.length){
-        clearInterval(pumpTimer); pumpTimer=null; pumpIdx=0; pumpRemain=0;
+        clearInterval(pumpTimer); pumpTimer=null; pumpIdx=0; pumpRemain=0; pumpElapsed=TOTAL_SEC;
         document.getElementById('pump-start').textContent='Start session';
         toast('Power pump complete 🎉');
+        haptic([50,30,50]);
       } else {
         pumpRemain = PUMP_PLAN[pumpIdx].min*60;
+        toast(PUMP_PLAN[pumpIdx].type==='pump' ? 'Pump again 💪' : 'Rest time ☕');
       }
     }
     renderPump();
@@ -804,13 +1009,36 @@ function startPump(){
   renderPump();
 }
 
-/* ═══════════════ NAV ═══════════════ */
+/* ═══════════════ TAB SWITCHING (animated) ═══════════════ */
+let currentTab = 'home';
+let isSwitching = false;
 function switchTab(tab){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.getElementById('page-'+tab).classList.add('on');
-  document.querySelectorAll('.bottom-nav a').forEach(a=>a.classList.toggle('on', a.dataset.tab===tab));
-  window.scrollTo(0,0);
+  if(tab === currentTab || isSwitching) return;
+  isSwitching = true;
+  haptic(8);
+
+  const oldPage = document.getElementById('page-'+currentTab);
+  const newPage = document.getElementById('page-'+tab);
+
+  oldPage.classList.add('leaving');
+  oldPage.classList.remove('on');
+
+  setTimeout(()=>{
+    oldPage.classList.remove('leaving');
+    newPage.classList.add('on');
+    document.querySelectorAll('.bottom-nav a').forEach(a=>a.classList.toggle('on', a.dataset.tab===tab));
+    currentTab = tab;
+    window.scrollTo({top:0, behavior:'smooth'});
+
+    // re-trigger animations for the new page's dynamic content
+    if(tab==='home') renderHome(true);
+    if(tab==='grow'){ scrollToWeek(gsel); }
+    if(tab==='feed') renderFeed(true);
+
+    setTimeout(()=>{ isSwitching = false; }, 300);
+  }, 280);
 }
+
 document.querySelectorAll('.bottom-nav a').forEach(a=>{
   a.addEventListener('click', e=>{ e.preventDefault(); switchTab(a.dataset.tab); });
 });
@@ -818,29 +1046,69 @@ document.querySelectorAll('[data-go]').forEach(a=>{
   a.addEventListener('click', e=>{ e.preventDefault(); switchTab(a.dataset.go); });
 });
 
+/* ═══════════════ SWIPE GESTURES ═══════════════ */
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', e=>{
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, {passive:true});
+document.addEventListener('touchend', e=>{
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)*1.5){
+    const idx = TAB_ORDER.indexOf(currentTab);
+    if(dx < 0 && idx < TAB_ORDER.length-1) switchTab(TAB_ORDER[idx+1]);
+    if(dx > 0 && idx > 0) switchTab(TAB_ORDER[idx-1]);
+  }
+}, {passive:true});
+
+/* ═══════════════ RIPPLE EFFECT ═══════════════ */
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('.btn');
+  if(!btn) return;
+  const rect = btn.getBoundingClientRect();
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.width = ripple.style.height = size+'px';
+  ripple.style.left = (e.clientX - rect.left - size/2)+'px';
+  ripple.style.top = (e.clientY - rect.top - size/2)+'px';
+  btn.appendChild(ripple);
+  setTimeout(()=>ripple.remove(), 600);
+});
+
 /* ═══════════════ EVENTS ═══════════════ */
 document.getElementById('btn-save-edd').onclick = ()=>{
   const val = document.getElementById('edd-input').value;
   if(!val){ toast('Pick a due date first'); return; }
+  haptic(20);
   store.edd = val;
   toast('Welcome to Maturna 🌸');
-  renderHome();
+  renderHome(true);
 };
 document.getElementById('btn-settings').onclick = ()=>{
+  haptic();
   document.getElementById('edd-edit').value = store.edd || '';
   document.getElementById('settings-modal').classList.add('on');
 };
-document.getElementById('btn-close-settings').onclick = ()=> document.getElementById('settings-modal').classList.remove('on');
+document.getElementById('btn-close-settings').onclick = ()=>{
+  document.getElementById('settings-modal').classList.remove('on');
+};
+document.getElementById('settings-modal').addEventListener('click', e=>{
+  if(e.target.id === 'settings-modal') document.getElementById('settings-modal').classList.remove('on');
+});
 document.getElementById('btn-save-edd2').onclick = ()=>{
   const val = document.getElementById('edd-edit').value;
   if(!val){ toast('Pick a due date'); return; }
+  haptic(15);
   store.edd = val;
   document.getElementById('settings-modal').classList.remove('on');
-  renderHome(); toast('Due date updated');
+  renderHome(true); toast('Due date updated');
 };
 
 document.querySelectorAll('#trim-chips .chip').forEach(c=>{
   c.onclick = ()=>{
+    haptic();
     document.querySelectorAll('#trim-chips .chip').forEach(x=>x.classList.remove('on'));
     c.classList.add('on');
     eatTrim = parseInt(c.dataset.trim);
@@ -849,6 +1117,7 @@ document.querySelectorAll('#trim-chips .chip').forEach(c=>{
 });
 document.querySelectorAll('#ck-chips .chip').forEach(c=>{
   c.onclick = ()=>{
+    haptic();
     document.querySelectorAll('#ck-chips .chip').forEach(x=>x.classList.remove('on'));
     c.classList.add('on');
     ckKey = c.dataset.ck;
@@ -856,6 +1125,7 @@ document.querySelectorAll('#ck-chips .chip').forEach(c=>{
   };
 });
 document.getElementById('ck-reset').onclick = ()=>{
+  haptic(15);
   store.setChecklist(ckKey, {});
   renderChecklist();
   toast('List reset');
@@ -866,17 +1136,21 @@ document.getElementById('f-log').onclick = ()=>{
   const feeds = store.getFeeds();
   feeds.push({date:todayKey(), side, min, ts:Date.now()});
   store.setFeeds(feeds);
-  renderFeed();
+  haptic(20);
+  renderFeed(true);
   toast(`Logged ${min} min on ${side}`);
 };
 document.getElementById('pump-start').onclick = startPump;
 document.getElementById('pump-reset').onclick = ()=>{
+  haptic(15);
   if(pumpTimer){ clearInterval(pumpTimer); pumpTimer=null; }
-  pumpIdx=0; pumpRemain=0;
+  pumpIdx=0; pumpRemain=0; pumpElapsed=0;
   document.getElementById('pump-start').textContent='Start session';
   renderPump();
+  toast('Session reset');
 };
 
+/* ═══════════════ TOAST ═══════════════ */
 function toast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -884,18 +1158,21 @@ function toast(msg){
 }
 
 /* ═══════════════ INIT ═══════════════ */
-renderHome();
+renderHome(false);
 renderGrowStrip();
 renderGrow();
 renderEat();
 renderChecklist();
-renderFeed();
+renderFeed(false);
 renderPump();
 
-/* Pre-fill EDD input with a sensible default (38 weeks ahead) so onboarding is one tap */
 if(!store.edd){
-  const d = new Date(); d.setDate(d.getDate()+266); // ~38 weeks = typical "now"
+  const d = new Date(); d.setDate(d.getDate()+266);
   document.getElementById('edd-input').value = d.toISOString().slice(0,10);
+} else {
+  // set grow selector to current week
+  const info = currentWeek();
+  if(info && info.week >=4 && info.week <=40){ gsel = info.week; renderGrowStrip(); renderGrow(); }
 }
 </script>
 </body>
