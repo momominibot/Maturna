@@ -519,6 +519,33 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .food-result.avoid{background:linear-gradient(135deg,#fdeeee,#fae0e0); border-left:4px solid var(--low)}
 .food-result .fr-name{font-family:var(--serif); font-size:17px; font-weight:700}
 .food-result .fr-advice{font-size:13px; color:var(--taupe); margin-top:4px; line-height:1.5}
+
+/* Daily trackers */
+.sym-chips{display:flex; flex-wrap:wrap; gap:6px}
+.sym-chip{
+  padding:5px 10px; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer;
+  background:var(--paper-deep); color:var(--taupe); border:2px solid transparent;
+  transition:all .2s var(--ease); user-select:none;
+}
+.sym-chip:hover{transform:translateY(-1px)}
+.sym-chip.on{background:linear-gradient(135deg,#efe8f7,#fbeae3); color:var(--mauve); border-color:var(--mauve)}
+.appt-item{
+  display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--paper-deep);
+  border-radius:var(--r-sm); position:relative;
+}
+.appt-item .appt-date{
+  background:linear-gradient(135deg,var(--lavender),var(--coral)); color:#fff;
+  border-radius:10px; padding:6px 8px; text-align:center; min-width:44px; flex-shrink:0;
+}
+.appt-item .appt-date .ad-d{font-size:16px; font-weight:800; line-height:1}
+.appt-item .appt-date .ad-m{font-size:9px; font-weight:700; text-transform:uppercase}
+.appt-item .appt-info{flex:1; min-width:0}
+.appt-item .appt-name{font-size:13px; font-weight:700}
+.appt-item .appt-time{font-size:11px; color:var(--faded)}
+.appt-item .appt-del{cursor:pointer; color:var(--faded); font-size:18px; padding:4px}
+.appt-item .appt-del:hover{color:var(--low)}
+.appt-item.upcoming{border-left:3px solid var(--mauve)}
+.appt-item.past{opacity:.5}
 </style>
 </head>
 <body>
@@ -621,6 +648,62 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
             <button class="mood-btn" data-mood="nauseous">🤢</button>
           </div>
           <div class="mood-note" id="mood-note" style="display:none; margin-top:10px; font-size:13px; color:var(--mauve); font-style:italic"></div>
+        </div>
+
+        <h2 class="sec">Daily trackers</h2>
+        <div class="grid2">
+          <div class="card tool-card">
+            <div class="tc-head"><span style="font-size:20px">⚖️</span><b style="font-family:var(--serif); font-size:15px">Weight</b></div>
+            <div class="tc-stat" id="wt-stat">— kg</div>
+            <div class="tc-sub" id="wt-sub">Log your weight</div>
+            <div style="display:flex; gap:6px; margin-top:10px">
+              <input type="number" id="wt-input" placeholder="kg" step="0.1" style="flex:1; padding:8px 10px; border:2px solid var(--line); border-radius:12px; font-size:13px; font-family:var(--sans)">
+              <button class="btn mauve" id="wt-log" style="padding:8px 14px; font-size:13px; margin:0">Log</button>
+            </div>
+            <div id="wt-history" style="margin-top:8px; font-size:11px; color:var(--faded)"></div>
+          </div>
+          <div class="card tool-card">
+            <div class="tc-head"><span style="font-size:20px">💧</span><b style="font-family:var(--serif); font-size:15px">Water</b></div>
+            <div class="tc-stat" id="wt-cups">0 / 8 cups</div>
+            <div class="tc-sub">Stay hydrated, mama</div>
+            <div style="display:flex; gap:6px; margin-top:10px">
+              <button class="btn" id="water-minus" style="flex:1; padding:8px; font-size:16px; margin:0">−</button>
+              <button class="btn mauve" id="water-plus" style="flex:1; padding:8px; font-size:16px; margin:0">+ cup</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card tool-card">
+            <div class="tc-head"><span style="font-size:20px">🩹</span><b style="font-family:var(--serif); font-size:15px">Symptoms</b></div>
+            <div class="tc-sub" id="sym-sub" style="margin:4px 0 8px">Tap what you're feeling</div>
+            <div class="sym-chips" id="sym-chips">
+              <span class="sym-chip" data-sym="nausea">🤢 nausea</span>
+              <span class="sym-chip" data-sym="fatigue">😴 fatigue</span>
+              <span class="sym-chip" data-sym="headache">🤕 headache</span>
+              <span class="sym-chip" data-sym="backache">🦴 backache</span>
+              <span class="sym-chip" data-sym="cramps">🌀 cramps</span>
+              <span class="sym-chip" data-sym="heartburn">🔥 heartburn</span>
+              <span class="sym-chip" data-sym="constipation">🚽 constipation</span>
+              <span class="sym-chip" data-sym="insomnia">🌙 insomnia</span>
+            </div>
+          </div>
+          <div class="card tool-card">
+            <div class="tc-head"><span style="font-size:20px">💪</span><b style="font-family:var(--serif); font-size:15px">Kegels</b></div>
+            <div class="tc-stat" id="kg-count">0 today</div>
+            <div class="tc-sub">Squeeze 5s, rest 5s × 10</div>
+            <button class="btn mauve" id="kg-btn" style="margin-top:10px; width:100%; padding:10px; font-size:14px">+ 1 set (10 reps)</button>
+            <div style="margin-top:8px; font-size:11px; color:var(--faded)">Pelvic floor prep for birth & recovery</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+            <b style="font-family:var(--serif); font-size:16px">📅 Appointments</b>
+            <button class="btn ghost" id="appt-add" style="margin:0; padding:6px 12px; font-size:12px">+ Add</button>
+          </div>
+          <div id="appt-list" style="display:flex; flex-direction:column; gap:8px"></div>
+          <div id="appt-empty" class="sub" style="text-align:center; padding:12px; font-size:13px">No appointments yet. Add your next OB visit.</div>
         </div>
       </div>
     </div>
@@ -2240,6 +2323,158 @@ document.getElementById('food-search').addEventListener('input', e=>{
     '</div>'
   ).join('');
 });
+
+/* ═══════════════ WEIGHT TRACKER ═══════════════ */
+function getWeights(){ try{return JSON.parse(localStorage.getItem('maturna_weights')||'[]')}catch(e){return []} }
+function setWeights(a){ localStorage.setItem('maturna_weights', JSON.stringify(a)) }
+function renderWeight(){
+  const w = getWeights();
+  if(w.length>0){
+    const latest = w[w.length-1];
+    document.getElementById('wt-stat').textContent = latest.w+' kg';
+    document.getElementById('wt-sub').textContent = 'Logged '+new Date(latest.t).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    if(w.length>1){
+      const diff = (latest.w - w[0].w).toFixed(1);
+      const sign = diff>0?'+':'';
+      document.getElementById('wt-history').textContent = w.length+' logs · total '+sign+diff+' kg';
+    }
+  }
+}
+document.getElementById('wt-log').onclick = ()=>{
+  const val = parseFloat(document.getElementById('wt-input').value);
+  if(!val || val<20 || val>300){ toast('Enter a valid weight'); return; }
+  const w = getWeights();
+  w.push({w:val, t:Date.now()});
+  setWeights(w);
+  document.getElementById('wt-input').value='';
+  renderWeight();
+  haptic(15);
+  toast('Weight logged 💪');
+};
+renderWeight();
+
+/* ═══════════════ WATER TRACKER ═══════════════ */
+function getWater(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('maturna_water')||'null');
+    if(saved && saved.date===new Date().toDateString()) return saved.cups;
+  }catch(e){}
+  return 0;
+}
+function setWater(cups){ localStorage.setItem('maturna_water', JSON.stringify({cups, date:new Date().toDateString()})) }
+function renderWater(){
+  const cups = getWater();
+  document.getElementById('wt-cups').textContent = cups+' / 8 cups';
+  if(cups>=8) document.getElementById('wt-cups').style.color='var(--ok)';
+}
+document.getElementById('water-plus').onclick = ()=>{
+  let c = getWater()+1;
+  setWater(c);
+  renderWater();
+  haptic(10);
+  if(c===8) toast('🎉 Hydration goal reached!');
+};
+document.getElementById('water-minus').onclick = ()=>{
+  let c = Math.max(0, getWater()-1);
+  setWater(c);
+  renderWater();
+  haptic(8);
+};
+renderWater();
+
+/* ═══════════════ SYMPTOM TRACKER ═══════════════ */
+function getSymptoms(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('maturna_symptoms')||'null');
+    if(saved && saved.date===new Date().toDateString()) return saved.syms;
+  }catch(e){}
+  return [];
+}
+function setSymptoms(syms){ localStorage.setItem('maturna_symptoms', JSON.stringify({syms, date:new Date().toDateString()})) }
+function renderSymptoms(){
+  const syms = getSymptoms();
+  document.querySelectorAll('.sym-chip').forEach(ch=>{
+    ch.classList.toggle('on', syms.includes(ch.dataset.sym));
+  });
+  document.getElementById('sym-sub').textContent = syms.length ? syms.length+' symptom(s) logged' : 'Tap what you\'re feeling';
+}
+document.querySelectorAll('.sym-chip').forEach(ch=>{
+  ch.onclick = ()=>{
+    let syms = getSymptoms();
+    const s = ch.dataset.sym;
+    if(syms.includes(s)) syms = syms.filter(x=>x!==s);
+    else syms.push(s);
+    setSymptoms(syms);
+    renderSymptoms();
+    haptic(10);
+  };
+});
+renderSymptoms();
+
+/* ═══════════════ KEGEL TRACKER ═══════════════ */
+function getKegels(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('maturna_kegels')||'null');
+    if(saved && saved.date===new Date().toDateString()) return saved.sets;
+  }catch(e){}
+  return 0;
+}
+function setKegels(sets){ localStorage.setItem('maturna_kegels', JSON.stringify({sets, date:new Date().toDateString()})) }
+document.getElementById('kg-btn').onclick = ()=>{
+  const s = getKegels()+1;
+  setKegels(s);
+  document.getElementById('kg-count').textContent = s+' set'+(s>1?'s':'')+' today ('+(s*10)+' reps)';
+  haptic(20);
+  if(s===3) toast('💪 30 kegels today! Pelvic floor thanks you.');
+};
+document.getElementById('kg-count').textContent = getKegels()+' set'+(getKegels()>1?'s':'')+' today ('+(getKegels()*10)+' reps)';
+
+/* ═══════════════ APPOINTMENTS ═══════════════ */
+function getAppts(){ try{return JSON.parse(localStorage.getItem('maturna_appts')||'[]')}catch(e){return []} }
+function setAppts(a){ localStorage.setItem('maturna_appts', JSON.stringify(a)) }
+function renderAppts(){
+  const appts = getAppts().sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const list = document.getElementById('appt-list');
+  const empty = document.getElementById('appt-empty');
+  if(appts.length===0){ list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  const now = new Date();
+  list.innerHTML = appts.map((a,i)=>{
+    const d = new Date(a.date);
+    const past = d < now;
+    const mon = d.toLocaleDateString('en-US',{month:'short'});
+    const day = d.getDate();
+    const time = a.time ? ' · '+a.time : '';
+    return '<div class="appt-item '+(past?'past':'upcoming')+'">'+
+      '<div class="appt-date"><div class="ad-d">'+day+'</div><div class="ad-m">'+mon+'</div></div>'+
+      '<div class="appt-info"><div class="appt-name">'+a.name+'</div><div class="appt-time">'+d.toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric'})+time+'</div></div>'+
+      '<span class="appt-del" data-idx="'+i+'">×</span>'+
+    '</div>';
+  }).join('');
+  list.querySelectorAll('.appt-del').forEach(el=>{
+    el.onclick = ()=>{
+      const appts = getAppts();
+      appts.splice(+el.dataset.idx,1);
+      setAppts(appts);
+      renderAppts();
+      haptic(10);
+    };
+  });
+}
+document.getElementById('appt-add').onclick = ()=>{
+  const name = prompt('Appointment name (e.g. OB checkup, ultrasound)');
+  if(!name) return;
+  const date = prompt('Date (YYYY-MM-DD)');
+  if(!date) return;
+  const time = prompt('Time (optional, e.g. 2:30 PM)') || '';
+  const appts = getAppts();
+  appts.push({name, date, time});
+  setAppts(appts);
+  renderAppts();
+  haptic(15);
+  toast('Appointment added 📅');
+};
+renderAppts();
 
 /* ═══════════════ EVENTS ═══════════════ */
 document.getElementById('btn-save-edd').onclick = ()=>{
