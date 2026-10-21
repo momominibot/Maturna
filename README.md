@@ -1,11 +1,10 @@
-# Bloom · Pregnancy Companion
+# Maturna · Pregnancy Companion
 
 A single-file pregnancy tracking app built on the **Rhythme / Ovumind design system**
 (pastel lavender + peach, Newsreader serif + Manrope sans, 390px phone frame).
 
 ## Run it
 ```bash
-cd bloom
 python3 -m http.server 8765
 # open http://localhost:8765
 ```
@@ -22,9 +21,10 @@ Or just double-click `index.html` — it is fully self-contained.
 - Static HTML/CSS/JS, no build step
 - LocalStorage for EDD, checklist state, and today's feed log
 - Google Fonts (Newsreader + Manrope) + Material Symbols Outlined
+- Seedream 5.0 Pro illustrations (hero + logo)
 - Same CSS tokens, phone frame, and bottom-nav pattern as `momominibot/rhythme`
 
-## Next steps (if you want)
-- Push to a new GitHub repo and deploy to Vercel (same as Rhythme)
+## Next steps
+- Deploy to Vercel (same as Rhythme)
 - Add a Capacitor wrapper for iOS
 - Hook up Volcengine TTS for a warm weekly audio note

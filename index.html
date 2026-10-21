@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Bloom · Pregnancy Companion</title>
+<title>Maturna · Pregnancy Companion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700;6..72,800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..700,0..1,-25..0">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   BLOOM — Pastel Lavender/Peach Design System (rhythme twin)
+   MATURNA — Pastel Lavender/Peach Design System (rhythme twin)
    ══════════════════════════════════════════════════════════════ */
 :root{
   --paper:#f7f2fa; --paper-deep:#f0e8f5; --card:rgba(255,255,255,.82); --card-solid:#fff;
@@ -240,7 +240,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
   <header class="top">
     <div class="brandline">
       <div class="bdot">✿</div>
-      <b>Bloom</b>
+      <b>Maturna</b>
     </div>
     <button class="t-icon" id="btn-settings" aria-label="Settings"><span class="material-symbols-outlined">settings</span></button>
   </header>
@@ -265,7 +265,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
           <img src="https://aka.doubaocdn.com/s/qiWuYGCA56" alt="Bloom" style="width:100%; max-width:280px; border-radius:20px; box-shadow:0 12px 30px -10px rgba(122,92,150,.3)">
         </div>
         <div class="card tint-lavender">
-          <h2 class="sec" style="margin-top:0">Welcome, mama 🌸</h2>
+          <h2 class="sec" style="margin-top:0">Welcome to Maturna 🌸</h2>
           <p class="sub" style="margin:8px 0 14px">Tell us your due date (or last period) and we'll personalise every screen.</p>
           <label class="f">Estimated Due Date (EDD)</label>
           <input type="date" id="edd-input" style="margin-bottom:12px">
@@ -823,7 +823,7 @@ document.getElementById('btn-save-edd').onclick = ()=>{
   const val = document.getElementById('edd-input').value;
   if(!val){ toast('Pick a due date first'); return; }
   store.edd = val;
-  toast('Welcome to Bloom 🌸');
+  toast('Welcome to Maturna 🌸');
   renderHome();
 };
 document.getElementById('btn-settings').onclick = ()=>{
