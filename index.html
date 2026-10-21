@@ -355,6 +355,170 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
   *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
   .page.on .scroll > *{animation:none; opacity:1}
 }
+
+/* ═══════════════ NAMES TAB ═══════════════ */
+.finder-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px}
+.finder-progress{font-size:12px; font-weight:700; color:var(--mauve); background:var(--paper-deep); padding:3px 10px; border-radius:20px}
+.finder-bar{height:5px; background:var(--sunken); border-radius:3px; overflow:hidden; margin-bottom:16px}
+.finder-bar-fill{height:100%; width:20%; background:linear-gradient(90deg,var(--lavender),var(--coral)); border-radius:3px; transition:width .4s var(--ease)}
+.finder-q{font-family:var(--serif); font-size:18px; font-weight:700; margin-bottom:14px; color:var(--ink)}
+.finder-options{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.finder-opt{
+  padding:14px 12px; border:2px solid var(--line); border-radius:var(--r-sm); cursor:pointer;
+  text-align:center; font-size:14px; font-weight:600; background:var(--card); transition:all .25s var(--ease);
+}
+.finder-opt:hover{border-color:var(--lavender); transform:translateY(-2px)}
+.finder-opt.sel{border-color:var(--mauve); background:linear-gradient(135deg,#efe8f7,#fbeae3); color:var(--mauve); box-shadow:0 4px 14px rgba(122,92,150,.18)}
+.finder-opt .fo-emoji{display:block; font-size:24px; margin-bottom:4px}
+.finder-nav{display:flex; gap:10px; margin-top:18px}
+.finder-nav .btn{flex:1}
+.name-card{
+  background:var(--card); border-radius:var(--r); padding:16px; margin-bottom:12px;
+  border:1px solid var(--line-soft); box-shadow:0 2px 12px rgba(107,82,142,.06);
+  animation:slideUp .5s var(--ease) both;
+}
+.name-card .nc-name{font-family:var(--serif); font-size:22px; font-weight:700; color:var(--ink)}
+.name-card .nc-pinyin{font-size:13px; color:var(--faded); margin-left:6px}
+.name-card .nc-meaning{font-size:14px; color:var(--taupe); margin-top:4px; line-height:1.5}
+.name-card .nc-tags{display:flex; gap:6px; margin-top:10px; flex-wrap:wrap}
+.name-card .nc-tag{font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; background:var(--paper-deep); color:var(--mauve)}
+.name-card .nc-tag.hot{background:linear-gradient(135deg,#fbeae3,#f5c6b8); color:#b56a54}
+
+/* DigitalDNA */
+.dna-score-card{display:flex; align-items:center; gap:16px; background:linear-gradient(135deg,#faf7fd,#fdf3ef)}
+.dna-score-ring{position:relative; flex-shrink:0}
+.dna-score-text{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center}
+.dna-score-text span{font-family:var(--serif); font-size:30px; font-weight:800; color:var(--mauve)}
+.dna-score-text small{font-size:11px; color:var(--faded)}
+.dna-name-display{font-family:var(--serif); font-size:20px; font-weight:700}
+.dna-verdict{font-size:13px; color:var(--taupe); margin-top:4px; line-height:1.5}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:12px 0}
+.dna-grid-card{background:var(--card); border-radius:var(--r-sm); padding:12px 10px; text-align:center; border:1px solid var(--line-soft)}
+.dna-grid-card .dgc-label{font-size:11px; font-weight:700; color:var(--faded); text-transform:uppercase; letter-spacing:.5px}
+.dna-grid-card .dgc-num{font-family:var(--serif); font-size:24px; font-weight:800; margin:4px 0}
+.dna-grid-card .dgc-element{font-size:12px; font-weight:700}
+.dna-grid-card .dgc-luck{font-size:11px; margin-top:2px; font-weight:600}
+.dna-grid-card.good .dgc-num{color:var(--ok)}
+.dna-grid-card.bad .dgc-num{color:var(--low)}
+.dna-grid-card.mid .dgc-num{color:var(--warn)}
+#dna-sancai{font-size:13px; line-height:1.6}
+#dna-sancai b{font-family:var(--serif); font-size:15px}
+
+/* ═══════════════ NURSERY TAB ═══════════════ */
+.sub-tabs{display:flex; gap:8px; margin-bottom:16px}
+.sub-tab{
+  flex:1; padding:10px; border:2px solid var(--line); border-radius:var(--r-sm);
+  background:var(--card); font-size:14px; font-weight:700; cursor:pointer;
+  transition:all .25s var(--ease); color:var(--taupe);
+}
+.sub-tab.on{border-color:var(--mauve); background:linear-gradient(135deg,#efe8f7,#fbeae3); color:var(--mauve)}
+
+/* Room decorator */
+.room-stage{
+  position:relative; width:100%; height:280px; border-radius:var(--r); overflow:hidden;
+  margin-bottom:14px; box-shadow:0 4px 20px rgba(107,82,142,.12);
+}
+.room-wall{position:absolute; top:0; left:0; right:0; height:68%; background:linear-gradient(180deg,#e8dff5,#ddd0ee); transition:background .5s}
+.room-floor{position:absolute; bottom:0; left:0; right:0; height:32%; background:linear-gradient(180deg,#d4b896,#c4a876)}
+.room-window{
+  position:absolute; top:30px; right:30px; width:90px; height:100px;
+  background:#fff; border-radius:8px; border:4px solid #fff; overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+.window-sky{position:absolute; inset:0; background:linear-gradient(180deg,#1a1a3e,#3d2f52 60%,#5a4a7a)}
+.window-moon{position:absolute; top:12px; right:12px; width:22px; height:22px; background:#f5e6c8; border-radius:50%; box-shadow:0 0 12px rgba(245,230,200,.6)}
+.window-star{position:absolute; width:3px; height:3px; background:#fff; border-radius:50%; animation:twinkle 2s ease-in-out infinite}
+.window-star.s1{top:20px; left:15px; animation-delay:0s}
+.window-star.s2{top:40px; left:30px; animation-delay:.7s}
+.window-star.s3{top:15px; left:45px; animation-delay:1.3s}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+.window-curtain{position:absolute; top:0; bottom:0; width:12px; background:linear-gradient(180deg,#e8a898,#d49a8a)}
+.window-curtain.left{left:0}
+.window-curtain.right{right:0}
+.room-items{position:absolute; inset:0; pointer-events:none}
+.room-item{
+  position:absolute; pointer-events:auto; cursor:pointer; font-size:36px;
+  transition:transform .2s var(--ease-spring); filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));
+  animation:popIn .35s var(--ease-spring);
+}
+.room-item:hover{transform:scale(1.15)}
+.room-item:active{transform:scale(.9)}
+@keyframes popIn{from{transform:scale(0); opacity:0}to{transform:scale(1); opacity:1}}
+.wall-swatches{display:flex; gap:10px; margin-top:10px; flex-wrap:wrap}
+.wall-swatch{width:36px; height:36px; border-radius:50%; cursor:pointer; border:3px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.15); transition:transform .2s}
+.wall-swatch:hover{transform:scale(1.15)}
+.wall-swatch.on{border-color:var(--mauve); transform:scale(1.15)}
+.room-palette{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+.palette-item{
+  background:var(--paper-deep); border-radius:var(--r-sm); padding:12px 4px; text-align:center;
+  cursor:pointer; transition:all .2s var(--ease); border:2px solid transparent;
+}
+.palette-item:hover{background:var(--lavender); transform:translateY(-2px)}
+.palette-item:active{transform:scale(.95)}
+.palette-item .pi-emoji{font-size:28px; display:block}
+.palette-item .pi-label{font-size:10px; font-weight:700; color:var(--taupe); margin-top:4px}
+
+/* Baby yoga */
+.yoga-hero{display:flex; gap:14px; align-items:center; background:linear-gradient(135deg,#faf7fd,#fdf3ef)}
+.yoga-pose-art{font-size:48px; flex-shrink:0; animation:floatY 3s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.yoga-pose-name{font-family:var(--serif); font-size:18px; font-weight:700}
+.yoga-pose-desc{font-size:13px; color:var(--taupe); margin-top:4px; line-height:1.5}
+.yoga-timer-wrap{display:flex; justify-content:center; padding:24px 0}
+.yoga-breath-circle{
+  width:160px; height:160px; border-radius:50%;
+  background:radial-gradient(circle,#fff 0%,#f0e8f5 100%);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  box-shadow:0 0 0 0 rgba(196,181,224,.4);
+  transition:transform .5s ease;
+}
+.yoga-breath-circle.inhale{animation:breathIn 4s ease-in-out forwards}
+.yoga-breath-circle.exhale{animation:breathOut 4s ease-in-out forwards}
+@keyframes breathIn{from{transform:scale(1); box-shadow:0 0 0 0 rgba(196,181,224,.4)}to{transform:scale(1.25); box-shadow:0 0 0 30px rgba(196,181,224,0)}}
+@keyframes breathOut{from{transform:scale(1.25); box-shadow:0 0 0 30px rgba(232,168,152,0)}to{transform:scale(1); box-shadow:0 0 0 0 rgba(232,168,152,.4)}}
+#yoga-time{font-family:var(--serif); font-size:28px; font-weight:800; color:var(--mauve)}
+#yoga-phase{font-size:12px; font-weight:700; color:var(--faded); text-transform:uppercase; letter-spacing:1px; margin-top:2px}
+.yoga-controls{display:flex; gap:10px; margin-bottom:16px}
+.yoga-controls .btn{flex:1}
+.yoga-connection{background:var(--card); border-radius:var(--r); padding:16px; margin-bottom:16px; border-left:4px solid var(--coral)}
+.yoga-connection p{font-size:14px; color:var(--taupe); margin-top:6px; line-height:1.6; font-style:italic}
+.yoga-poses{display:flex; flex-direction:column; gap:8px}
+.yoga-pose-row{
+  display:flex; align-items:center; gap:12px; background:var(--card); border-radius:var(--r-sm);
+  padding:12px 14px; border:2px solid transparent; transition:all .25s var(--ease);
+}
+.yoga-pose-row.active{border-color:var(--mauve); background:linear-gradient(135deg,#efe8f7,#fbeae3)}
+.yoga-pose-row.done{opacity:.5}
+.yoga-pose-row .ypr-emoji{font-size:24px}
+.yoga-pose-row .ypr-info{flex:1}
+.yoga-pose-row .ypr-name{font-size:14px; font-weight:700}
+.yoga-pose-row .ypr-dur{font-size:12px; color:var(--faded)}
+.yoga-pose-row .ypr-check{font-size:18px; color:var(--ok)}
+
+/* Home tools */
+.tool-card{padding:14px}
+.tc-head{display:flex; align-items:center; gap:8px; margin-bottom:8px}
+.tc-stat{font-family:var(--serif); font-size:20px; font-weight:700; color:var(--mauve)}
+.tc-sub{font-size:12px; color:var(--faded); margin-top:2px}
+.mood-card{margin-top:12px}
+.mood-options{display:flex; gap:8px; margin-top:12px; justify-content:space-between}
+.mood-btn{
+  flex:1; padding:10px 0; font-size:24px; border:2px solid var(--line); border-radius:var(--r-sm);
+  background:var(--card); cursor:pointer; transition:all .25s var(--ease-spring);
+}
+.mood-btn:hover{transform:translateY(-3px) scale(1.05); border-color:var(--lavender)}
+.mood-btn.sel{border-color:var(--mauve); background:linear-gradient(135deg,#efe8f7,#fbeae3); transform:scale(1.1)}
+.mood-btn:active{transform:scale(.9)}
+
+/* Food safety search */
+.food-search{width:100%; padding:12px 16px; border:2px solid var(--line); border-radius:var(--r-sm); font-size:15px; font-family:var(--sans); background:var(--card); margin-bottom:14px; transition:border-color .2s}
+.food-search:focus{outline:none; border-color:var(--mauve)}
+.food-result{padding:14px; border-radius:var(--r-sm); margin-bottom:10px; animation:slideUp .4s var(--ease) both}
+.food-result.safe{background:linear-gradient(135deg,#e8f5ec,#f0f7ee); border-left:4px solid var(--ok)}
+.food-result.caution{background:linear-gradient(135deg,#fdf6e8,#faf0d4); border-left:4px solid var(--warn)}
+.food-result.avoid{background:linear-gradient(135deg,#fdeeee,#fae0e0); border-left:4px solid var(--low)}
+.food-result .fr-name{font-family:var(--serif); font-size:17px; font-weight:700}
+.food-result .fr-advice{font-size:13px; color:var(--taupe); margin-top:4px; line-height:1.5}
 </style>
 </head>
 <body>
@@ -429,6 +593,35 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
           <a class="lrow" href="#" data-go="checklist"><div class="l-ic" style="background:rgba(232,168,152,.25)">🎒</div><div class="l-t"><b>Pregnancy checklists</b><span>Hospital bag, baby, postpartum</span></div><div class="l-arr">›</div></a>
           <a class="lrow" href="#" data-go="feed"><div class="l-ic" style="background:rgba(168,184,216,.25)">🤱</div><div class="l-t"><b>Breastfeeding & power pump</b><span>Schedule and log</span></div><div class="l-arr">›</div></a>
         </div>
+
+        <h2 class="sec">Today's tools</h2>
+        <div class="grid2">
+          <div class="card tool-card" id="tool-contraction">
+            <div class="tc-head"><span style="font-size:22px">⏱️</span><b style="font-family:var(--serif); font-size:15px">Contractions</b></div>
+            <div class="tc-stat" id="ct-stat">Ready to time</div>
+            <div class="tc-sub" id="ct-sub">Tap start when one begins</div>
+            <button class="btn mauve" id="ct-btn" style="margin-top:10px; width:100%; padding:10px; font-size:14px">Start timing</button>
+          </div>
+          <div class="card tool-card" id="tool-kick">
+            <div class="tc-head"><span style="font-size:22px">👶</span><b style="font-family:var(--serif); font-size:15px">Kick counter</b></div>
+            <div class="tc-stat" id="kc-stat">0 kicks</div>
+            <div class="tc-sub" id="kc-sub">Goal: 10 in 2 hours</div>
+            <button class="btn" id="kc-btn" style="margin-top:10px; width:100%; padding:10px; font-size:14px">+ Log a kick</button>
+          </div>
+        </div>
+
+        <div class="card mood-card">
+          <b style="font-family:var(--serif); font-size:16px">💜 How are you feeling today?</b>
+          <div class="mood-options" id="mood-options">
+            <button class="mood-btn" data-mood="amazing">✨</button>
+            <button class="mood-btn" data-mood="good">😊</button>
+            <button class="mood-btn" data-mood="okay">😐</button>
+            <button class="mood-btn" data-mood="tired">😴</button>
+            <button class="mood-btn" data-mood="anxious">😰</button>
+            <button class="mood-btn" data-mood="nauseous">🤢</button>
+          </div>
+          <div class="mood-note" id="mood-note" style="display:none; margin-top:10px; font-size:13px; color:var(--mauve); font-style:italic"></div>
+        </div>
       </div>
     </div>
   </main>
@@ -466,6 +659,10 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
     <div class="scroll">
       <h2 class="sec">Nourish the bump</h2>
       <p class="sub">Food wisdom by trimester. Always check with your OB for personal advice.</p>
+
+      <input type="text" class="food-search" id="food-search" placeholder="🔍 Is it safe? Search a food (sushi, coffee, cheese...)">
+      <div id="food-results"></div>
+
       <div class="chiprow" id="trim-chips">
         <div class="chip on" data-trim="1"><span class="c-ic">🌱</span>1st</div>
         <div class="chip" data-trim="2"><span class="c-ic">🌿</span>2nd</div>
@@ -578,11 +775,159 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
     </div>
   </main>
 
+  <!-- NAMES PAGE -->
+  <main class="page" id="page-names">
+    <div class="scroll">
+      <h2 class="sec">Baby names</h2>
+      <p class="sub">Answer a few questions for curated suggestions, then run a DigitalDNA reading on Chinese names.</p>
+
+      <!-- Name Finder Questionnaire -->
+      <div class="card" id="finder-card">
+        <div class="finder-header">
+          <b style="font-family:var(--serif); font-size:17px">✨ Name Finder</b>
+          <span class="finder-progress" id="finder-prog">1 / 5</span>
+        </div>
+        <div class="finder-bar"><div class="finder-bar-fill" id="finder-bar-fill"></div></div>
+        <div id="finder-step"></div>
+        <div class="finder-nav">
+          <button class="btn ghost" id="finder-back" style="display:none">Back</button>
+          <button class="btn mauve" id="finder-next">Continue</button>
+        </div>
+      </div>
+
+      <!-- Name Results -->
+      <div id="name-results" style="display:none">
+        <div class="card tint-peach">
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <b style="font-family:var(--serif); font-size:17px">💡 Your matches</b>
+            <button class="btn ghost" id="finder-restart" style="margin:0; padding:6px 14px; font-size:13px">Redo</button>
+          </div>
+          <p class="sub" id="results-summary" style="margin-top:8px"></p>
+        </div>
+        <div id="name-cards"></div>
+      </div>
+
+      <!-- DigitalDNA Calculator -->
+      <h2 class="sec" style="margin-top:24px">DigitalDNA · 姓名五格</h2>
+      <p class="sub">Chinese name numerology. Enter characters or stroke counts to calculate the five grids and 81-number auspiciousness.</p>
+      <div class="card">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px">
+          <div>
+            <label class="f">Surname 姓</label>
+            <input type="text" id="dna-surname" placeholder="e.g. 陈 / 7" maxlength="4">
+          </div>
+          <div>
+            <label class="f">Given name 名</label>
+            <input type="text" id="dna-given" placeholder="e.g. 雨桐 / 8+10" maxlength="8">
+          </div>
+        </div>
+        <p class="sub" style="margin-top:8px; font-size:12px">Type Chinese characters (auto-lookup) or stroke counts separated by +. Common surnames and name chars are built in.</p>
+        <button class="btn mauve" id="dna-calc" style="margin-top:12px">Read my DigitalDNA</button>
+      </div>
+
+      <div id="dna-result" style="display:none">
+        <div class="card dna-score-card">
+          <div class="dna-score-ring">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <defs><linearGradient id="dnaGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c4b5e0"/><stop offset="100%" stop-color="#e8a898"/></linearGradient></defs>
+              <circle cx="55" cy="55" r="46" fill="none" stroke="rgba(107,82,142,.1)" stroke-width="8"/>
+              <circle id="dna-ring" cx="55" cy="55" r="46" fill="none" stroke="url(#dnaGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289" transform="rotate(-90 55 55)"/>
+            </svg>
+            <div class="dna-score-text"><span id="dna-score-num">0</span><small>/100</small></div>
+          </div>
+          <div>
+            <div class="dna-name-display" id="dna-name-display"></div>
+            <div class="dna-verdict" id="dna-verdict"></div>
+          </div>
+        </div>
+        <div class="grid3" id="dna-grids"></div>
+        <div class="card" id="dna-sancai"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- NURSERY PAGE -->
+  <main class="page" id="page-nursery">
+    <div class="scroll">
+      <h2 class="sec">Nursery</h2>
+      <p class="sub">Decorate your baby's room and flow through gentle yoga to connect.</p>
+
+      <!-- Sub-tab toggle -->
+      <div class="sub-tabs">
+        <button class="sub-tab on" data-sub="room">🛏️ Room</button>
+        <button class="sub-tab" data-sub="yoga">🧘 Yoga</button>
+      </div>
+
+      <!-- ROOM DECORATOR -->
+      <div id="room-view">
+        <div class="room-stage" id="room-stage">
+          <div class="room-wall" id="room-wall">
+            <div class="room-window">
+              <div class="window-sky"></div>
+              <div class="window-moon"></div>
+              <div class="window-star s1"></div>
+              <div class="window-star s2"></div>
+              <div class="window-star s3"></div>
+              <div class="window-curtain left"></div>
+              <div class="window-curtain right"></div>
+            </div>
+          </div>
+          <div class="room-floor" id="room-floor"></div>
+          <div class="room-items" id="room-items"></div>
+        </div>
+
+        <div class="card">
+          <b style="font-family:var(--serif); font-size:16px">🎨 Wall color</b>
+          <div class="wall-swatches" id="wall-swatches"></div>
+        </div>
+
+        <div class="card">
+          <b style="font-family:var(--serif); font-size:16px">🧸 Add furniture & decor</b>
+          <p class="sub" style="margin:6px 0 10px">Tap to place. Tap a placed item to remove it.</p>
+          <div class="room-palette" id="room-palette"></div>
+          <button class="btn ghost" id="room-clear" style="margin-top:10px; width:100%">Clear room</button>
+        </div>
+      </div>
+
+      <!-- BABY YOGA -->
+      <div id="yoga-view" style="display:none">
+        <div class="card yoga-hero">
+          <div class="yoga-pose-art" id="yoga-art">🧘‍♀️</div>
+          <div>
+            <div class="yoga-pose-name" id="yoga-name">Ready to begin</div>
+            <div class="yoga-pose-desc" id="yoga-desc">A gentle 6-pose flow to connect with your baby. Breathe slowly and move only what feels good.</div>
+          </div>
+        </div>
+
+        <div class="yoga-timer-wrap">
+          <div class="yoga-breath-circle" id="yoga-breath">
+            <span id="yoga-time">05:00</span>
+            <small id="yoga-phase">breathe</small>
+          </div>
+        </div>
+
+        <div class="yoga-controls">
+          <button class="btn mauve" id="yoga-play">Start flow</button>
+          <button class="btn ghost" id="yoga-reset">Reset</button>
+        </div>
+
+        <div class="yoga-connection" id="yoga-connection">
+          <b style="font-family:var(--serif)">💜 Connection note</b>
+          <p id="yoga-affirmation">Place both hands on your belly. Take a slow breath in, and as you breathe out, send warmth to your baby.</p>
+        </div>
+
+        <div class="yoga-poses" id="yoga-poses"></div>
+      </div>
+    </div>
+  </main>
+
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <a href="#" class="on" data-tab="home"><span class="n-ic">home</span>Home</a>
     <a href="#" data-tab="grow"><span class="n-ic">child_care</span>Grow</a>
     <a href="#" data-tab="eat"><span class="n-ic">restaurant</span>Eat</a>
+    <a href="#" data-tab="names"><span class="n-ic">auto_awesome</span>Names</a>
+    <a href="#" data-tab="nursery"><span class="n-ic">bedroom_baby</span>Nursery</a>
     <a href="#" data-tab="checklist"><span class="n-ic">checklist</span>List</a>
     <a href="#" data-tab="feed"><span class="n-ic">water_drop</span>Feed</a>
   </nav>
@@ -775,7 +1120,7 @@ const CHECKLISTS = {
 };
 
 const TRIM_NAMES = {1:'First Trimester',2:'Second Trimester',3:'Third Trimester'};
-const TAB_ORDER = ['home','grow','eat','checklist','feed'];
+const TAB_ORDER = ['home','grow','eat','names','nursery','checklist','feed'];
 
 /* ═══════════════ STATE ═══════════════ */
 const store = {
@@ -1044,6 +1389,7 @@ function switchTab(tab){
     if(tab==='home') renderHome(true);
     if(tab==='grow'){ scrollToWeek(gsel); }
     if(tab==='feed') renderFeed(true);
+    if(tab==='nursery') renderRoom();
 
     setTimeout(()=>{ isSwitching = false; }, 300);
   }, 280);
@@ -1085,6 +1431,814 @@ document.addEventListener('click', e=>{
   ripple.style.top = (e.clientY - rect.top - size/2)+'px';
   btn.appendChild(ripple);
   setTimeout(()=>ripple.remove(), 600);
+});
+
+/* ═══════════════ NAME DATABASE ═══════════════ */
+const ENGLISH_NAMES = {
+  girl: {
+    classic: [
+      {n:'Eleanor', m:'Light, shining one. A timeless name with vintage warmth.', tags:['classic','light']},
+      {n:'Charlotte', m:'Free woman. Strong yet gentle, royal without feeling stiff.', tags:['classic','strong']},
+      {n:'Violet', m:'Purple flower. Soft, creative, quietly bold.', tags:['classic','nature']},
+      {n:'Clara', m:'Bright, clear. Simple and luminous.', tags:['classic','light']},
+      {n:'Rose', m:'The flower. Romantic, understated, enduring.', tags:['classic','nature']},
+    ],
+    modern: [
+      {n:'Nova', m:'A new star. Fresh, cosmic, full of possibility.', tags:['modern','celestial']},
+      {n:'Luna', m:'Moon. Dreamy, calm, universally loved.', tags:['modern','celestial']},
+      {n:'Aria', m:'Air, melody. Musical and light.', tags:['modern','music']},
+      {n:'Willow', m:'Graceful tree. Flexible, resilient, serene.', tags:['modern','nature']},
+      {n:'Hazel', m:'The tree / nut color. Warm, earthy, wise.', tags:['modern','nature']},
+    ],
+    nature: [
+      {n:'Ivy', m:'Climbing evergreen. Tenacious, evergreen, elegant.', tags:['nature','strong']},
+      {n:'Fern', m:'Lush green plant. Quiet, resilient, forest-born.', tags:['nature','calm']},
+      {n:'Meadow', m:'Open field of grass. Free, peaceful, sunlit.', tags:['nature','calm']},
+      {n:'Juniper', m:'Evergreen shrub. Fresh, hardy, slightly wild.', tags:['nature','unique']},
+      {n:'Sage', m:'Herb and color. Wise, calming, grounded.', tags:['nature','wisdom']},
+    ],
+    celestial: [
+      {n:'Stella', m:'Star. Classic Latin, radiant and steady.', tags:['celestial','light']},
+      {n:'Celeste', m:'Heavenly. Soft, elevated, serene.', tags:['celestial','calm']},
+      {n:'Aurora', m:'Dawn / northern lights. Magical, colorful, hopeful.', tags:['celestial','magic']},
+      {n:'Lyra', m:'The harp constellation. Musical, poetic, star-born.', tags:['celestial','music']},
+      {n:'Elara', m:'A moon of Jupiter. Mysterious, gentle, cosmic.', tags:['celestial','unique']},
+    ],
+    vintage: [
+      {n:'Pearl', m:'The gem. Classic, precious, born of patience.', tags:['vintage','classic']},
+      {n:'Beatrice', m:'She who brings joy. Warm, literary, bright.', tags:['vintage','joy']},
+      {n:'Cora', m:'Maiden / heart. Short, strong, timeless.', tags:['vintage','strong']},
+      {n:'Mabel', m:'Lovable, amiable. Sweet without being frilly.', tags:['vintage','love']},
+      {n:'Edith', m:'Prosperous in war. Quietly strong, vintage cool.', tags:['vintage','strong']},
+    ],
+  },
+  boy: {
+    classic: [
+      {n:'Henry', m:'Ruler of the home. Warm, steady, universally liked.', tags:['classic','strong']},
+      {n:'Theodore', m:'Gift of God. Gentle giant energy, nickname-ready (Teddy).', tags:['classic','warm']},
+      {n:'Oliver', m:'Olive tree. Peaceful, friendly, evergreen.', tags:['classic','nature']},
+      {n:'Arthur', m:'Noble leader. Legendary, kind, grounded.', tags:['classic','strong']},
+      {n:'James', m:'Supplanter. Reliable, versatile, timeless.', tags:['classic','steady']},
+    ],
+    modern: [
+      {n:'Milo', m:'Soldier / merciful. Playful, warm, easy to love.', tags:['modern','joy']},
+      {n:'Asher', m:'Happy, blessed. Upbeat, modern, Jewish heritage.', tags:['modern','joy']},
+      {n:'Leo', m:'Lion. Bold, sunny, zodiac-friendly.', tags:['modern','strong']},
+      {n:'Finn', m:'Fair, white. Adventurous, Irish, crisp.', tags:['modern','adventure']},
+      {n:'Ezra', m:'Help. Short, strong, literary.', tags:['modern','wisdom']},
+    ],
+    nature: [
+      {n:'River', m:'Flowing water. Calm, strong, free.', tags:['nature','calm']},
+      {n:'Forest', m:'Woods. Deep, quiet, grounded.', tags:['nature','calm']},
+      {n:'Rowan', m:'Mountain ash tree. Hardy, magical, unisex-leaning.', tags:['nature','unique']},
+      {n:'Ash', m:'The tree. Short, strong, elemental.', tags:['nature','strong']},
+      {n:'Cedar', m:'Evergreen tree. Warm, sturdy, aromatic.', tags:['nature','warm']},
+    ],
+    celestial: [
+      {n:'Orion', m:'The hunter constellation. Bold, cosmic, legendary.', tags:['celestial','strong']},
+      {n:'Atlas', m:'Titan who held the sky. Strong, supportive, grand.', tags:['celestial','strong']},
+      {n:'Cosmo', m:'Universe. Playful, cosmic, retro-futuristic.', tags:['celestial','unique']},
+      {n:'Sirius', m:'The brightest star. Radiant, loyal, cosmic.', tags:['celestial','light']},
+      {n:'Nova', m:'New star. Explosive, bright, unisex-friendly.', tags:['celestial','light']},
+    ],
+    vintage: [
+      {n:'Walter', m:'Ruler of the army. Steady, vintage, nickname Wally.', tags:['vintage','steady']},
+      {n:'Edwin', m:'Wealthy friend. Kind, old-fashioned, warm.', tags:['vintage','warm']},
+      {n:'Ralph', m:'Wolf counsel. Retro, confident, cozy.', tags:['vintage','strong']},
+      {n:'Victor', m:'Conqueror. Strong, elegant, international.', tags:['vintage','strong']},
+      {n:'Oscar', m:'Divine spear. Charming, literary, well-loved.', tags:['vintage','joy']},
+    ],
+  },
+};
+
+const CHINESE_NAMES = {
+  girl: [
+    {c:'雨桐', py:'Yǔ Tóng', s:[8,10], m:'Rain + paulownia tree. Gentle rain nourishing a strong tree. Graceful and resilient.', tags:['nature','gentle']},
+    {c:'思琪', py:'Sī Qí', s:[9,13], m:'Thought + fine jade. Wise and precious, thoughtful beauty.', tags:['wisdom','jade']},
+    {c:'欣怡', py:'Xīn Yí', s:[8,9], m:'Joy + harmony. Happy and harmonious, a cheerful spirit.', tags:['joy','harmony']},
+    {c:'诗涵', py:'Shī Hán', s:[13,12], m:'Poetry + deep waters. Artistic, profound, graceful.', tags:['art','wisdom']},
+    {c:'雅婷', py:'Yǎ Tíng', s:[12,12], m:'Elegant + graceful. Refined and poised.', tags:['elegance','beauty']},
+    {c:'梓萱', py:'Zǐ Xuān', s:[11,15], m:'Catalpa tree + daylily. Strong and warm, maternal warmth.', tags:['nature','warm']},
+    {c:'梦瑶', py:'Mèng Yáo', s:[14,15], m:'Dream + precious jade. Dreamy, valuable, ethereal.', tags:['dream','jade']},
+    {c:'若曦', py:'Ruò Xī', s:[11,20], m:'Like + dawn. Gentle as morning light, hopeful.', tags:['light','gentle']},
+    {c:'静宜', py:'Jìng Yí', s:[16,8], m:'Quiet + appropriate. Calm, balanced, serene.', tags:['calm','harmony']},
+    {c:'悦宁', py:'Yuè Níng', s:[11,14], m:'Joy + peace. Happy and tranquil.', tags:['joy','peace']},
+  ],
+  boy: [
+    {c:'浩然', py:'Hào Rán', s:[11,12], m:'Vast + right. Great and upright, noble spirit.', tags:['strong','noble']},
+    {c:'子轩', py:'Zǐ Xuān', s:[3,10], m:'Master + pavilion. Learned and distinguished.', tags:['wisdom','elegance']},
+    {c:'宇航', py:'Yǔ Háng', s:[6,10], m:'Universe + navigate. Cosmic ambition, exploring the stars.', tags:['celestial','ambition']},
+    {c:'俊杰', py:'Jùn Jié', s:[9,12], m:'Talented + outstanding. Bright and exceptional.', tags:['talent','strong']},
+    {c:'铭泽', py:'Míng Zé', s:[14,17], m:'Inscribe + grace. Remembered kindness, deep favor.', tags:['wisdom','grace']},
+    {c:'天佑', py:'Tiān Yòu', s:[4,7], m:'Heaven + protect. Divinely protected, blessed.', tags:['blessing','strong']},
+    {c:'嘉树', py:'Jiā Shù', s:[14,16], m:'Excellent + tree. Fine and growing, strong roots.', tags:['nature','excellence']},
+    {c:'博文', py:'Bó Wén', s:[12,4], m:'Rich + literature. Broad knowledge, literary.', tags:['wisdom','art']},
+    {c:'承宇', py:'Chéng Yǔ', s:[8,6], m:'Receive + universe. Bearing the cosmos, vast potential.', tags:['celestial','strong']},
+    {c:'奕辰', py:'Yì Chén', s:[9,7], m:'Great + celestial body. Brilliant star, grand timing.', tags:['celestial','bright']},
+  ],
+};
+
+/* Chinese stroke count lookup for common characters */
+const STROKE_DB = {
+  '李':7,'王':4,'张':7,'刘':6,'陈':7,'杨':7,'黄':11,'赵':9,'周':8,'吴':7,
+  '徐':10,'孙':6,'胡':9,'朱':6,'高':10,'林':8,'何':7,'郭':10,'马':3,'罗':8,
+  '梁':11,'宋':7,'郑':8,'谢':17,'韩':17,'唐':10,'冯':5,'于':3,'董':12,'萧':11,
+  '程':12,'曹':11,'袁':10,'邓':4,'许':6,'傅':12,'沈':7,'曾':12,'彭':12,'吕':6,
+  '苏':7,'卢':5,'蒋':14,'蔡':14,'贾':10,'丁':2,'魏':17,'薛':16,'叶':5,'阎':11,
+  '余':7,'潘':15,'杜':7,'戴':17,'夏':10,'钟':9,'汪':7,'田':5,'任':6,'姜':9,
+  '范':8,'方':4,'石':5,'姚':9,'谭':14,'廖':14,'邹':7,'熊':14,'金':8,'陆':7,
+  '郝':9,'孔':4,'白':5,'崔':11,'康':11,'毛':4,'邱':7,'秦':10,'江':6,'史':5,
+  '顾':10,'侯':9,'邵':7,'孟':8,'龙':5,'万':3,'段':9,'雷':13,'钱':10,'汤':6,
+  '尹':4,'黎':15,'易':8,'常':11,'武':8,'乔':6,'贺':9,'赖':16,'龚':11,'文':4,
+  '雨':8,'桐':10,'思':9,'琪':13,'欣':8,'怡':9,'诗':13,'涵':12,'雅':12,'婷':12,
+  '梓':11,'萱':15,'梦':14,'瑶':15,'若':11,'曦':20,'静':16,'宜':8,'悦':11,'宁':14,
+  '浩':11,'然':12,'子':3,'轩':10,'宇':6,'航':10,'俊':9,'杰':12,'铭':14,'泽':17,
+  '天':4,'佑':7,'嘉':14,'树':16,'博':12,'文':4,'承':8,'奕':9,'辰':7,'安':6,
+  '乐':5,'心':4,'一':1,'明':8,'清':11,'美':9,'丽':7,'华':6,'强':12,'平':5,
+  '慧':15,'敏':11,'健':11,'勇':9,'芳':7,'娜':9,'静':16,'秀':7,'英':8,'玉':5,
+  '凤':4,'云':4,'雪':11,'梅':11,'月':4,'星':9,'晨':11,'阳':6,'光':6,'海':10,
+  '山':3,'林':8,'森':12,'木':4,'水':4,'火':4,'土':3,'金':8,'风':9,'花':7,
+  '爱':13,'仁':4,'义':3,'礼':5,'智':12,'信':9,'和':8,'善':12,'德':15,'福':14,
+};
+
+/* 81数理吉凶 table */
+const LUCKY_81 = {
+  1:{t:'大吉',d:'万事基础,万物起源. 稳健发展,富贵荣誉.'},
+  2:{t:'大凶',d:'混沌未定,志望难达. 需配合他格化解.'},
+  3:{t:'大吉',d:'进取如意,繁荣昌盛. 智谋出众,贵人相助.'},
+  4:{t:'凶',d:'破坏凶变,万事难成. 需谨慎行事.'},
+  5:{t:'大吉',d:'福禄长寿,阴阳和合. 完璧之象,大吉大利.'},
+  6:{t:'吉',d:'安稳余庆,吉人天相. 豪侠敦厚,成大业.'},
+  7:{t:'吉',d:'刚毅果断,勇往直前. 独立权威,吉星高照.'},
+  8:{t:'吉',d:'意志刚健,勤勉发展. 八卦之数,繁荣发达.'},
+  9:{t:'凶',d:'大成大败,穷困劳苦. 需配合吉数化解.'},
+  10:{t:'大凶',d:'万物终局,虚无缥缈. 凶象至极,需他格补救.'},
+  11:{t:'大吉',d:'旱苗逢雨,万物更新. 稳健着实,必得人望.'},
+  12:{t:'凶',d:'薄弱无力,孤独无援. 需他格配合方吉.'},
+  13:{t:'大吉',d:'智略超群,博学多才. 技艺大成,富贵繁荣.'},
+  14:{t:'凶',d:'家庭缘薄,孤独遭难. 需谨慎,多行善.'},
+  15:{t:'大吉',d:'福寿圆满,富贵荣誉. 涵养雅量,德高望重.'},
+  16:{t:'大吉',d:'反凶化吉,贵人相助. 成大业,兴旺发达.'},
+  17:{t:'吉',d:'突破万难,刚柔兼备. 权威刚强,必获成功.'},
+  18:{t:'吉',d:'有志竟成,内外有运. 博得名利,富贵发达.'},
+  19:{t:'凶',d:'风云蔽日,辛苦重来. 需谨慎,防意外.'},
+  20:{t:'大凶',d:'屋下藏金,非业破运. 凶象叠出,需他格化解.'},
+  21:{t:'大吉',d:'明月中天,光风霁月. 独立权威,大首领运.'},
+  22:{t:'凶',d:'秋草逢霜,困难疾弱. 需他格配合,多积德.'},
+  23:{t:'大吉',d:'旭日东升,壮丽壮观. 权威旺盛,功名荣达.'},
+  24:{t:'大吉',d:'家门余庆,金钱丰盈. 白手成家,财源广进.'},
+  25:{t:'吉',d:'资性英敏,才能奇特. 克服傲慢,尚可成功.'},
+  26:{t:'半吉',d:'英雄豪杰,波澜重叠. 侠气义气,需防变动.'},
+  27:{t:'半吉',d:'欲望无止,自我心强. 多受毁谤,尚可成功.'},
+  28:{t:'凶',d:'豪气生离,行踪不定. 需防意外,多谨慎.'},
+  29:{t:'吉',d:'智谋优秀,财力归集. 名闻海内,成就大业.'},
+  30:{t:'半吉',d:'浮沉不定,凶吉难分. 需配合他格判断.'},
+  31:{t:'大吉',d:'智勇得志,博得名利. 统领众人,繁荣富贵.'},
+  32:{t:'大吉',d:'侥幸多望,贵人得助. 财帛丰裕,繁荣至上.'},
+  33:{t:'大吉',d:'旭日升天,鸾凤相会. 名闻天下,隆昌至极.'},
+  34:{t:'大凶',d:'破家亡身,见识短小. 需他格强力化解.'},
+  35:{t:'吉',d:'温和平静,智达通畅. 文昌技艺,奏功洋洋.'},
+  36:{t:'凶',d:'波澜重叠,沉浮万状. 侠气义情,需防变动.'},
+  37:{t:'大吉',d:'权威显达,热诚忠信. 宜着雅量,终身荣富.'},
+  38:{t:'半吉',d:'意志薄弱,刻意经营. 才略不凡,需恒心.'},
+  39:{t:'大吉',d:'富贵荣华,财帛丰盈. 德泽四方,光明坦途.'},
+  40:{t:'半吉',d:'退安谨慎,智谋胆力. 冒险投机,需防失败.'},
+  41:{t:'大吉',d:'纯阳独秀,德高望重. 和顺畅达,博得名利.'},
+  42:{t:'凶',d:'博识多能,精通世情. 如能专心,尚可成功.'},
+  43:{t:'凶',d:'散财破产,外祥内苦. 需防破财,多节俭.'},
+  44:{t:'大凶',d:'破家亡身,最恶之数. 需他格强力化解.'},
+  45:{t:'大吉',d:'新生泰和,万事如意. 富贵繁荣,富贵吉祥.'},
+  46:{t:'凶',d:'载宝沉舟,凶吉难分. 需防意外,多谨慎.'},
+  47:{t:'大吉',d:'开花结果,权威进取. 万事如意,可奏大功.'},
+  48:{t:'大吉',d:'青松立鹤,德智兼备. 立身兴家,名利双收.'},
+  49:{t:'半吉',d:'吉凶难分,处心积虑. 需配合他格,多行善.'},
+  50:{t:'半吉',d:'小舟人海,吉凶参半. 需防意外,谨慎行事.'},
+  51:{t:'半吉',d:'盛衰交加,波澜重叠. 需谨慎,多积德.'},
+  52:{t:'大吉',d:'卓识达眼,先见之明. 一举成名,富贵吉祥.'},
+  53:{t:'凶',d:'盛衰参半,外祥内苦. 需防破财,多节俭.'},
+  54:{t:'大凶',d:'多难悲运,难得成功. 需他格强力化解.'},
+  55:{t:'半吉',d:'外美内苦,外观幸福. 需防内忧,多修心.'},
+  56:{t:'凶',d:'浪里行舟,历尽艰辛. 需谨慎,多积德.'},
+  57:{t:'吉',d:'寒雪青松,一生荣运. 才能非凡,终获成功.'},
+  58:{t:'半吉',d:'浮沉多端,祸福无常. 需配合他格,多行善.'},
+  59:{t:'凶',d:'得而复失,枉费心机. 需防破财,多节俭.'},
+  60:{t:'凶',d:'黑暗无光,心迷意乱. 需他格强力化解.'},
+  61:{t:'吉',d:'牡丹芙蓉,名利双收. 繁荣富贵,吉祥如意.'},
+  62:{t:'凶',d:'基础虚弱,困难重重. 需他格配合,多积德.'},
+  63:{t:'大吉',d:'富贵荣华,身心健全. 家门昌隆,万事如意.'},
+  64:{t:'大凶',d:'骨肉分离,孤独悲愁. 需他格强力化解.'},
+  65:{t:'大吉',d:'富贵长寿,志望坚固. 光明坦途,万事如意.'},
+  66:{t:'凶',d:'内外不和,信用缺乏. 需修心养性,多行善.'},
+  67:{t:'大吉',d:'财禄亨通,志气昂扬. 万事顺遂,富贵吉祥.'},
+  68:{t:'大吉',d:'兴家立业,智略超群. 富贵荣华,万事如意.'},
+  69:{t:'凶',d:'坐立不安,常陷逆境. 需他格配合,多积德.'},
+  70:{t:'凶',d:'残菊逢霜,寂寞无聊. 需防孤独,多交友.'},
+  71:{t:'半吉',d:'石上金花,内心劳苦. 需恒心,终可成功.'},
+  72:{t:'凶',d:'劳苦不绝,缺乏忍耐. 需修心,多积德.'},
+  73:{t:'半吉',d:'志高力微,盛衰参半. 需配合他格,多努力.'},
+  74:{t:'凶',d:'秋叶飘零,孤独无援. 需他格配合,多交友.'},
+  75:{t:'半吉',d:'守旧可安,进取多险. 需谨慎,多积德.'},
+  76:{t:'凶',d:'倾覆离散,骨肉分离. 需他格强力化解.'},
+  77:{t:'半吉',d:'家庭有悦,半吉半凶. 需配合他格,多行善.'},
+  78:{t:'半吉',d:'晚景凄凉,功德不足. 需早积德,多行善.'},
+  79:{t:'凶',d:'云头望月,身疲力竭. 需修心,多积德.'},
+  80:{t:'凶',d:'辛苦不绝,灾难重重. 需他格强力化解.'},
+  81:{t:'大吉',d:'万物回春,还原复始. 最极之数,还本归元.'},
+};
+
+/* Five element mapping from last digit */
+function numToElement(n){
+  const d = n % 10;
+  if(d===1||d===2) return {e:'木',c:'#8ab88a'};
+  if(d===3||d===4) return {e:'火',c:'#e8a898'};
+  if(d===5||d===6) return {e:'土',c:'#d4b896'};
+  if(d===7||d===8) return {e:'金',c:'#c4b5c0'};
+  return {e:'水',c:'#a8b8d8'};
+}
+
+/* ═══════════════ NAME FINDER ═══════════════ */
+const FINDER_STEPS = [
+  {q:'Is your baby a girl, boy, or a surprise?', key:'gender', options:[
+    {emoji:'🎀',label:'Girl',val:'girl'},{emoji:'💙',label:'Boy',val:'boy'},{emoji:'🎁',label:'Surprise',val:'any'},
+  ]},
+  {q:'What vibe feels right?', key:'vibe', options:[
+    {emoji:'🏛️',label:'Classic',val:'classic'},{emoji:'✨',label:'Modern',val:'modern'},
+    {emoji:'🌿',label:'Nature',val:'nature'},{emoji:'🌟',label:'Celestial',val:'celestial'},
+    {emoji:'📷',label:'Vintage',val:'vintage'},
+  ]},
+  {q:'What meaning matters most?', key:'meaning', options:[
+    {emoji:'💪',label:'Strength',val:'strong'},{emoji:'🧠',label:'Wisdom',val:'wisdom'},
+    {emoji:'😊',label:'Joy',val:'joy'},{emoji:'🕊️',label:'Peace',val:'peace'},
+    {emoji:'💜',label:'Love',val:'love'},{emoji:'🌸',label:'Beauty',val:'beauty'},
+  ]},
+  {q:'Cultural background?', key:'culture', options:[
+    {emoji:'🌍',label:'Western',val:'western'},{emoji:'🇨🇳',label:'Chinese',val:'chinese'},
+    {emoji:'🌏',label:'Mixed / both',val:'mixed'},{emoji:'🤷',label:'Any',val:'any'},
+  ]},
+  {q:'Any initial or letter preference?', key:'initial', options:[
+    {emoji:'✅',label:'No preference',val:'any'},{emoji:'A',label:'A–F',val:'af'},
+    {emoji:'G',label:'G–L',val:'gl'},{emoji:'M',label:'M–R',val:'mr'},{emoji:'S',label:'S–Z',val:'sz'},
+  ]},
+];
+let finderState = {step:0, answers:{}};
+
+function renderFinderStep(){
+  const s = FINDER_STEPS[finderState.step];
+  document.getElementById('finder-prog').textContent = (finderState.step+1)+' / '+FINDER_STEPS.length;
+  document.getElementById('finder-bar-fill').style.width = ((finderState.step+1)/FINDER_STEPS.length*100)+'%';
+  const container = document.getElementById('finder-step');
+  let html = '<div class="finder-q">'+s.q+'</div><div class="finder-options">';
+  s.options.forEach(o=>{
+    const sel = finderState.answers[s.key]===o.val ? 'sel' : '';
+    html += '<div class="finder-opt '+sel+'" data-val="'+o.val+'"><span class="fo-emoji">'+o.emoji+'</span>'+o.label+'</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+  container.querySelectorAll('.finder-opt').forEach(el=>{
+    el.onclick = ()=>{
+      haptic(10);
+      finderState.answers[s.key] = el.dataset.val;
+      renderFinderStep();
+    };
+  });
+  document.getElementById('finder-back').style.display = finderState.step>0 ? 'block' : 'none';
+  document.getElementById('finder-next').textContent = finderState.step===FINDER_STEPS.length-1 ? 'See names ✨' : 'Continue';
+}
+
+function generateNames(){
+  const a = finderState.answers;
+  let results = [];
+  const genders = a.gender==='any' ? ['girl','boy'] : [a.gender];
+  const cultures = a.culture==='any' ? ['western','chinese'] : (a.culture==='mixed' ? ['western','chinese'] : [a.culture]);
+
+  genders.forEach(g=>{
+    cultures.forEach(c=>{
+      if(c==='chinese'){
+        CHINESE_NAMES[g].forEach(n=>{
+          results.push({name:n.c, pinyin:n.py, meaning:n.m, tags:n.tags.concat(['Chinese']), type:'chinese', strokes:n.s});
+        });
+      } else {
+        const vibes = a.vibe ? [a.vibe] : ['classic','modern','nature','celestial','vintage'];
+        vibes.forEach(v=>{
+          if(ENGLISH_NAMES[g] && ENGLISH_NAMES[g][v]){
+            ENGLISH_NAMES[g][v].forEach(n=>{
+              if(a.initial && a.initial!=='any'){
+                const ranges={af:/^[A-Fa-f]/,gl:/^[G-Lg-l]/,mr:/^[M-Rm-r]/,sz:/^[S-Zs-z]/};
+                if(!ranges[a.initial].test(n.n)) return;
+              }
+              results.push({name:n.n, meaning:n.m, tags:n.tags.concat([v]), type:'english'});
+            });
+          }
+        });
+      }
+    });
+  });
+
+  // Shuffle and take top 12
+  results.sort(()=>Math.random()-0.5);
+  return results.slice(0,12);
+}
+
+function showNameResults(){
+  const names = generateNames();
+  const a = finderState.answers;
+  document.getElementById('finder-card').style.display='none';
+  document.getElementById('name-results').style.display='block';
+  const vibeLabel = FINDER_STEPS[1].options.find(o=>o.val===a.vibe)?.label || 'any';
+  document.getElementById('results-summary').textContent =
+    (a.gender==='any'?'Girl + boy':'For your '+(a.gender==='girl'?'little girl':'little boy'))+
+    ' · '+vibeLabel+' vibe · '+names.length+' handpicked names';
+  const container = document.getElementById('name-cards');
+  container.innerHTML = names.map((n,i)=>{
+    const hot = n.tags.some(t=>['joy','strong','wisdom','peace','celestial','nature'].includes(t)) ? 'hot' : '';
+    return '<div class="name-card" style="animation-delay:'+(i*0.06)+'s">'+
+      '<div class="nc-name">'+n.name+(n.pinyin?' <span class="nc-pinyin">'+n.pinyin+'</span>':'')+'</div>'+
+      '<div class="nc-meaning">'+n.meaning+'</div>'+
+      '<div class="nc-tags">'+n.tags.slice(0,3).map(t=>'<span class="nc-tag '+(t==='Chinese'||t==='joy'||t==='strong'?hot:'')+'">'+t+'</span>').join('')+'</div>'+
+    '</div>';
+  }).join('');
+}
+
+document.getElementById('finder-next').onclick = ()=>{
+  const s = FINDER_STEPS[finderState.step];
+  if(!finderState.answers[s.key]){ toast('Pick an option first'); return; }
+  haptic(15);
+  if(finderState.step < FINDER_STEPS.length-1){
+    finderState.step++;
+    renderFinderStep();
+  } else {
+    showNameResults();
+  }
+};
+document.getElementById('finder-back').onclick = ()=>{
+  if(finderState.step>0){ finderState.step--; renderFinderStep(); haptic(8); }
+};
+document.getElementById('finder-restart').onclick = ()=>{
+  finderState = {step:0, answers:{}};
+  document.getElementById('finder-card').style.display='block';
+  document.getElementById('name-results').style.display='none';
+  renderFinderStep();
+};
+renderFinderStep();
+
+/* ═══════════════ DIGITALDNA CALCULATOR ═══════════════ */
+function getStrokes(str){
+  // Accept Chinese chars (lookup) or numbers separated by +
+  if(/^\d+(\+\d+)*$/.test(str.trim())){
+    return str.trim().split('+').map(Number);
+  }
+  const chars = str.trim().split('');
+  const strokes = [];
+  for(const ch of chars){
+    if(STROKE_DB[ch]) strokes.push(STROKE_DB[ch]);
+    else return null; // unknown char
+  }
+  return strokes;
+}
+
+function calcDigitalDNA(){
+  const surStr = document.getElementById('dna-surname').value.trim();
+  const givStr = document.getElementById('dna-given').value.trim();
+  if(!surStr || !givStr){ toast('Enter surname and given name'); return; }
+
+  const surStrokes = getStrokes(surStr);
+  const givStrokes = getStrokes(givStr);
+  if(!surStrokes){ toast('Unknown character in surname — try stroke count like "7"'); return; }
+  if(!givStrokes){ toast('Unknown character in given name — try stroke counts like "8+10"'); return; }
+
+  const sSum = surStrokes.reduce((a,b)=>a+b,0);
+  const gSum = givStrokes.reduce((a,b)=>a+b,0);
+  const g1 = givStrokes[0] || 0;
+  const g2 = givStrokes[1] || 0;
+
+  // Five grids (single surname assumed)
+  const tianGe = sSum + 1; // 天格
+  const renGe = sSum + g1; // 人格
+  const diGe = givStrokes.length > 1 ? g1 + g2 : g1 + 1; // 地格
+  const zongGe = sSum + gSum; // 总格
+  const waiGe = givStrokes.length > 1 ? zongGe - renGe + 1 : 2; // 外格
+
+  const grids = [
+    {label:'天格\nHeaven', num:tianGe, meaning:'先天运 · 祖先与环境'},
+    {label:'人格\nPersonality', num:renGe, meaning:'主运 · 核心性格与一生'},
+    {label:'地格\nEarth', num:diGe, meaning:'前运 · 青年时期'},
+    {label:'外格\nOuter', num:waiGe, meaning:'副运 · 外部人际'},
+    {label:'总格\nTotal', num:zongGe, meaning:'后运 · 中老年与整体'},
+  ];
+
+  // Score
+  let score = 0;
+  grids.forEach(g=>{
+    const luck = LUCKY_81[g.num] || LUCKY_81[81];
+    if(luck.t==='大吉') score += 20;
+    else if(luck.t==='吉') score += 15;
+    else if(luck.t==='半吉') score += 8;
+    else if(luck.t==='凶') score += 3;
+    else score += 0;
+  });
+  // 三才 bonus
+  const tianEl = numToElement(tianGe).e;
+  const renEl = numToElement(renGe).e;
+  const diEl = numToElement(diGe).e;
+  const sancaiGood = (tianEl===renEl || renEl===diEl);
+  if(sancaiGood) score = Math.min(100, score+5);
+
+  // Render
+  document.getElementById('dna-result').style.display='block';
+  document.getElementById('dna-name-display').textContent = surStr + ' ' + givStr;
+  const verdict = score>=80 ? '🌟 大吉之名 — 五格配置优秀,三才和顺.' :
+                  score>=60 ? '✨ 吉名 — 整体不错,个别格数可优化.' :
+                  score>=40 ? '🌤️ 平名 — 尚可,建议调整笔画.' :
+                  '🌧️ 建议调整 — 凶数较多,可换字或笔画.';
+  document.getElementById('dna-verdict').textContent = verdict;
+
+  // Animate score ring
+  const ring = document.getElementById('dna-ring');
+  const circ = 289;
+  ring.style.transition = 'stroke-dashoffset 1.2s var(--ease)';
+  ring.style.strokeDashoffset = circ - (circ*score/100);
+  countUp(document.getElementById('dna-score-num'), score, 1200);
+
+  // Grid cards
+  const gc = document.getElementById('dna-grids');
+  gc.innerHTML = grids.map(g=>{
+    const luck = LUCKY_81[g.num] || LUCKY_81[81];
+    const el = numToElement(g.num);
+    const cls = luck.t.includes('大吉')||luck.t==='吉' ? 'good' : (luck.t==='凶'||luck.t==='大凶' ? 'bad' : 'mid');
+    return '<div class="dna-grid-card '+cls+'">'+
+      '<div class="dgc-label">'+g.label.replace('\n',' ')+'</div>'+
+      '<div class="dgc-num">'+g.num+'</div>'+
+      '<div class="dgc-element" style="color:'+el.c+'">'+el.e+'</div>'+
+      '<div class="dgc-luck" style="color:'+(cls==='good'?'var(--ok)':cls==='bad'?'var(--low)':'var(--warn)')+'">'+luck.t+'</div>'+
+    '</div>';
+  }).join('');
+
+  // 三才
+  const sancaiEl = numToElement(tianGe).e+numToElement(renGe).e+numToElement(diGe).e;
+  document.getElementById('dna-sancai').innerHTML =
+    '<b>三才配置 · Heaven-Person-Earth</b><br>'+
+    '<span style="font-size:20px; font-weight:700; color:var(--mauve)">'+sancaiEl+'</span><br>'+
+    '<span style="font-size:13px; color:var(--taupe)">天格('+tianGe+') → 人格('+renGe+') → 地格('+diGe+')</span><br>'+
+    '<p style="margin-top:8px; font-size:13px; line-height:1.6">'+
+    (sancaiGood ? '✅ 三才相生或比和,基础稳固,易得贵人相助.' : '⚠️ 三才存在相克,建议关注健康与人际关系,多行善积德.')+
+    '</p>';
+
+  haptic(30);
+  document.getElementById('dna-result').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+document.getElementById('dna-calc').onclick = calcDigitalDNA;
+
+/* ═══════════════ NURSERY: ROOM DECORATOR ═══════════════ */
+const ROOM_ITEMS = [
+  {emoji:'🛏️',label:'Crib',x:30,y:55},
+  {emoji:'🪑',label:'Rocking chair',x:65,y:58},
+  {emoji:'🧸',label:'Teddy bear',x:50,y:70},
+  {emoji:'🎠',label:'Carousel',x:20,y:72},
+  {emoji:'🪴',label:'Plant',x:80,y:60},
+  {emoji:'💡',label:'Lamp',x:85,y:35},
+  {emoji:'📚',label:'Bookshelf',x:10,y:40},
+  {emoji:'🖼️',label:'Wall art',x:45,y:25},
+  {emoji:'⭐',label:'Stars',x:60,y:18},
+  {emoji:'🎈',label:'Balloons',x:75,y:20},
+  {emoji:'🧺',label:'Basket',x:40,y:72},
+  {emoji:'🦒',label:'Giraffe',x:15,y:65},
+];
+const WALL_COLORS = [
+  {name:'Lavender',val:'linear-gradient(180deg,#e8dff5,#ddd0ee)'},
+  {name:'Peach',val:'linear-gradient(180deg,#fde8dc,#f5d4c4)'},
+  {name:'Sage',val:'linear-gradient(180deg,#e0ede0,#cfe0cf)'},
+  {name:'Sky',val:'linear-gradient(180deg,#dde8f5,#c8d8ec)'},
+  {name:'Blush',val:'linear-gradient(180deg,#fae8ec,#f5d4dc)'},
+  {name:'Cream',val:'linear-gradient(180deg,#faf5ed,#f0e8d8)'},
+];
+let roomState = {wall:0, items:[]};
+
+function loadRoom(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('maturna_room')||'null');
+    if(saved) roomState = saved;
+  }catch(e){}
+}
+function saveRoom(){ localStorage.setItem('maturna_room', JSON.stringify(roomState)); }
+
+function renderRoom(){
+  // Wall
+  document.getElementById('room-wall').style.background = WALL_COLORS[roomState.wall].val;
+  // Swatches
+  document.getElementById('wall-swatches').innerHTML = WALL_COLORS.map((c,i)=>
+    '<div class="wall-swatch '+(i===roomState.wall?'on':'')+'" data-wall="'+i+'" style="background:'+c.val.split(',')[0].replace('linear-gradient(180deg','')+'" title="'+c.name+'"></div>'
+  ).join('');
+  document.querySelectorAll('.wall-swatch').forEach(el=>{
+    el.onclick = ()=>{ roomState.wall = +el.dataset.wall; saveRoom(); renderRoom(); haptic(8); };
+  });
+  // Placed items
+  const container = document.getElementById('room-items');
+  container.innerHTML = roomState.items.map((it,i)=>
+    '<div class="room-item" data-idx="'+i+'" style="left:'+it.x+'%; top:'+it.y+'%">'+it.emoji+'</div>'
+  ).join('');
+  container.querySelectorAll('.room-item').forEach(el=>{
+    el.onclick = ()=>{
+      const idx = +el.dataset.idx;
+      roomState.items.splice(idx,1);
+      saveRoom(); renderRoom(); haptic(10);
+      toast('Removed');
+    };
+  });
+  // Palette
+  document.getElementById('room-palette').innerHTML = ROOM_ITEMS.map((it,i)=>
+    '<div class="palette-item" data-item="'+i+'"><span class="pi-emoji">'+it.emoji+'</span><span class="pi-label">'+it.label+'</span></div>'
+  ).join('');
+  document.querySelectorAll('.palette-item').forEach(el=>{
+    el.onclick = ()=>{
+      const item = ROOM_ITEMS[+el.dataset.item];
+      const x = 15 + Math.random()*70;
+      const y = 30 + Math.random()*45;
+      roomState.items.push({emoji:item.emoji, label:item.label, x, y});
+      saveRoom(); renderRoom(); haptic(15);
+    };
+  });
+}
+document.getElementById('room-clear').onclick = ()=>{
+  roomState.items = [];
+  saveRoom(); renderRoom();
+  toast('Room cleared');
+};
+loadRoom();
+
+/* ═══════════════ NURSERY: BABY YOGA ═══════════════ */
+const YOGA_POSES = [
+  {emoji:'🧘‍♀️',name:'Centering breath',desc:'Sit comfortably, hands on belly. Breathe in for 4, out for 6. Feel your baby rise and fall.',dur:60,aff:'You are doing the most important work simply by being here. Your breath is your baby\'s first lullaby.'},
+  {emoji:'🐱',name:'Cat-Cow flow',desc:'On hands and knees, inhale arching your back (cow), exhale rounding (cat). Move with your breath.',dur:90,aff:'Each movement is a gentle dance between you and your baby. They feel every sway.'},
+  {emoji:'🧎‍♀️',name:'Supported child\'s pose',desc:'Knees wide, big toes touching, sit back onto heels. Rest forehead on a pillow. Let your belly hang.',dur:90,aff:'This is a pose of surrender. You don\'t have to do anything right now — just be together.'},
+  {emoji:'💺',name:'Seated pelvic tilts',desc:'Sit on a birthing ball or chair. Gently tilt pelvis forward and back in small circles. This opens the hips.',dur:60,aff:'Your body is wise. It knows exactly how to prepare for meeting your baby.'},
+  {emoji:'🤰',name:'Side-lying release',desc:'Lie on your left side with a pillow between knees. Let your whole body soften. Stay as long as you like.',dur:120,aff:'Rest is not lazy. Rest is how your baby grows. Be proud of every moment you take for yourself.'},
+  {emoji:'💜',name:'Gratitude closing',desc:'Hands on your heart and belly. Whisper one thing you\'re grateful for today. Breathe it in.',dur:60,aff:'Thank you for taking this time. You are a wonderful mother already, and your baby feels your love.'},
+];
+let yogaState = {running:false, poseIdx:0, timeLeft:0, interval:null, breathInterval:null};
+
+function renderYogaPoses(){
+  const container = document.getElementById('yoga-poses');
+  container.innerHTML = YOGA_POSES.map((p,i)=>
+    '<div class="yoga-pose-row '+(i===yogaState.poseIdx?'active':'')+(i<yogaState.poseIdx?' done':'')+'" data-idx="'+i+'">'+
+      '<span class="ypr-emoji">'+p.emoji+'</span>'+
+      '<div class="ypr-info"><div class="ypr-name">'+p.name+'</div><div class="ypr-dur">'+Math.round(p.dur/60)+' min</div></div>'+
+      (i<yogaState.poseIdx?'<span class="ypr-check">✓</span>':'')+
+    '</div>'
+  ).join('');
+  container.querySelectorAll('.yoga-pose-row').forEach(el=>{
+    el.onclick = ()=>{
+      if(!yogaState.running){
+        yogaState.poseIdx = +el.dataset.idx;
+        yogaState.timeLeft = YOGA_POSES[yogaState.poseIdx].dur;
+        updateYogaDisplay();
+        renderYogaPoses();
+      }
+    };
+  });
+}
+
+function updateYogaDisplay(){
+  const p = YOGA_POSES[yogaState.poseIdx];
+  document.getElementById('yoga-art').textContent = p.emoji;
+  document.getElementById('yoga-name').textContent = p.name;
+  document.getElementById('yoga-desc').textContent = p.desc;
+  document.getElementById('yoga-affirmation').textContent = p.aff;
+  const m = Math.floor(yogaState.timeLeft/60);
+  const s = yogaState.timeLeft%60;
+  document.getElementById('yoga-time').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+
+function startBreath(){
+  const circle = document.getElementById('yoga-breath');
+  let inhaling = true;
+  document.getElementById('yoga-phase').textContent = 'inhale';
+  circle.className = 'yoga-breath-circle inhale';
+  yogaState.breathInterval = setInterval(()=>{
+    inhaling = !inhaling;
+    document.getElementById('yoga-phase').textContent = inhaling ? 'inhale' : 'exhale';
+    circle.className = 'yoga-breath-circle '+(inhaling?'inhale':'exhale');
+  }, 4000);
+}
+function stopBreath(){
+  clearInterval(yogaState.breathInterval);
+  document.getElementById('yoga-breath').className = 'yoga-breath-circle';
+  document.getElementById('yoga-phase').textContent = 'breathe';
+}
+
+function startYoga(){
+  if(yogaState.running){
+    // Pause
+    clearInterval(yogaState.interval);
+    stopBreath();
+    yogaState.running = false;
+    document.getElementById('yoga-play').textContent = 'Resume';
+    return;
+  }
+  yogaState.running = true;
+  document.getElementById('yoga-play').textContent = 'Pause';
+  if(yogaState.timeLeft<=0) yogaState.timeLeft = YOGA_POSES[yogaState.poseIdx].dur;
+  startBreath();
+  yogaState.interval = setInterval(()=>{
+    yogaState.timeLeft--;
+    if(yogaState.timeLeft<=0){
+      haptic(30);
+      if(yogaState.poseIdx < YOGA_POSES.length-1){
+        yogaState.poseIdx++;
+        yogaState.timeLeft = YOGA_POSES[yogaState.poseIdx].dur;
+        renderYogaPoses();
+      } else {
+        // Done
+        clearInterval(yogaState.interval);
+        stopBreath();
+        yogaState.running = false;
+        document.getElementById('yoga-play').textContent = 'Start flow';
+        document.getElementById('yoga-time').textContent = '00:00';
+        document.getElementById('yoga-phase').textContent = 'complete 💜';
+        toast('Flow complete. You and baby are amazing.');
+        return;
+      }
+    }
+    updateYogaDisplay();
+  }, 1000);
+  updateYogaDisplay();
+}
+
+function resetYoga(){
+  clearInterval(yogaState.interval);
+  stopBreath();
+  yogaState = {running:false, poseIdx:0, timeLeft:YOGA_POSES[0].dur, interval:null, breathInterval:null};
+  document.getElementById('yoga-play').textContent = 'Start flow';
+  updateYogaDisplay();
+  renderYogaPoses();
+}
+
+document.getElementById('yoga-play').onclick = startYoga;
+document.getElementById('yoga-reset').onclick = resetYoga;
+yogaState.timeLeft = YOGA_POSES[0].dur;
+updateYogaDisplay();
+renderYogaPoses();
+
+/* Nursery sub-tabs */
+document.querySelectorAll('.sub-tab').forEach(t=>{
+  t.onclick = ()=>{
+    document.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('on'));
+    t.classList.add('on');
+    const sub = t.dataset.sub;
+    document.getElementById('room-view').style.display = sub==='room' ? 'block' : 'none';
+    document.getElementById('yoga-view').style.display = sub==='yoga' ? 'block' : 'none';
+    haptic(8);
+  };
+});
+
+/* ═══════════════ CONTRACTION TIMER ═══════════════ */
+let ctState = {timing:false, startTime:0, contractions:[], interval:null};
+function updateCT(){
+  if(!ctState.timing) return;
+  const elapsed = Math.floor((Date.now()-ctState.startTime)/1000);
+  const m = Math.floor(elapsed/60), s = elapsed%60;
+  document.getElementById('ct-stat').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  if(ctState.contractions.length>0){
+    const last = ctState.contractions[ctState.contractions.length-1];
+    const gapMin = Math.round((ctState.startTime-last.end)/60000);
+    document.getElementById('ct-sub').textContent = ctState.contractions.length+' recorded · '+gapMin+' min since last';
+  }
+}
+document.getElementById('ct-btn').onclick = ()=>{
+  if(!ctState.timing){
+    ctState.timing = true;
+    ctState.startTime = Date.now();
+    document.getElementById('ct-btn').textContent = 'End contraction';
+    document.getElementById('ct-btn').classList.remove('mauve');
+    ctState.interval = setInterval(updateCT, 500);
+    haptic(20);
+  } else {
+    ctState.timing = false;
+    clearInterval(ctState.interval);
+    const dur = Math.round((Date.now()-ctState.startTime)/1000);
+    ctState.contractions.push({start:ctState.startTime, end:Date.now(), dur});
+    document.getElementById('ct-btn').textContent = 'Start timing';
+    document.getElementById('ct-btn').classList.add('mauve');
+    document.getElementById('ct-stat').textContent = 'Last: '+Math.floor(dur/60)+'m '+(dur%60)+'s';
+    document.getElementById('ct-sub').textContent = ctState.contractions.length+' contractions recorded';
+    haptic(30);
+    if(ctState.contractions.length>=5){
+      const avgDur = Math.round(ctState.contractions.reduce((a,c)=>a+c.dur,0)/ctState.contractions.length);
+      const gaps = [];
+      for(let i=1;i<ctState.contractions.length;i++){
+        gaps.push(Math.round((ctState.contractions[i].start-ctState.contractions[i-1].end)/60000));
+      }
+      const avgGap = gaps.length ? Math.round(gaps.reduce((a,b)=>a+b,0)/gaps.length) : 0;
+      if(avgDur>=60 && avgGap<=5){
+        toast('⚠️ Contractions ~'+Math.round(avgDur/60)+'m long, '+avgGap+' min apart. Call your OB/midwife.');
+      }
+    }
+  }
+};
+
+/* ═══════════════ KICK COUNTER ═══════════════ */
+let kickCount = 0;
+let kickSessionStart = null;
+function loadKicks(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('maturna_kicks')||'null');
+    if(saved && saved.date === new Date().toDateString()){
+      kickCount = saved.count;
+      kickSessionStart = saved.start;
+    }
+  }catch(e){}
+}
+function saveKicks(){
+  localStorage.setItem('maturna_kicks', JSON.stringify({count:kickCount, start:kickSessionStart, date:new Date().toDateString()}));
+}
+function updateKickDisplay(){
+  document.getElementById('kc-stat').textContent = kickCount+' kicks';
+  if(kickCount>=10){
+    document.getElementById('kc-sub').textContent = '🎉 Goal reached! Baby is active.';
+    document.getElementById('kc-stat').style.color = 'var(--ok)';
+  } else if(kickSessionStart){
+    const elapsed = Math.round((Date.now()-kickSessionStart)/60000);
+    document.getElementById('kc-sub').textContent = (10-kickCount)+' more · '+elapsed+' min session';
+  }
+}
+document.getElementById('kc-btn').onclick = ()=>{
+  if(kickCount===0) kickSessionStart = Date.now();
+  kickCount++;
+  saveKicks();
+  updateKickDisplay();
+  haptic(15);
+  if(kickCount===10) toast('🎉 10 kicks! Baby is doing great.');
+};
+loadKicks();
+updateKickDisplay();
+
+/* ═══════════════ MOOD CHECK-IN ═══════════════ */
+const MOOD_MESSAGES = {
+  amazing:'Love that energy! Hold onto this feeling today.',
+  good:'Glad you\'re feeling good. Take a moment to appreciate it.',
+  okay:'Okay is perfectly okay. Be gentle with yourself today.',
+  tired:'Rest is productive. Your body is working hard. Nap if you can.',
+  anxious:'Anxiety is common. Try 3 slow breaths. You\'re safe, baby is safe.',
+  nauseous:'Morning sickness is real. Small sips, bland foods, rest. It gets better.',
+};
+function loadMood(){
+  try{
+    const saved = JSON.parse(localStorage.getItem('maturna_mood')||'null');
+    if(saved && saved.date === new Date().toDateString()){
+      document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('sel', b.dataset.mood===saved.mood));
+      document.getElementById('mood-note').style.display='block';
+      document.getElementById('mood-note').textContent = 'Today: '+saved.mood+' — '+MOOD_MESSAGES[saved.mood];
+    }
+  }catch(e){}
+}
+document.querySelectorAll('.mood-btn').forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    const mood = btn.dataset.mood;
+    localStorage.setItem('maturna_mood', JSON.stringify({mood, date:new Date().toDateString()}));
+    document.getElementById('mood-note').style.display='block';
+    document.getElementById('mood-note').textContent = MOOD_MESSAGES[mood];
+    haptic(15);
+  };
+});
+loadMood();
+
+/* ═══════════════ FOOD SAFETY SEARCH ═══════════════ */
+const FOOD_DB = [
+  {name:'sushi', alt:['raw fish','sashimi','nigiri'], status:'avoid', advice:'Raw fish carries listeria and parasite risk. Cooked sushi (eel, shrimp tempura) is fine. Avoid raw until after birth.'},
+  {name:'coffee', alt:['caffeine','espresso','latte'], status:'caution', advice:'Limit to 200mg/day (about 1 12oz cup). Higher intake linked to increased risk. Decaf is a great swap.'},
+  {name:'cheese', alt:['brie','camembert','blue cheese','feta'], status:'caution', advice:'Hard cheeses (cheddar, parmesan) are safe. Soft unpasteurized cheeses (brie, blue, feta) carry listeria risk. Check labels for pasteurized.'},
+  {name:'egg', alt:['eggs','mayonnaise','raw egg'], status:'caution', advice:'Fully cooked eggs are safe. Avoid runny yolks, raw cookie dough, homemade mayo. Pasteurized products are okay.'},
+  {name:'meat', alt:['beef','pork','chicken','turkey','deli meat','cold cuts'], status:'caution', advice:'Cook all meat thoroughly (165°F poultry, 160°F ground beef). Deli meats should be heated until steaming to kill listeria.'},
+  {name:'fish', alt:['salmon','tuna','shrimp','seafood'], status:'safe', advice:'Low-mercury fish (salmon, shrimp, cod) 2-3 servings/week is great for DHA. Avoid swordfish, king mackerel, raw tuna.'},
+  {name:'alcohol', alt:['wine','beer','cocktails','champagne'], status:'avoid', advice:'No amount of alcohol is known to be safe in pregnancy. Mocktails are a fun alternative.'},
+  {name:'papaya', alt:['green papaya','unripe papaya'], status:'avoid', advice:'Unripe/green papaya contains latex that can trigger contractions. Ripe papaya is fine in moderation.'},
+  {name:'pineapple', alt:['tropical fruit'], status:'safe', advice:'Pineapple is safe! The bromelain myth is just that — a myth. Enjoy in normal amounts.'},
+  {name:'leafy greens', alt:['spinach','kale','lettuce','salad','arugula'], status:'safe', advice:'Excellent source of folate and iron. Wash thoroughly. Pre-washed bagged greens should be re-washed.'},
+  {name:'dairy', alt:['milk','yogurt','cream'], status:'safe', advice:'Pasteurized dairy is safe and provides calcium. Avoid unpasteurized milk and products.'},
+  {name:'nuts', alt:['peanuts','almonds','walnuts','cashews'], status:'safe', advice:'Nuts are safe and nutritious unless you have a personal allergy. No evidence linking prenatal nut consumption to child allergy.'},
+  {name:'spicy food', alt:['chili','curry','hot sauce','pepper'], status:'safe', advice:'Spicy food is safe! It may worsen heartburn in later trimesters. Listen to your body.'},
+  {name:'herbal tea', alt:['tea','chamomile','peppermint tea','raspberry leaf'], status:'caution', advice:'Peppermint and ginger teas are generally safe. Avoid raspberry leaf tea until 36+ weeks. Limit chamomile. Check with your OB.'},
+  {name:'watermelon', alt:['melon','cantaloupe','honeydew'], status:'safe', advice:'Hydrating and safe. Wash rind before cutting to prevent bacteria transfer. Cut melon should be refrigerated.'},
+  {name:'grapes', alt:['raisins','wine grapes'], status:'safe', advice:'Grapes are safe and a great snack. Wash thoroughly. Avoid grape juice if unpasteurized.'},
+];
+document.getElementById('food-search').addEventListener('input', e=>{
+  const q = e.target.value.trim().toLowerCase();
+  const container = document.getElementById('food-results');
+  if(!q){ container.innerHTML=''; return; }
+  const matches = FOOD_DB.filter(f=>
+    f.name.includes(q) || f.alt.some(a=>a.includes(q))
+  );
+  if(matches.length===0){
+    container.innerHTML = '<div class="food-result caution"><div class="fr-name">Not in our database</div><div class="fr-advice">We don\'t have data on this food yet. When in doubt, ask your OB or midwife. General rule: cook thoroughly, avoid unpasteurized and raw animal products.</div></div>';
+    return;
+  }
+  container.innerHTML = matches.map(f=>
+    '<div class="food-result '+f.status+'">'+
+      '<div class="fr-name">'+(f.status==='safe'?'✅ ':f.status==='caution'?'⚠️ ':'🚫 ')+f.name.charAt(0).toUpperCase()+f.name.slice(1)+'</div>'+
+      '<div class="fr-advice">'+f.advice+'</div>'+
+    '</div>'
+  ).join('');
 });
 
 /* ═══════════════ EVENTS ═══════════════ */
