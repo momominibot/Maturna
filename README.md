@@ -17,6 +17,15 @@ Or just double-click `index.html` — it is fully self-contained.
 - **List** — tap-to-check checklists: hospital bag, baby essentials, postpartum recovery (progress bar, persisted)
 - **Feed** — breastfeeding log (side + minutes) + a timed 60-min power-pump session (pump 10 / rest 10 × 3)
 
+## Test
+```bash
+pip install playwright==1.63.0 && playwright install chromium
+python3 tools/smoke.py                # this checkout
+python3 tools/smoke.py --root ../old  # any other checkout
+```
+Headless Chromium at 390x844 in Asia/Singapore with a fixed clock: due dates for weeks 2, 20 and 38,
+appointments, feed dates, swipe, contraction timer, nursery, yoga and the desktop frame. Exits 1 on any failure.
+
 ## Tech
 - Static HTML/CSS/JS, no build step
 - LocalStorage for EDD, checklist state, and today's feed log

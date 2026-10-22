@@ -93,6 +93,7 @@ h2.sec{font-family:var(--serif); font-weight:800; font-size:19px; color:var(--in
 .card.tint-sage{background:rgba(168,192,160,.16); border-color:rgba(168,192,160,.35)}
 .card.tint-blush{background:#FCF6F5; border-color:var(--blush)}
 .card.tint-gold{background:#FDFAF3; border-color:var(--gold)}
+.card.tint-peach{background:rgba(232,168,152,.14); border-color:rgba(232,168,152,.35)}
 .row{display:flex; align-items:center; gap:12px}
 .grid2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
 .grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
@@ -320,6 +321,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .page.on .scroll > *:nth-child(7){animation-delay:.47s}
 .page.on .scroll > *:nth-child(8){animation-delay:.54s}
 .page.on .scroll > *:nth-child(9){animation-delay:.61s}
+@keyframes slideUp{from{opacity:0; transform:translateY(12px)}to{opacity:1; transform:translateY(0)}}
 @keyframes staggerIn{from{opacity:0; transform:translateY(16px)}to{opacity:1; transform:translateY(0)}}
 /* hero image */
 .hero-img{border-radius:var(--r); overflow:hidden; box-shadow:0 10px 28px -12px rgba(122,92,150,.3); transition:transform .4s var(--ease), box-shadow .4s}
@@ -328,14 +330,19 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .hero-img:hover img{transform:scale(1.03)}
 /* phone frame on desktop */
 @media (min-width:500px){
-  body{padding:20px; align-items:center}
+  body{padding:20px; align-items:center; height:100dvh}
   .app{
-    width:390px; max-width:390px; min-height:844px; max-height:92vh;
-    border-radius:44px; overflow:hidden; position:relative;
+    width:390px; max-width:390px; height:min(844px, calc(100dvh - 40px)); min-height:0;
+    border-radius:44px; overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain; position:relative;
+    padding-top:0; padding-bottom:0; scrollbar-width:none;
     box-shadow:0 0 0 10px #1a1228, 0 0 0 12px #3a2a50, 0 50px 100px -20px rgba(0,0,0,.6);
   }
-  .app::before{content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:24px; background:#1a1228; border-radius:0 0 18px 18px; z-index:1000}
-  .app > .top{padding-top:calc(14px + 30px) !important}
+  .app::-webkit-scrollbar{display:none}
+  /* bars live in the frame's own scroll box, not the browser window */
+  .app > .top, .app > .bottom-nav{position:sticky; left:auto; transform:none; width:100%; max-width:none; flex-shrink:0}
+  .app > .top{top:0; padding-top:calc(14px + 30px) !important}
+  .app > .bottom-nav{bottom:0; margin-top:auto; padding-bottom:16px}
+  .app > .top::before{content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:120px; height:24px; background:#1a1228; border-radius:0 0 18px 18px}
 }
 @media (max-width:499px){ body{padding:0; background:var(--paper)} .app{border-radius:0; box-shadow:none; max-height:none} }
 /* modal */
@@ -392,7 +399,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .dna-score-text small{font-size:11px; color:var(--faded)}
 .dna-name-display{font-family:var(--serif); font-size:20px; font-weight:700}
 .dna-verdict{font-size:13px; color:var(--taupe); margin-top:4px; line-height:1.5}
-.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:12px 0}
+#dna-grids{margin:12px 0}
 .dna-grid-card{background:var(--card); border-radius:var(--r-sm); padding:12px 10px; text-align:center; border:1px solid var(--line-soft)}
 .dna-grid-card .dgc-label{font-size:11px; font-weight:700; color:var(--faded); text-transform:uppercase; letter-spacing:.5px}
 .dna-grid-card .dgc-num{font-family:var(--serif); font-size:24px; font-weight:800; margin:4px 0}
@@ -473,7 +480,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
   transition:transform .5s ease;
 }
 .yoga-breath-circle.inhale{animation:breathIn 4s ease-in-out forwards}
-.yoga-breath-circle.exhale{animation:breathOut 4s ease-in-out forwards}
+.yoga-breath-circle.exhale{animation:breathOut 6s ease-in-out forwards}
 @keyframes breathIn{from{transform:scale(1); box-shadow:0 0 0 0 rgba(196,181,224,.4)}to{transform:scale(1.25); box-shadow:0 0 0 30px rgba(196,181,224,0)}}
 @keyframes breathOut{from{transform:scale(1.25); box-shadow:0 0 0 30px rgba(232,168,152,0)}to{transform:scale(1); box-shadow:0 0 0 0 rgba(232,168,152,.4)}}
 #yoga-time{font-family:var(--serif); font-size:28px; font-weight:800; color:var(--mauve)}
@@ -494,6 +501,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .yoga-pose-row .ypr-name{font-size:14px; font-weight:700}
 .yoga-pose-row .ypr-dur{font-size:12px; color:var(--faded)}
 .yoga-pose-row .ypr-check{font-size:18px; color:var(--ok)}
+.yoga-safety{margin-top:14px; font-size:12.5px}
 
 /* Home tools */
 .tool-card{padding:14px}
@@ -501,6 +509,11 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .tc-stat{font-family:var(--serif); font-size:20px; font-weight:700; color:var(--mauve)}
 .tc-sub{font-size:12px; color:var(--faded); margin-top:2px}
 .mood-card{margin-top:12px}
+.ct-clear{display:block; margin:8px auto 0; background:none; border:none; font:700 12px var(--sans); color:var(--taupe); text-decoration:underline; cursor:pointer; padding:4px}
+.ct-clear[hidden]{display:none}
+.ct-alert{margin-top:12px; padding:14px 16px; border-radius:var(--r-sm); background:#fdeeee; border:1.5px solid var(--low); border-left-width:5px}
+.ct-alert[hidden]{display:none}
+.ct-alert p{font-size:15px; line-height:1.45; font-weight:800; color:var(--ink)}
 .mood-options{display:flex; gap:8px; margin-top:12px; justify-content:space-between}
 .mood-btn{
   flex:1; padding:10px 0; font-size:24px; border:2px solid var(--line); border-radius:var(--r-sm);
@@ -542,10 +555,14 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
 .appt-item .appt-info{flex:1; min-width:0}
 .appt-item .appt-name{font-size:13px; font-weight:700}
 .appt-item .appt-time{font-size:11px; color:var(--faded)}
-.appt-item .appt-del{cursor:pointer; color:var(--faded); font-size:18px; padding:4px}
+.appt-item .appt-del{cursor:pointer; color:var(--faded); font-size:20px; line-height:1; padding:6px 8px; background:none; border:none; border-radius:8px; font-family:inherit}
 .appt-item .appt-del:hover{color:var(--low)}
 .appt-item.upcoming{border-left:3px solid var(--mauve)}
 .appt-item.past{opacity:.5}
+.appt-form{display:flex; flex-direction:column; gap:10px; margin-bottom:12px; padding:12px; border-radius:var(--r-sm); background:var(--sunken)}
+.appt-form[hidden]{display:none}
+.appt-form-row{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+.appt-form-row .btn{width:100%}
 </style>
 </head>
 <body>
@@ -565,7 +582,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
     <div class="scroll">
       <div class="hero" id="hero">
         <div class="h-kicker" id="hero-trimester">First Trimester</div>
-        <div class="h-weeks"><span id="h-weeks-num">0</span><small> weeks</small></div>
+        <div class="h-weeks"><span id="h-weeks-num">0</span><small id="h-weeks-unit"> weeks</small></div>
         <div class="h-sub" id="h-week-sub">Tiny miracle is the size of a poppy seed</div>
         <div class="h-fruit" id="h-fruit">🌱</div>
         <div class="h-count">
@@ -628,6 +645,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
             <div class="tc-stat" id="ct-stat">Ready to time</div>
             <div class="tc-sub" id="ct-sub">Tap start when one begins</div>
             <button class="btn mauve" id="ct-btn" style="margin-top:10px; width:100%; padding:10px; font-size:14px">Start timing</button>
+            <button type="button" class="ct-clear" id="ct-clear" hidden>Clear timings</button>
           </div>
           <div class="card tool-card" id="tool-kick">
             <div class="tc-head"><span style="font-size:22px">👶</span><b style="font-family:var(--serif); font-size:15px">Kick counter</b></div>
@@ -635,6 +653,10 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
             <div class="tc-sub" id="kc-sub">Goal: 10 in 2 hours</div>
             <button class="btn" id="kc-btn" style="margin-top:10px; width:100%; padding:10px; font-size:14px">+ Log a kick</button>
           </div>
+        </div>
+
+        <div class="ct-alert" id="ct-alert" role="alert" hidden>
+          <p id="ct-alert-text"></p>
         </div>
 
         <div class="card mood-card">
@@ -700,8 +722,22 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
         <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
             <b style="font-family:var(--serif); font-size:16px">📅 Appointments</b>
-            <button class="btn ghost" id="appt-add" style="margin:0; padding:6px 12px; font-size:12px">+ Add</button>
+            <button class="btn ghost" id="appt-add" style="margin:0; padding:6px 12px; font-size:12px; width:auto; flex-shrink:0">+ Add</button>
           </div>
+          <form id="appt-form" class="appt-form" hidden>
+            <div>
+              <label class="f" for="appt-name">Appointment</label>
+              <input type="text" id="appt-name" required maxlength="80" placeholder="e.g. OB checkup, ultrasound" autocomplete="off">
+            </div>
+            <div class="appt-form-row">
+              <div><label class="f" for="appt-date">Date</label><input type="date" id="appt-date" required></div>
+              <div><label class="f" for="appt-time">Time (optional)</label><input type="time" id="appt-time"></div>
+            </div>
+            <div class="appt-form-row">
+              <button type="button" class="btn ghost sm" id="appt-cancel">Cancel</button>
+              <button type="submit" class="btn mauve sm" id="appt-save">Save</button>
+            </div>
+          </form>
           <div id="appt-list" style="display:flex; flex-direction:column; gap:8px"></div>
           <div id="appt-empty" class="sub" style="text-align:center; padding:12px; font-size:13px">No appointments yet. Add your next OB visit.</div>
         </div>
@@ -1000,6 +1036,7 @@ label.f{display:block; font-size:12px; font-weight:800; color:var(--taupe); marg
         </div>
 
         <div class="yoga-poses" id="yoga-poses"></div>
+        <p class="sub yoga-safety" id="yoga-safety">Stop if you feel pain, bleeding, dizziness or breathlessness, and check with your doctor or midwife before carrying on.</p>
       </div>
     </div>
   </main>
@@ -1041,7 +1078,7 @@ const WEEKS = [
   {w:10, fruit:'🌰', name:'kumquat',         len:'~31 mm',  wei:'4 g',      trim:1, dev:'Vital organs begin to function. Nails and fingerprints form.', mom:'Mood swings peak. Skin may glow or break out.'},
   {w:11, fruit:'🍑', name:'fig',             len:'~41 mm',  wei:'7 g',      trim:1, dev:'Bone begins to replace cartilage; external genitals forming.', mom:'Nausea may ease. Increased vaginal discharge is normal.'},
   {w:12, fruit:'🥥', name:'lime',            len:'~5.4 cm', wei:'14 g',     trim:1, dev:'Reflexes develop. Fingernails, vocal cords and tooth buds present.', mom:'End of first trimester! First scan around now. Uterus is the size of a grapefruit.'},
-  {w:13, fruit:'🥑', name:'lemon',           len:'~7.4 cm', wei:'23 g',     trim:2, dev:'Voice box forms; fingerprints set; the placenta fully takes over.', mom:'Energy returns, nausea fades. Appetite grows.'},
+  {w:13, fruit:'🥑', name:'lemon',           len:'~7.4 cm', wei:'23 g',     trim:1, dev:'Voice box forms; fingerprints set; the placenta fully takes over.', mom:'Energy returns, nausea fades. Appetite grows.'},
   {w:14, fruit:'🍋', name:'peach',           len:'~8.7 cm', wei:'43 g',     trim:2, dev:'Baby can squint, frown and make facial expressions.', mom:'May get a stuffy nose (pregnancy rhinitis). Use a humidifier.'},
   {w:15, fruit:'🍐', name:'apple',           len:'~10 cm',  wei:'70 g',     trim:2, dev:'Skin is still thin; bones are hardening. Senses active.', mom:'Nasal congestion and bleeding gums are normal.'},
   {w:16, fruit:'🥔', name:'avocado',         len:'~11.6 cm',wei:'100 g',    trim:2, dev:'Baby can make sucking motions. Gender visible on ultrasound.', mom:'Belly popping out. Stretch mark oil helps.'},
@@ -1053,9 +1090,9 @@ const WEEKS = [
   {w:22, fruit:'🍠', name:'papaya',          len:'~27.8 cm',wei:'430 g',    trim:2, dev:'Taste buds developing. Hair and nails grow.', mom:'Braxton Hicks may start. Stay hydrated.'},
   {w:23, fruit:'🌽', name:'large mango',     len:'~28.9 cm',wei:'500 g',    trim:2, dev:'Lungs begin producing surfactant. Baby looks like a skinny newborn.', mom:'Dizziness possible — rise slowly. Iron-rich food important.'},
   {w:24, fruit:'🌶️', name:'ear of corn',     len:'~30 cm',  wei:'600 g',    trim:2, dev:'Footprints and fingerprints formed. Inner ear fully developed.', mom:'Glucose screening test around now. Shoe size may grow!'},
-  {w:25, fruit:'🥬', name:'cauliflower',     len:'~34.6 cm',wei:'660 g',   trim:3, dev:'Baby responds to familiar voices. Lungs practice breathing.', mom:'Round ligament pain, swollen feet. Elevate legs.'},
-  {w:26, fruit:'🥦', name:'lettuce',         len:'~35.6 cm',wei:'760 g',   trim:3, dev:'Eyes open! Baby can blink and sense light.', mom:'Braxton Hicks more noticeable. Shortness of breath normal.'},
-  {w:27, fruit:'🥒', name:'cabbage',         len:'~36.6 cm',wei:'875 g',   trim:3, dev:'Brain waves ramp up for sleeping and waking cycles.', mom:'Third trimester begins. Heartburn and constipation common.'},
+  {w:25, fruit:'🥬', name:'cauliflower',     len:'~34.6 cm',wei:'660 g',   trim:2, dev:'Baby responds to familiar voices. Lungs practice breathing.', mom:'Round ligament pain, swollen feet. Elevate legs.'},
+  {w:26, fruit:'🥦', name:'lettuce',         len:'~35.6 cm',wei:'760 g',   trim:2, dev:'Eyes open! Baby can blink and sense light.', mom:'Braxton Hicks more noticeable. Shortness of breath normal.'},
+  {w:27, fruit:'🥒', name:'cabbage',         len:'~36.6 cm',wei:'875 g',   trim:2, dev:'Brain waves ramp up for sleeping and waking cycles.', mom:'Third trimester begins. Heartburn and constipation common.'},
   {w:28, fruit:'🍈', name:'eggplant',        len:'~37.6 cm',wei:'1 kg',     trim:3, dev:'Eyes can open and close. Baby dreams.', mom:'Rh status check if needed. Take it easy.'},
   {w:29, fruit:'🥝', name:'butternut squash',len:'~38.6 cm',wei:'1.15 kg',  trim:3, dev:'Bones fully develop but still soft. Muscles and lungs mature.', mom:'Harder to get comfortable. Pregnancy pillow helps.'},
   {w:30, fruit:'🍋', name:'cucumber',        len:'~39.9 cm',wei:'1.3 kg',   trim:3, dev:'Baby practices breathing. Body begins storing iron.', mom:'Backache, frequent urination returns. Kegels daily.'},
@@ -1231,18 +1268,43 @@ function countUp(el, target, duration=800, suffix=''){
   requestAnimationFrame(tick);
 }
 
-/* ═══════════════ PREGNANCY MATH ═══════════════ */
-function getWeeksPregnant(){
-  const edd = store.edd; if(!edd) return null;
-  const eddDate = new Date(edd + 'T00:00:00');
-  const lmp = new Date(eddDate.getTime() - 280*86400000);
-  const now = new Date();
-  return Math.floor((now - lmp)/86400000);
+/* ═══════════════ DATES (local, never UTC) ═══════════════ */
+// 'YYYY-MM-DD' for the device's own calendar day. toISOString() gives the UTC day,
+// which in Singapore is yesterday until 08:00.
+function localKey(d=new Date()){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
+// new Date('YYYY-MM-DD') parses as UTC midnight; this gives local midnight.
+function parseLocalDate(s){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');
+  return m ? new Date(+m[1], +m[2]-1, +m[3]) : new Date(NaN);
+}
+function startOfDay(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+function daysBetween(a, b){ return Math.round((startOfDay(b) - startOfDay(a))/86400000); }
+// One broken screen must not blank the others or lock navigation.
+function safely(fn, ...args){ try{ fn(...args); }catch(e){ console.error('Maturna: '+fn.name+' failed', e); } }
+
+/* ═══════════════ PREGNANCY MATH ═══════════════ */
+// ACOG: 1st trimester to 13w6d, 2nd 14w0d-27w6d, 3rd from 28w0d.
+function trimesterOf(weeks){ return weeks < 14 ? 1 : weeks < 28 ? 2 : 3; }
+function weekData(weeks){
+  const w = Math.max(4, Math.min(40, weeks));
+  return WEEKS.find(x=>x.w===w) || WEEKS[0];
+}
+function getWeeksPregnant(){
+  const eddDate = parseLocalDate(store.edd);
+  if(isNaN(eddDate)) return null;
+  return 280 - daysBetween(new Date(), eddDate);
+}
+// Gestational age in completed weeks and days ("20 weeks 3 days" = 20w3d).
 function currentWeek(){
   const d = getWeeksPregnant();
   if(d === null) return null;
-  return {week: Math.max(0, Math.min(40, Math.floor(d/7)+1)), day: d%7, daysTotal:d};
+  const days = Math.max(0, Math.min(42*7, d));
+  return {weeks: Math.floor(days/7), day: days%7, daysTotal:d};
+}
+function weeksUnit(weeks, day){
+  return ' week'+(weeks===1?'':'s') + (day ? ' '+day+' day'+(day===1?'':'s') : '');
 }
 
 /* ═══════════════ HOME RENDER ═══════════════ */
@@ -1250,27 +1312,28 @@ function renderHome(animate=true){
   const edd = store.edd;
   const onboard = document.getElementById('onboard-empty');
   const content = document.getElementById('home-content');
-  if(!edd){ onboard.style.display='block'; content.style.display='none'; return; }
+  const info = edd ? currentWeek() : null;
+  if(!info){ onboard.style.display='block'; content.style.display='none'; return; }
   onboard.style.display='none'; content.style.display='block';
 
-  const info = currentWeek();
-  const wk = WEEKS[Math.max(0, Math.min(39, info.week-1))] || WEEKS[0];
-  const eddDate = new Date(edd+'T00:00:00');
-  const now = new Date();
-  const daysLeft = Math.max(0, Math.ceil((eddDate - now)/86400000));
+  const wk = weekData(info.weeks);
+  const trim = trimesterOf(info.weeks);
+  const eddDate = parseLocalDate(edd);
+  const daysLeft = Math.max(0, daysBetween(new Date(), eddDate));
   const pct = Math.min(100, Math.max(0, Math.round(info.daysTotal/280*100)));
 
   const weeksEl = document.getElementById('h-weeks-num');
-  if(animate) countUp(weeksEl, Math.max(0, info.week), 900); else weeksEl.textContent = Math.max(0, info.week);
+  if(animate) countUp(weeksEl, info.weeks, 900); else weeksEl.textContent = info.weeks;
+  document.getElementById('h-weeks-unit').textContent = weeksUnit(info.weeks, info.day);
   document.getElementById('h-fruit').textContent = wk.fruit;
   document.getElementById('h-week-sub').textContent = `Baby is the size of a ${wk.name}`;
-  document.getElementById('h-trimester').textContent = TRIM_NAMES[wk.trim];
+  document.getElementById('hero-trimester').textContent = TRIM_NAMES[trim];
   if(animate) countUp(document.getElementById('h-days-left'), daysLeft, 700); else document.getElementById('h-days-left').textContent = daysLeft;
-  document.getElementById('h-edd').textContent = new Date(edd).toLocaleDateString('en-SG',{month:'short', day:'numeric'});
+  document.getElementById('h-edd').textContent = eddDate.toLocaleDateString('en-SG',{month:'short', day:'numeric'});
   if(animate) countUp(document.getElementById('h-trim-pct'), pct, 800, '%'); else document.getElementById('h-trim-pct').textContent = pct + '%';
 
-  document.getElementById('week-title').textContent = `Week ${info.week}`;
-  document.getElementById('week-badge').textContent = TRIM_NAMES[wk.trim];
+  document.getElementById('week-title').textContent = `Week ${info.weeks}`;
+  document.getElementById('week-badge').textContent = TRIM_NAMES[trim];
   document.getElementById('week-summary').textContent = wk.dev;
   document.getElementById('m-len').textContent = wk.len;
   document.getElementById('m-wei').textContent = wk.wei;
@@ -1305,10 +1368,10 @@ function renderGrow(){
   document.getElementById('g-week').textContent = gsel;
   document.getElementById('g-fruit').textContent = wk.fruit;
   document.getElementById('g-compare').textContent = `About the size of a ${wk.name}`;
-  document.getElementById('g-trimester').textContent = TRIM_NAMES[wk.trim];
+  document.getElementById('g-trimester').textContent = TRIM_NAMES[trimesterOf(wk.w)];
   document.getElementById('g-len').textContent = wk.len;
   document.getElementById('g-wei').textContent = wk.wei;
-  document.getElementById('g-ln').textContent = 'T'+wk.trim;
+  document.getElementById('g-ln').textContent = 'T'+trimesterOf(wk.w);
   document.getElementById('g-dev').textContent = wk.dev;
   document.getElementById('g-mom').textContent = wk.mom;
 }
@@ -1354,10 +1417,11 @@ function renderChecklist(){
 }
 
 /* ═══════════════ FEED RENDER ═══════════════ */
-function todayKey(){ const d=new Date(); return d.toISOString().slice(0,10); }
+function todayKey(){ return localKey(); }
+function feedDay(f){ return f.ts ? localKey(new Date(f.ts)) : f.date; }
 function renderFeed(animate=true){
   const feeds = store.getFeeds();
-  const today = feeds.filter(f=>f.date===todayKey());
+  const today = feeds.filter(f=>feedDay(f)===todayKey());
   const count = today.length;
   const mins = today.reduce((s,f)=>s+f.min,0);
   if(animate){
@@ -1379,19 +1443,38 @@ const PUMP_PLAN = [
   {label:'Rest',  min:10, type:'rest'},
 ];
 const TOTAL_SEC = PUMP_PLAN.reduce((s,p)=>s+p.min*60,0);
-let pumpTimer = null, pumpIdx = 0, pumpRemain = 0, pumpElapsed = 0;
+const PUMP_KEY = 'maturna_pump';
+// The running stage ends at a wall-clock deadline, so a locked phone or a throttled
+// tab catches up on the next tick instead of drifting. idx === PUMP_PLAN.length = done.
+function freshPump(){ return {idx:0, remainMs:PUMP_PLAN[0].min*60000, deadline:0, running:false}; }
+let pump = freshPump(), pumpTimer = null;
+function loadPump(){
+  try{
+    const p = JSON.parse(localStorage.getItem(PUMP_KEY)||'null');
+    if(p && p.idx>=0 && p.idx<=PUMP_PLAN.length && p.remainMs>=0) pump = Object.assign(freshPump(), p);
+  }catch(e){}
+}
+function savePump(){ localStorage.setItem(PUMP_KEY, JSON.stringify(pump)); }
+function pumpRemainMs(){ return pump.running ? Math.max(0, pump.deadline - Date.now()) : pump.remainMs; }
+function pumpElapsedSec(){
+  if(pump.idx >= PUMP_PLAN.length) return TOTAL_SEC;
+  const before = PUMP_PLAN.slice(0, pump.idx).reduce((s,p)=>s+p.min*60,0);
+  return before + PUMP_PLAN[pump.idx].min*60 - Math.ceil(pumpRemainMs()/1000);
+}
 
 function updatePumpRing(){
   const ring = document.getElementById('pump-ring-fg');
   const circumference = 2 * Math.PI * 52; // ~326.7
-  const progress = pumpElapsed / TOTAL_SEC;
-  ring.style.strokeDashoffset = circumference * (1 - progress);
-  const remaining = TOTAL_SEC - pumpElapsed;
+  const elapsed = Math.min(TOTAL_SEC, Math.max(0, pumpElapsedSec()));
+  ring.style.strokeDashoffset = circumference * (1 - elapsed/TOTAL_SEC);
+  const remaining = TOTAL_SEC - elapsed;
   const mm = String(Math.floor(remaining/60)).padStart(2,'0');
   const ss = String(remaining%60).padStart(2,'0');
   document.getElementById('pump-ring-time').textContent = `${mm}:${ss}`;
   document.getElementById('pump-ring-label').textContent =
-    pumpTimer ? (PUMP_PLAN[pumpIdx]?.type==='pump' ? 'pumping' : 'resting') : 'ready';
+    pump.idx >= PUMP_PLAN.length ? 'done' :
+    pump.running ? (PUMP_PLAN[pump.idx].type==='pump' ? 'pumping' : 'resting') :
+    elapsed > 0 ? 'paused' : 'ready';
 }
 
 function renderPump(){
@@ -1400,52 +1483,73 @@ function renderPump(){
   PUMP_PLAN.forEach((s,i)=>{
     const el = document.createElement('div');
     let cls = 'pump-step';
-    if(i < pumpIdx) cls += ' done';
-    if(i === pumpIdx && pumpTimer) cls += ' run';
+    if(i < pump.idx) cls += ' done';
+    if(i === pump.idx && pump.running) cls += ' run';
     el.className = cls;
-    el.innerHTML = `<div class="ph">${i<pumpIdx?'✓':(s.type==='pump'?'P':'R')}</div>
+    el.innerHTML = `<div class="ph">${i<pump.idx?'✓':(s.type==='pump'?'P':'R')}</div>
       <div class="pt"><b>${s.label} · ${s.min} min</b>
       <span>${s.type==='pump'?'Express milk':'Relax, drink water, massage breasts'}</span></div>
-      ${i===pumpIdx && pumpTimer?`<span class="badge mauve">${Math.ceil(pumpRemain/60)}s</span>`:''}
+      ${i===pump.idx && pump.running?`<span class="badge mauve">${Math.ceil(pumpRemainMs()/60000)} min</span>`:''}
       </div>`;
     wrap.appendChild(el);
   });
+  const paused = !pump.running && pump.idx < PUMP_PLAN.length && (pump.idx > 0 || pump.remainMs < PUMP_PLAN[0].min*60000);
+  document.getElementById('pump-start').textContent = pump.running ? 'Pause session' : paused ? 'Resume session' : 'Start session';
   updatePumpRing();
+}
+
+// move past every stage whose deadline has gone by
+function pumpTick(){
+  if(!pump.running) return;
+  let moved = false;
+  while(pump.running && Date.now() >= pump.deadline){
+    pump.idx++;
+    moved = true;
+    if(pump.idx >= PUMP_PLAN.length){
+      pump.running = false; pump.remainMs = 0;
+      clearInterval(pumpTimer); pumpTimer = null;
+      toast('Power pump complete 🎉');
+      haptic([50,30,50]);
+    } else {
+      pump.deadline += PUMP_PLAN[pump.idx].min*60000;
+    }
+  }
+  if(moved){
+    if(pump.running){ haptic(30); toast(PUMP_PLAN[pump.idx].type==='pump' ? 'Pump again 💪' : 'Rest time ☕'); }
+    savePump();
+  }
+  renderPump();
 }
 
 function startPump(){
   haptic(20);
-  if(pumpTimer){
-    clearInterval(pumpTimer); pumpTimer=null;
-    document.getElementById('pump-start').textContent='Resume session';
+  if(pump.running){
+    pump.remainMs = pumpRemainMs();
+    pump.running = false;
+    clearInterval(pumpTimer); pumpTimer = null;
+    savePump();
     toast('Paused');
     renderPump();
     return;
   }
-  if(pumpIdx>=PUMP_PLAN.length){ pumpIdx=0; pumpElapsed=0; }
-  pumpRemain = PUMP_PLAN[pumpIdx].min*60;
-  document.getElementById('pump-start').textContent='Pause session';
-  toast(pumpIdx===0 ? 'Power pump started 🤱' : 'Resumed');
-  pumpTimer = setInterval(()=>{
-    pumpRemain--;
-    pumpElapsed++;
-    if(pumpRemain<=0){
-      pumpIdx++;
-      haptic(30);
-      if(pumpIdx>=PUMP_PLAN.length){
-        clearInterval(pumpTimer); pumpTimer=null; pumpIdx=0; pumpRemain=0; pumpElapsed=TOTAL_SEC;
-        document.getElementById('pump-start').textContent='Start session';
-        toast('Power pump complete 🎉');
-        haptic([50,30,50]);
-      } else {
-        pumpRemain = PUMP_PLAN[pumpIdx].min*60;
-        toast(PUMP_PLAN[pumpIdx].type==='pump' ? 'Pump again 💪' : 'Rest time ☕');
-      }
-    }
-    renderPump();
-  },1000);
+  if(pump.idx >= PUMP_PLAN.length) pump = freshPump();
+  const first = pump.idx===0 && pump.remainMs===PUMP_PLAN[0].min*60000;
+  pump.deadline = Date.now() + pump.remainMs;
+  pump.running = true;
+  clearInterval(pumpTimer);
+  pumpTimer = setInterval(pumpTick, 1000);
+  savePump();
+  toast(first ? 'Power pump started 🤱' : 'Resumed');
   renderPump();
 }
+function resetPump(){
+  clearInterval(pumpTimer); pumpTimer = null;
+  pump = freshPump();
+  savePump();
+  renderPump();
+}
+loadPump();
+if(pump.running){ pumpTimer = setInterval(pumpTick, 1000); setTimeout(pumpTick, 0); }
 
 /* ═══════════════ TAB SWITCHING (animated) ═══════════════ */
 let currentTab = 'home';
@@ -1462,19 +1566,22 @@ function switchTab(tab){
   oldPage.classList.remove('on');
 
   setTimeout(()=>{
-    oldPage.classList.remove('leaving');
-    newPage.classList.add('on');
-    document.querySelectorAll('.bottom-nav a').forEach(a=>a.classList.toggle('on', a.dataset.tab===tab));
-    currentTab = tab;
-    window.scrollTo({top:0, behavior:'smooth'});
+    try{
+      oldPage.classList.remove('leaving');
+      newPage.classList.add('on');
+      document.querySelectorAll('.bottom-nav a').forEach(a=>a.classList.toggle('on', a.dataset.tab===tab));
+      currentTab = tab;
+      window.scrollTo({top:0, behavior:'smooth'});
+      document.querySelector('.app').scrollTo({top:0, behavior:'smooth'});
 
-    // re-trigger animations for the new page's dynamic content
-    if(tab==='home') renderHome(true);
-    if(tab==='grow'){ scrollToWeek(gsel); }
-    if(tab==='feed') renderFeed(true);
-    if(tab==='nursery') renderRoom();
-
-    setTimeout(()=>{ isSwitching = false; }, 300);
+      // re-trigger animations for the new page's dynamic content
+      if(tab==='home') safely(renderHome, true);
+      if(tab==='grow') safely(scrollToWeek, gsel);
+      if(tab==='feed') safely(renderFeed, true);
+      if(tab==='nursery') safely(renderRoom);
+    } finally {
+      setTimeout(()=>{ isSwitching = false; }, 300);
+    }
   }, 280);
 }
 
@@ -1486,12 +1593,22 @@ document.querySelectorAll('[data-go]').forEach(a=>{
 });
 
 /* ═══════════════ SWIPE GESTURES ═══════════════ */
-let touchStartX = 0, touchStartY = 0;
+let touchStartX = 0, touchStartY = 0, swipeBlocked = false;
+function swipeIgnored(el){
+  if(document.querySelector('.modal-bg.on')) return true;
+  for(; el && el !== document.body && el.nodeType===1; el = el.parentElement){
+    if(el.matches('input, select, textarea, [data-noswipe]')) return true;
+    if(el.scrollWidth > el.clientWidth + 1 && /auto|scroll/.test(getComputedStyle(el).overflowX)) return true;
+  }
+  return false;
+}
 document.addEventListener('touchstart', e=>{
   touchStartX = e.touches[0].clientX;
   touchStartY = e.touches[0].clientY;
+  swipeBlocked = swipeIgnored(e.target);
 }, {passive:true});
 document.addEventListener('touchend', e=>{
+  if(swipeBlocked) return;
   const dx = e.changedTouches[0].clientX - touchStartX;
   const dy = e.changedTouches[0].clientY - touchStartY;
   if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)*1.5){
@@ -2009,7 +2126,7 @@ function renderRoom(){
   document.getElementById('room-wall').style.background = WALL_COLORS[roomState.wall].val;
   // Swatches
   document.getElementById('wall-swatches').innerHTML = WALL_COLORS.map((c,i)=>
-    '<div class="wall-swatch '+(i===roomState.wall?'on':'')+'" data-wall="'+i+'" style="background:'+c.val.split(',')[0].replace('linear-gradient(180deg','')+'" title="'+c.name+'"></div>'
+    '<div class="wall-swatch '+(i===roomState.wall?'on':'')+'" data-wall="'+i+'" style="background:'+c.val+'" title="'+c.name+'" aria-label="'+c.name+' wall"></div>'
   ).join('');
   document.querySelectorAll('.wall-swatch').forEach(el=>{
     el.onclick = ()=>{ roomState.wall = +el.dataset.wall; saveRoom(); renderRoom(); haptic(8); };
@@ -2057,14 +2174,18 @@ const YOGA_POSES = [
   {emoji:'🤰',name:'Side-lying release',desc:'Lie on your left side with a pillow between knees. Let your whole body soften. Stay as long as you like.',dur:120,aff:'Rest is not lazy. Rest is how your baby grows. Be proud of every moment you take for yourself.'},
   {emoji:'💜',name:'Gratitude closing',desc:'Hands on your heart and belly. Whisper one thing you\'re grateful for today. Breathe it in.',dur:60,aff:'Thank you for taking this time. You are a wonderful mother already, and your baby feels your love.'},
 ];
-let yogaState = {running:false, poseIdx:0, timeLeft:0, interval:null, breathInterval:null};
+let yogaState = {running:false, complete:false, poseIdx:0, timeLeft:0, interval:null, breathInterval:null};
 
+function fmtYogaDur(sec){
+  const m = Math.floor(sec/60), s = sec%60;
+  return (m ? m+' min' : '') + (m && s ? ' ' : '') + (s ? s+' s' : '');
+}
 function renderYogaPoses(){
   const container = document.getElementById('yoga-poses');
   container.innerHTML = YOGA_POSES.map((p,i)=>
     '<div class="yoga-pose-row '+(i===yogaState.poseIdx?'active':'')+(i<yogaState.poseIdx?' done':'')+'" data-idx="'+i+'">'+
       '<span class="ypr-emoji">'+p.emoji+'</span>'+
-      '<div class="ypr-info"><div class="ypr-name">'+p.name+'</div><div class="ypr-dur">'+Math.round(p.dur/60)+' min</div></div>'+
+      '<div class="ypr-info"><div class="ypr-name">'+p.name+'</div><div class="ypr-dur">'+fmtYogaDur(p.dur)+'</div></div>'+
       (i<yogaState.poseIdx?'<span class="ypr-check">✓</span>':'')+
     '</div>'
   ).join('');
@@ -2091,20 +2212,23 @@ function updateYogaDisplay(){
   document.getElementById('yoga-time').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 }
 
+const BREATH_IN_MS = 4000, BREATH_OUT_MS = 6000;
 function startBreath(){
   const circle = document.getElementById('yoga-breath');
-  let inhaling = true;
-  document.getElementById('yoga-phase').textContent = 'inhale';
-  circle.className = 'yoga-breath-circle inhale';
-  yogaState.breathInterval = setInterval(()=>{
-    inhaling = !inhaling;
+  const phase = inhaling=>{
     document.getElementById('yoga-phase').textContent = inhaling ? 'inhale' : 'exhale';
+    const ms = inhaling ? BREATH_IN_MS : BREATH_OUT_MS;
     circle.className = 'yoga-breath-circle '+(inhaling?'inhale':'exhale');
-  }, 4000);
+    circle.style.animationDuration = ms+'ms';
+    yogaState.breathInterval = setTimeout(()=>phase(!inhaling), ms);
+  };
+  clearTimeout(yogaState.breathInterval);
+  phase(true);
 }
 function stopBreath(){
-  clearInterval(yogaState.breathInterval);
+  clearTimeout(yogaState.breathInterval);
   document.getElementById('yoga-breath').className = 'yoga-breath-circle';
+  document.getElementById('yoga-breath').style.animationDuration = '';
   document.getElementById('yoga-phase').textContent = 'breathe';
 }
 
@@ -2116,6 +2240,13 @@ function startYoga(){
     yogaState.running = false;
     document.getElementById('yoga-play').textContent = 'Resume';
     return;
+  }
+  if(yogaState.complete){
+    // a finished flow starts again from the first pose, not the last one
+    yogaState.complete = false;
+    yogaState.poseIdx = 0;
+    yogaState.timeLeft = YOGA_POSES[0].dur;
+    renderYogaPoses();
   }
   yogaState.running = true;
   document.getElementById('yoga-play').textContent = 'Pause';
@@ -2134,6 +2265,7 @@ function startYoga(){
         clearInterval(yogaState.interval);
         stopBreath();
         yogaState.running = false;
+        yogaState.complete = true;
         document.getElementById('yoga-play').textContent = 'Start flow';
         document.getElementById('yoga-time').textContent = '00:00';
         document.getElementById('yoga-phase').textContent = 'complete 💜';
@@ -2149,7 +2281,7 @@ function startYoga(){
 function resetYoga(){
   clearInterval(yogaState.interval);
   stopBreath();
-  yogaState = {running:false, poseIdx:0, timeLeft:YOGA_POSES[0].dur, interval:null, breathInterval:null};
+  yogaState = {running:false, complete:false, poseIdx:0, timeLeft:YOGA_POSES[0].dur, interval:null, breathInterval:null};
   document.getElementById('yoga-play').textContent = 'Start flow';
   updateYogaDisplay();
   renderYogaPoses();
@@ -2174,49 +2306,104 @@ document.querySelectorAll('.sub-tab').forEach(t=>{
 });
 
 /* ═══════════════ CONTRACTION TIMER ═══════════════ */
+// Timings live in localStorage so a reload (or a phone that drops the tab) keeps them.
+// Frequency is start-to-start, the way maternity units ask for it.
+const CT_KEY = 'maturna_contractions', CT_ACTIVE_KEY = 'maturna_ct_active';
+const CT_WINDOW_MS = 60*60000;
 let ctState = {timing:false, startTime:0, contractions:[], interval:null};
+function loadCT(){
+  try{
+    const a = JSON.parse(localStorage.getItem(CT_KEY)||'[]');
+    ctState.contractions = Array.isArray(a) ? a.filter(c=>c && c.start && c.end) : [];
+  }catch(e){ ctState.contractions = []; }
+  const active = +localStorage.getItem(CT_ACTIVE_KEY);
+  if(active && Date.now()-active < 30*60000){ ctState.timing = true; ctState.startTime = active; }
+  else localStorage.removeItem(CT_ACTIVE_KEY);
+}
+function saveCT(){
+  localStorage.setItem(CT_KEY, JSON.stringify(ctState.contractions.slice(-100)));
+  if(ctState.timing) localStorage.setItem(CT_ACTIVE_KEY, String(ctState.startTime));
+  else localStorage.removeItem(CT_ACTIVE_KEY);
+}
+// contractions that started in the last hour, with average length and start-to-start gap
+function ctRecent(){
+  const list = ctState.contractions.filter(c=>c.start >= Date.now()-CT_WINDOW_MS);
+  const avgDur = list.length ? Math.round(list.reduce((a,c)=>a+(c.end-c.start)/1000,0)/list.length) : 0;
+  const gaps = [];
+  for(let i=1;i<list.length;i++) gaps.push(list[i].start - list[i-1].start);
+  const avgGap = gaps.length ? Math.round(gaps.reduce((a,b)=>a+b,0)/gaps.length/60000) : null;
+  return {list, avgDur, avgGap};
+}
 function updateCT(){
   if(!ctState.timing) return;
-  const elapsed = Math.floor((Date.now()-ctState.startTime)/1000);
+  const elapsed = Math.max(0, Math.floor((Date.now()-ctState.startTime)/1000));
   const m = Math.floor(elapsed/60), s = elapsed%60;
   document.getElementById('ct-stat').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
   if(ctState.contractions.length>0){
     const last = ctState.contractions[ctState.contractions.length-1];
-    const gapMin = Math.round((ctState.startTime-last.end)/60000);
-    document.getElementById('ct-sub').textContent = ctState.contractions.length+' recorded · '+gapMin+' min since last';
+    const gapMin = Math.round((ctState.startTime-last.start)/60000);
+    document.getElementById('ct-sub').textContent = ctState.contractions.length+' recorded · '+gapMin+' min since last started';
   }
+}
+function renderCT(){
+  const btn = document.getElementById('ct-btn');
+  const n = ctState.contractions.length;
+  const r = ctRecent();
+  btn.textContent = ctState.timing ? 'End contraction' : 'Start timing';
+  btn.classList.toggle('mauve', !ctState.timing);
+  document.getElementById('ct-clear').hidden = ctState.timing || n===0;
+  if(ctState.timing){
+    updateCT();
+  } else if(n){
+    const last = ctState.contractions[n-1];
+    const dur = Math.round((last.end-last.start)/1000);
+    document.getElementById('ct-stat').textContent = 'Last: '+Math.floor(dur/60)+'m '+(dur%60)+'s';
+    document.getElementById('ct-sub').textContent = n+' contraction'+(n===1?'':'s')+' recorded'+(r.avgGap!==null ? ' · about every '+r.avgGap+' min' : '');
+  } else {
+    document.getElementById('ct-stat').textContent = 'Ready to time';
+    document.getElementById('ct-sub').textContent = 'Tap start when one begins';
+  }
+  // stays on screen (and after reload) while the last hour's pattern holds
+  const alert = document.getElementById('ct-alert');
+  const show = r.list.length>=5 && r.avgDur>=60 && r.avgGap!==null && r.avgGap<=5;
+  alert.hidden = !show;
+  if(show) document.getElementById('ct-alert-text').textContent =
+    '⚠️ Contractions ~'+Math.round(r.avgDur/60)+'m long, '+r.avgGap+' min apart. Call your OB/midwife.';
 }
 document.getElementById('ct-btn').onclick = ()=>{
   if(!ctState.timing){
     ctState.timing = true;
     ctState.startTime = Date.now();
-    document.getElementById('ct-btn').textContent = 'End contraction';
-    document.getElementById('ct-btn').classList.remove('mauve');
+    clearInterval(ctState.interval);
     ctState.interval = setInterval(updateCT, 500);
     haptic(20);
   } else {
     ctState.timing = false;
     clearInterval(ctState.interval);
-    const dur = Math.round((Date.now()-ctState.startTime)/1000);
-    ctState.contractions.push({start:ctState.startTime, end:Date.now(), dur});
-    document.getElementById('ct-btn').textContent = 'Start timing';
-    document.getElementById('ct-btn').classList.add('mauve');
-    document.getElementById('ct-stat').textContent = 'Last: '+Math.floor(dur/60)+'m '+(dur%60)+'s';
-    document.getElementById('ct-sub').textContent = ctState.contractions.length+' contractions recorded';
+    ctState.contractions.push({start:ctState.startTime, end:Date.now()});
     haptic(30);
-    if(ctState.contractions.length>=5){
-      const avgDur = Math.round(ctState.contractions.reduce((a,c)=>a+c.dur,0)/ctState.contractions.length);
-      const gaps = [];
-      for(let i=1;i<ctState.contractions.length;i++){
-        gaps.push(Math.round((ctState.contractions[i].start-ctState.contractions[i-1].end)/60000));
-      }
-      const avgGap = gaps.length ? Math.round(gaps.reduce((a,b)=>a+b,0)/gaps.length) : 0;
-      if(avgDur>=60 && avgGap<=5){
-        toast('⚠️ Contractions ~'+Math.round(avgDur/60)+'m long, '+avgGap+' min apart. Call your OB/midwife.');
-      }
-    }
   }
+  saveCT();
+  renderCT();
 };
+document.getElementById('ct-clear').onclick = ()=>{
+  const b = document.getElementById('ct-clear');
+  if(!b.dataset.armed){
+    b.dataset.armed = '1'; b.textContent = 'Tap again to clear';
+    clearTimeout(b._t); b._t = setTimeout(()=>{ delete b.dataset.armed; b.textContent = 'Clear timings'; }, 3000);
+    return;
+  }
+  clearTimeout(b._t); delete b.dataset.armed; b.textContent = 'Clear timings';
+  ctState.contractions = [];
+  saveCT();
+  renderCT();
+  toast('Timings cleared');
+};
+loadCT();
+if(ctState.timing) ctState.interval = setInterval(updateCT, 500);
+renderCT();
+// the one-hour window moves on even when nobody taps
+setInterval(()=>{ if(!ctState.timing) renderCT(); }, 60000);
 
 /* ═══════════════ KICK COUNTER ═══════════════ */
 let kickCount = 0;
@@ -2420,60 +2607,98 @@ function getKegels(){
   return 0;
 }
 function setKegels(sets){ localStorage.setItem('maturna_kegels', JSON.stringify({sets, date:new Date().toDateString()})) }
+function kegelText(s){ return s+' set'+(s===1?'':'s')+' today ('+(s*10)+' reps)'; }
 document.getElementById('kg-btn').onclick = ()=>{
   const s = getKegels()+1;
   setKegels(s);
-  document.getElementById('kg-count').textContent = s+' set'+(s>1?'s':'')+' today ('+(s*10)+' reps)';
+  document.getElementById('kg-count').textContent = kegelText(s);
   haptic(20);
   if(s===3) toast('💪 30 kegels today! Pelvic floor thanks you.');
 };
-document.getElementById('kg-count').textContent = getKegels()+' set'+(getKegels()>1?'s':'')+' today ('+(getKegels()*10)+' reps)';
+document.getElementById('kg-count').textContent = kegelText(getKegels());
 
 /* ═══════════════ APPOINTMENTS ═══════════════ */
-function getAppts(){ try{return JSON.parse(localStorage.getItem('maturna_appts')||'[]')}catch(e){return []} }
+function newApptId(){ return 'a'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function getAppts(){
+  let a;
+  try{ a = JSON.parse(localStorage.getItem('maturna_appts')||'[]'); }catch(e){ a = []; }
+  if(!Array.isArray(a)) a = [];
+  // entries saved before ids existed get one now, so delete can target them
+  if(a.some(x=>!x.id)){ a.forEach(x=>{ if(!x.id) x.id = newApptId(); }); setAppts(a); }
+  return a;
+}
 function setAppts(a){ localStorage.setItem('maturna_appts', JSON.stringify(a)) }
+function fmtApptTime(t){
+  const m = /^(\d{2}):(\d{2})$/.exec(t||'');
+  if(!m) return t || '';
+  return new Date(2000,0,1,+m[1],+m[2]).toLocaleTimeString('en-US',{hour:'numeric', minute:'2-digit'});
+}
+function mkEl(tag, cls, text){
+  const e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(text != null) e.textContent = text;
+  return e;
+}
+// names and times are typed by the user, so they only ever go in as text
 function renderAppts(){
-  const appts = getAppts().sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const appts = getAppts().sort((a,b)=> (a.date+' '+(a.time||'')).localeCompare(b.date+' '+(b.time||'')));
   const list = document.getElementById('appt-list');
   const empty = document.getElementById('appt-empty');
-  if(appts.length===0){ list.innerHTML=''; empty.style.display='block'; return; }
+  list.replaceChildren();
+  if(appts.length===0){ empty.style.display='block'; return; }
   empty.style.display='none';
-  const now = new Date();
-  list.innerHTML = appts.map((a,i)=>{
-    const d = new Date(a.date);
-    const past = d < now;
-    const mon = d.toLocaleDateString('en-US',{month:'short'});
-    const day = d.getDate();
-    const time = a.time ? ' · '+a.time : '';
-    return '<div class="appt-item '+(past?'past':'upcoming')+'">'+
-      '<div class="appt-date"><div class="ad-d">'+day+'</div><div class="ad-m">'+mon+'</div></div>'+
-      '<div class="appt-info"><div class="appt-name">'+a.name+'</div><div class="appt-time">'+d.toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric'})+time+'</div></div>'+
-      '<span class="appt-del" data-idx="'+i+'">×</span>'+
-    '</div>';
-  }).join('');
-  list.querySelectorAll('.appt-del').forEach(el=>{
-    el.onclick = ()=>{
-      const appts = getAppts();
-      appts.splice(+el.dataset.idx,1);
-      setAppts(appts);
+  const today = startOfDay(new Date());
+  appts.forEach(a=>{
+    const d = parseLocalDate(a.date);
+    const valid = !isNaN(d);
+    const item = mkEl('div', 'appt-item '+(valid && d < today ? 'past' : 'upcoming'));
+    const box = mkEl('div', 'appt-date');
+    box.append(mkEl('div', 'ad-d', valid ? d.getDate() : '?'), mkEl('div', 'ad-m', valid ? d.toLocaleDateString('en-US',{month:'short'}) : ''));
+    const info = mkEl('div', 'appt-info');
+    const when = valid ? d.toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric'}) : String(a.date||'');
+    info.append(mkEl('div', 'appt-name', String(a.name||'')), mkEl('div', 'appt-time', when + (a.time ? ' · '+fmtApptTime(a.time) : '')));
+    const del = mkEl('button', 'appt-del', '×');
+    del.type = 'button';
+    del.setAttribute('aria-label', 'Delete '+String(a.name||'appointment'));
+    del.onclick = ()=>{
+      setAppts(getAppts().filter(x=>x.id!==a.id));
       renderAppts();
       haptic(10);
     };
+    item.append(box, info, del);
+    list.appendChild(item);
   });
 }
-document.getElementById('appt-add').onclick = ()=>{
-  const name = prompt('Appointment name (e.g. OB checkup, ultrasound)');
-  if(!name) return;
-  const date = prompt('Date (YYYY-MM-DD)');
-  if(!date) return;
-  const time = prompt('Time (optional, e.g. 2:30 PM)') || '';
+const apptForm = document.getElementById('appt-form');
+function openApptForm(open){
+  apptForm.hidden = !open;
+  document.getElementById('appt-add').textContent = open ? 'Close' : '+ Add';
+  if(open){
+    apptForm.reset();
+    document.getElementById('appt-date').value = localKey();
+    document.getElementById('appt-name').focus();
+  }
+}
+document.getElementById('appt-add').onclick = ()=> openApptForm(apptForm.hidden);
+document.getElementById('appt-cancel').onclick = ()=> openApptForm(false);
+apptForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('appt-name').value.trim().slice(0, 80);
+  const date = document.getElementById('appt-date').value;
+  const time = document.getElementById('appt-time').value;
+  const d = parseLocalDate(date);
+  if(!name){ toast('Add a name for the appointment'); return; }
+  // reject impossible dates (2026-02-31 parses as 3 March) and out-of-range years
+  if(isNaN(d) || localKey(d)!==date || d.getFullYear()<2000 || d.getFullYear()>2100){ toast('Pick a valid date'); return; }
+  if(time && !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)){ toast('Pick a valid time or leave it empty'); return; }
   const appts = getAppts();
-  appts.push({name, date, time});
+  appts.push({id:newApptId(), name, date, time});
   setAppts(appts);
+  openApptForm(false);
   renderAppts();
   haptic(15);
   toast('Appointment added 📅');
-};
+});
 renderAppts();
 
 /* ═══════════════ EVENTS ═══════════════ */
@@ -2484,7 +2709,17 @@ document.getElementById('btn-save-edd').onclick = ()=>{
   store.edd = val;
   toast('Welcome to Maturna 🌸');
   renderHome(true);
+  syncGrowToToday();
 };
+// point Grow at this week and Eat at this trimester (on load and after a due date is saved)
+function syncGrowToToday(){
+  const info = store.edd ? currentWeek() : null;
+  if(!info) return;
+  gsel = Math.max(4, Math.min(40, info.weeks));
+  eatTrim = trimesterOf(info.weeks);
+  document.querySelectorAll('#trim-chips .chip').forEach(x=>x.classList.toggle('on', +x.dataset.trim===eatTrim));
+  safely(renderGrowStrip); safely(renderGrow); safely(renderEat);
+}
 document.getElementById('btn-settings').onclick = ()=>{
   haptic();
   document.getElementById('edd-edit').value = store.edd || '';
@@ -2502,7 +2737,7 @@ document.getElementById('btn-save-edd2').onclick = ()=>{
   haptic(15);
   store.edd = val;
   document.getElementById('settings-modal').classList.remove('on');
-  renderHome(true); toast('Due date updated');
+  renderHome(true); syncGrowToToday(); toast('Due date updated');
 };
 
 document.querySelectorAll('#trim-chips .chip').forEach(c=>{
@@ -2542,10 +2777,7 @@ document.getElementById('f-log').onclick = ()=>{
 document.getElementById('pump-start').onclick = startPump;
 document.getElementById('pump-reset').onclick = ()=>{
   haptic(15);
-  if(pumpTimer){ clearInterval(pumpTimer); pumpTimer=null; }
-  pumpIdx=0; pumpRemain=0; pumpElapsed=0;
-  document.getElementById('pump-start').textContent='Start session';
-  renderPump();
+  resetPump();
   toast('Session reset');
 };
 
@@ -2557,21 +2789,19 @@ function toast(msg){
 }
 
 /* ═══════════════ INIT ═══════════════ */
-renderHome(false);
-renderGrowStrip();
-renderGrow();
-renderEat();
-renderChecklist();
-renderFeed(false);
-renderPump();
+const startInfo = store.edd ? currentWeek() : null;
+safely(renderHome, false);
+safely(renderGrowStrip);
+safely(renderGrow);
+safely(renderEat);
+syncGrowToToday();
+safely(renderChecklist);
+safely(renderFeed, false);
+safely(renderPump);
 
-if(!store.edd){
+if(!startInfo){
   const d = new Date(); d.setDate(d.getDate()+266);
-  document.getElementById('edd-input').value = d.toISOString().slice(0,10);
-} else {
-  // set grow selector to current week
-  const info = currentWeek();
-  if(info && info.week >=4 && info.week <=40){ gsel = info.week; renderGrowStrip(); renderGrow(); }
+  document.getElementById('edd-input').value = localKey(d);
 }
 </script>
 </body>
